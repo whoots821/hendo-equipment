@@ -8,242 +8,165 @@
 
   <style>
     :root{
-      --bg:#070a08;
-      --panel:#101612;
-      --panel2:#162019;
-      --text:#f3f6f4;
-      --muted:#a7b3ab;
-      --border:#2a3a30;
+      --bg:#f4f6f4;
+      --panel:#ffffff;
+      --panelAlt:#f0f3f0;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#d1d5db;
 
-      /* OD Green scheme */
-      --accent:#6b7f3a;       /* OD green */
+      /* OD green */
+      --accent:#6b7f3a;
       --accentDark:#55662f;
-      --accentGlow: rgba(107,127,58,.22);
-
-      /* Badge colors */
-      --badgeBg:#0c1410;
-      --badgeBorder:#36503f;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% 0%, rgba(107,127,58,.10), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(54,80,63,.10), transparent 55%),
-        var(--bg);
+      background:var(--bg);
       color:var(--text)
     }
-    a{color:inherit;text-decoration:none}
+    a{text-decoration:none;color:inherit}
     .container{max-width:1200px;margin:0 auto;padding:16px}
 
+    /* HEADER */
     header{
-      border-bottom:2px solid var(--border);
-      background:rgba(7,10,8,.88);
-      position:sticky;
-      top:0;
-      z-index:10;
-      backdrop-filter: blur(8px);
+      background:#fff;
+      border-bottom:4px solid var(--accent);
+      position:sticky;top:0;z-index:10
     }
     .headerRow{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;flex-wrap:wrap
     }
-    .brand{display:flex;flex-direction:column;gap:4px}
-    .brandTop{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .brand h1{margin:0;font-size:22px;letter-spacing:.3px}
+    .brand h1{margin:0;font-size:22px}
     .brand p{margin:0;color:var(--muted);font-size:13px}
-
-    .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
     .btn{
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(22,32,25,.9), rgba(16,22,18,.9));
+      background:var(--panel);
       padding:10px 14px;
-      border-radius:12px;
-      font-weight:700;
-      color:var(--text);
-      box-shadow: 0 0 0 0 rgba(0,0,0,0);
-      transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
-      display:inline-flex; align-items:center; gap:8px;
+      border-radius:10px;
+      font-weight:600
     }
-    .btn:hover{
-      background:linear-gradient(180deg, rgba(27,40,31,.95), rgba(16,22,18,.95));
-      box-shadow: 0 10px 30px rgba(0,0,0,.22);
-      transform: translateY(-1px);
-    }
-
     .btnPrimary{
-      background:linear-gradient(180deg, var(--accent), var(--accentDark));
-      border:1px solid rgba(255,255,255,.06);
-      color:#08100a;
+      background:var(--accent);
+      color:#fff;
+      border:none
     }
-    .btnPrimary:hover{
-      filter: brightness(1.03);
-      box-shadow: 0 10px 30px rgba(107,127,58,.20);
-    }
+    .btnPrimary:hover{background:var(--accentDark)}
 
-    .badgeRow{display:flex;gap:8px;flex-wrap:wrap}
+    /* BADGES */
+    .badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--badgeBorder);
-      background: linear-gradient(180deg, rgba(12,20,16,.95), rgba(10,16,12,.95));
-      color:var(--text);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.2px;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      background:var(--panelAlt);
+      border:1px solid var(--border);
+      font-size:12px;font-weight:700
     }
-    .badgeDot{
-      width:9px;height:9px;border-radius:999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accentGlow);
-      flex:0 0 auto;
+    .flag{
+      width:18px;height:12px;display:inline-block
     }
 
+    /* HERO */
     .hero{
-      border:2px solid var(--border);
-      background:
-        linear-gradient(180deg, rgba(107,127,58,.12), transparent 55%),
-        rgba(16,22,18,.78);
-      border-radius:20px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:18px;
       padding:24px;
-      margin-top:16px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.32);
+      margin-top:16px
     }
     .hero h2{
-      margin:10px 0 10px;
+      margin:8px 0 10px;
       font-size:30px;
-      line-height:1.15;
-    }
-    .hero h2 .accent{
-      color: #d7e0c5;
-      text-shadow: 0 0 30px rgba(107,127,58,.22);
+      color:var(--accent)
     }
     .hero p{
       margin:0 0 16px;
-      color:var(--muted);
       max-width:780px;
-      font-size:16px;
-      line-height:1.55
+      color:var(--muted);
+      font-size:16px
     }
-    .heroActions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .heroNote{margin-top:10px;color:var(--muted);font-size:12px}
 
+    /* LAYOUT */
     .layout{
       display:grid;
       grid-template-columns:280px 1fr;
       gap:16px;
       margin-top:16px
     }
-    @media(max-width:900px){
-      .layout{grid-template-columns:1fr}
-    }
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
+    /* SIDEBAR */
     .sidebar{
-      border:2px solid var(--border);
-      background: rgba(16,22,18,.78);
-      border-radius:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
       padding:14px
     }
     .sideTitle{
-      font-weight:900;
-      margin-bottom:8px;
-      color:#d7e0c5;
-      letter-spacing:.2px
-    }
-
-    .seg,.cats{
-      display:grid;
-      gap:6px;
-      margin-bottom:14px
-    }
-    .seg button,.cats button{
-      width:100%;
-      text-align:left;
-      border:1px solid var(--border);
-      background: rgba(7,10,8,.35);
-      color:var(--muted);
-      padding:10px 10px;
-      border-radius:12px;
-      cursor:pointer;
       font-weight:800;
-      transition: background .12s ease, transform .08s ease;
+      margin-bottom:8px;
+      color:var(--accent)
     }
-    .seg button:hover,.cats button:hover{
-      background: rgba(22,32,25,.65);
-      transform: translateY(-1px);
-      color: var(--text);
+    .seg,.cats{display:grid;gap:6px;margin-bottom:14px}
+    .seg button,.cats button{
+      width:100%;text-align:left;
+      padding:10px;border-radius:8px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      font-weight:600;
+      cursor:pointer
     }
     .seg button.active,.cats button.active{
-      background: linear-gradient(180deg, var(--accent), var(--accentDark));
-      color:#08100a;
-      border:1px solid rgba(255,255,255,.08);
+      background:var(--accent);
+      color:#fff;
+      border:none
     }
 
+    /* CONTENT */
     .content{
-      border:2px solid var(--border);
-      background: rgba(16,22,18,.78);
-      border-radius:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
       padding:14px
     }
-    .content h3{
-      margin:0;
-      font-size:20px;
-      color:#d7e0c5
-    }
-    .contentMeta{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:12px
-    }
+    .content h3{margin:0;color:var(--accent)}
 
+    /* CARDS */
     .cards{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
       margin-top:12px
     }
-    @media(max-width:1000px){ .cards{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:600px){ .cards{grid-template-columns:1fr} }
+    @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.cards{grid-template-columns:1fr}}
 
     .card{
       border:1px solid var(--border);
-      border-radius:16px;
+      border-radius:14px;
       overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(107,127,58,.10), transparent 55%),
-        rgba(7,10,8,.25);
+      background:#fff
     }
     .ph{
-      height:120px;
-      background:
-        radial-gradient(500px 200px at 20% 20%, rgba(107,127,58,.18), transparent 60%),
-        linear-gradient(135deg,#1c2a22,#0c1410);
+      height:110px;
+      background:linear-gradient(135deg,#d1d5db,#f3f4f6)
     }
     .cardBody{padding:12px}
-    .cardBody strong{display:block;margin-bottom:4px}
-    .cardBody small{color:var(--muted)}
-    .cardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     footer{
-      border-top:2px solid var(--border);
-      margin-top:24px
+      margin-top:24px;
+      border-top:1px solid var(--border);
+      background:#fff
     }
     .foot{
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      color:var(--muted);
-      font-size:13px;
-      padding:12px 0
+      display:flex;justify-content:space-between;
+      flex-wrap:wrap;color:var(--muted);
+      font-size:13px;padding:12px 0
     }
   </style>
 </head>
@@ -252,17 +175,29 @@
 <header>
   <div class="container headerRow">
     <div class="brand">
-      <div class="brandTop">
-        <h1>Hendo Equipment</h1>
-        <div class="badgeRow">
-          <span class="badge"><span class="badgeDot"></span> USA Made</span>
-          <span class="badge"><span class="badgeDot"></span> Veteran Owned &amp; Operated</span>
-        </div>
+      <h1>Hendo Equipment</h1>
+      <div class="badgeRow">
+        <span class="badge">
+          <svg class="flag" viewBox="0 0 7410 3900">
+            <rect width="7410" height="3900" fill="#b22234"/>
+            <g fill="#fff">
+              <rect y="300" width="7410" height="300"/>
+              <rect y="900" width="7410" height="300"/>
+              <rect y="1500" width="7410" height="300"/>
+              <rect y="2100" width="7410" height="300"/>
+              <rect y="2700" width="7410" height="300"/>
+              <rect y="3300" width="7410" height="300"/>
+            </g>
+            <rect width="2964" height="2100" fill="#3c3b6e"/>
+          </svg>
+          USA Made
+        </span>
+        <span class="badge">Veteran Owned &amp; Operated</span>
       </div>
-      <p>Skid Steer &amp; Mini Skid Steer Attachments • Hendersonville, NC</p>
+      <p>Skid Steer & Mini Skid Steer Attachments • Hendersonville, NC</p>
     </div>
 
-    <div class="cta">
+    <div>
       <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
       <a class="btn" href="mailto:whoots821@gmail.com">Email</a>
     </div>
@@ -271,26 +206,12 @@
 
 <main class="container">
   <section class="hero">
-    <div class="badgeRow" style="margin-bottom:10px;">
-      <span class="badge"><span class="badgeDot"></span> USA Made</span>
-      <span class="badge"><span class="badgeDot"></span> Veteran Owned &amp; Operated</span>
-    </div>
-
-    <h2><span class="accent">USA-Made</span> Skid Steer &amp; Mini Skid Steer Attachments</h2>
+    <h2>USA-Made Skid Steer & Mini Skid Steer Attachments</h2>
     <p>
-      Built for contractors who demand strength, reliability, and real job-site performance.
-      Clear starting-at pricing — call or email for availability, options, and lead times.
+      Built in the USA for contractors who demand strength, reliability,
+      and real job-site performance. Clear starting-at pricing.
     </p>
-
-    <div class="heroActions">
-      <a class="btn btnPrimary" href="#catalog">Browse Attachments</a>
-      <a class="btn" href="tel:+18286990157">Call Now</a>
-      <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote%20Request%20-%20Hendo%20Equipment">Request a Quote</a>
-    </div>
-
-    <div class="heroNote">
-      Pricing shown as <strong>Starting at</strong>. Final pricing may vary by options, width, and machine requirements.
-    </div>
+    <a class="btn btnPrimary" href="#catalog">Browse Attachments</a>
   </section>
 
   <section id="catalog" class="layout">
@@ -300,15 +221,10 @@
 
       <div class="sideTitle">Categories</div>
       <div class="cats" id="catList"></div>
-
-      <div style="color:var(--muted);font-size:12px;margin-top:10px;">
-        Need help matching an attachment? Call <strong>(828) 699-0157</strong>.
-      </div>
     </aside>
 
     <div class="content">
       <h3 id="title">Skid Steer Attachments</h3>
-      <div class="contentMeta" id="meta"></div>
       <div class="cards" id="cards"></div>
     </div>
   </section>
@@ -317,7 +233,7 @@
 <footer>
   <div class="container foot">
     <div>© <span id="year"></span> Hendo Equipment</div>
-    <div>Hendersonville, NC • <a href="tel:+18286990157">(828) 699-0157</a> • <a href="mailto:whoots821@gmail.com">whoots821@gmail.com</a></div>
+    <div>Hendersonville, NC • (828) 699-0157 • whoots821@gmail.com</div>
   </div>
 </footer>
 
@@ -325,58 +241,44 @@
 document.getElementById("year").textContent=new Date().getFullYear();
 
 const PRODUCTS=[
-  // Skid Steer
-  {name:"Grapple Bucket",price:"Starting at $2,495",category:"Buckets",machine:"Skid Steer"},
-  {name:"Rock Bucket",price:"Starting at $2,195",category:"Buckets",machine:"Skid Steer"},
-  {name:"Root Grapple",price:"Starting at $3,495",category:"Grapples",machine:"Skid Steer"},
-  {name:"Pallet Forks",price:"Starting at $1,295",category:"Forks",machine:"Skid Steer"},
-  {name:"Auger Drive",price:"Starting at $2,195",category:"Augers",machine:"Skid Steer"},
-  {name:"Trencher",price:"Starting at $4,995",category:"Trenchers",machine:"Skid Steer"},
-
-  // Mini Skid Steer
-  {name:"Mini Bucket",price:"Starting at $795",category:"Buckets",machine:"Mini Skid Steer"},
-  {name:"Mini Grapple",price:"Starting at $1,895",category:"Grapples",machine:"Mini Skid Steer"},
-  {name:"Mini Auger",price:"Starting at $1,695",category:"Augers",machine:"Mini Skid Steer"},
-  {name:"Mini Forks",price:"Starting at $995",category:"Forks",machine:"Mini Skid Steer"}
+ {name:"Grapple Bucket",price:"Starting at $2,495",category:"Buckets",machine:"Skid Steer"},
+ {name:"Rock Bucket",price:"Starting at $2,195",category:"Buckets",machine:"Skid Steer"},
+ {name:"Root Grapple",price:"Starting at $3,495",category:"Grapples",machine:"Skid Steer"},
+ {name:"Pallet Forks",price:"Starting at $1,295",category:"Forks",machine:"Skid Steer"},
+ {name:"Auger Drive",price:"Starting at $2,195",category:"Augers",machine:"Skid Steer"},
+ {name:"Mini Bucket",price:"Starting at $795",category:"Buckets",machine:"Mini Skid Steer"},
+ {name:"Mini Grapple",price:"Starting at $1,895",category:"Grapples",machine:"Mini Skid Steer"},
+ {name:"Mini Auger",price:"Starting at $1,695",category:"Augers",machine:"Mini Skid Steer"}
 ];
 
 const MACHINES=["Skid Steer","Mini Skid Steer"];
-const CATS=["All","Buckets","Grapples","Augers","Forks","Trenchers"];
+const CATS=["All","Buckets","Grapples","Augers","Forks"];
 
 let machine="Skid Steer",cat="All";
 
 function render(){
-  document.getElementById("machineSeg").innerHTML =
-    MACHINES.map(m=>`<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
-
-  document.getElementById("catList").innerHTML =
-    CATS.map(c=>`<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
-
-  const filtered = PRODUCTS.filter(p => p.machine===machine && (cat==="All" || p.category===cat));
-
-  document.getElementById("title").textContent = `${machine} Attachments`;
-  document.getElementById("meta").textContent = `${cat==="All" ? "All categories" : cat} • ${filtered.length} item(s)`;
-
-  document.getElementById("cards").innerHTML =
-    filtered.map(p=>`
-      <div class="card">
-        <div class="ph"></div>
-        <div class="cardBody">
-          <strong>${p.name}</strong>
-          <small>${p.category}</small><br>
-          <strong>${p.price}</strong>
-
-          <div class="cardActions">
-            <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
-            <a class="btn" href="mailto:whoots821@gmail.com?subject=${encodeURIComponent("Quote - " + p.name)}">Email</a>
-          </div>
-        </div>
+ document.getElementById("machineSeg").innerHTML =
+  MACHINES.map(m=>`<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
+ document.getElementById("catList").innerHTML =
+  CATS.map(c=>`<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+ document.getElementById("title").textContent = `${machine} Attachments`;
+ document.getElementById("cards").innerHTML =
+  PRODUCTS.filter(p=>p.machine===machine&&(cat==="All"||p.category===cat))
+  .map(p=>`
+    <div class="card">
+      <div class="ph"></div>
+      <div class="cardBody">
+        <strong>${p.name}</strong><br>
+        <small>${p.category}</small><br>
+        <strong>${p.price}</strong><br><br>
+        <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
+        <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote - ${p.name}">Email</a>
       </div>
-    `).join("");
+    </div>
+  `).join("");
 }
-
-function setMachine(m){ machine=m; cat="All"; render(); }
-function setCat(c){ cat=c; render(); }
+function setMachine(m){machine=m;cat="All";render()}
+function setCat(c){cat=c;render()}
 render();
 </script>
 </body>
