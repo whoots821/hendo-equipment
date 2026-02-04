@@ -4,36 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hendo Equipment | USA-Made Skid Steer Attachments</title>
-  <meta name="description" content="USA-made skid steer and mini skid steer attachments. Starting-at pricing. Call (828) 699-0157. Hendersonville NC." />
+  <meta name="description" content="USA-made skid steer and mini skid steer attachments. Veteran owned & operated. Starting-at pricing. Call (828) 699-0157. Hendersonville NC." />
 
   <style>
     :root{
-      --bg:#09090b;
-      --panel:#18181b;
-      --panel2:#27272a;
-      --text:#fafafa;
-      --muted:#a1a1aa;
-      --border:#3f3f46;
-      --accent:#facc15;   /* INDUSTRIAL YELLOW */
-      --accentDark:#eab308;
+      --bg:#070a08;
+      --panel:#101612;
+      --panel2:#162019;
+      --text:#f3f6f4;
+      --muted:#a7b3ab;
+      --border:#2a3a30;
+
+      /* OD Green scheme */
+      --accent:#6b7f3a;       /* OD green */
+      --accentDark:#55662f;
+      --accentGlow: rgba(107,127,58,.22);
+
+      /* Badge colors */
+      --badgeBg:#0c1410;
+      --badgeBorder:#36503f;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(107,127,58,.10), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(54,80,63,.10), transparent 55%),
+        var(--bg);
       color:var(--text)
     }
     a{color:inherit;text-decoration:none}
-
     .container{max-width:1200px;margin:0 auto;padding:16px}
 
     header{
-      border-bottom:2px solid var(--accent);
-      background:rgba(9,9,11,.95);
+      border-bottom:2px solid var(--border);
+      background:rgba(7,10,8,.88);
       position:sticky;
       top:0;
-      z-index:10
+      z-index:10;
+      backdrop-filter: blur(8px);
     }
     .headerRow{
       display:flex;
@@ -42,52 +53,89 @@
       flex-wrap:wrap;
       align-items:center
     }
-    .brand h1{
-      margin:0;
-      font-size:22px;
-      letter-spacing:.3px
-    }
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px
-    }
+    .brand{display:flex;flex-direction:column;gap:4px}
+    .brandTop{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.3px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+
+    .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
     .btn{
       border:1px solid var(--border);
-      background:var(--panel);
+      background:linear-gradient(180deg, rgba(22,32,25,.9), rgba(16,22,18,.9));
       padding:10px 14px;
       border-radius:12px;
-      font-weight:600
+      font-weight:700;
+      color:var(--text);
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+      transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
+      display:inline-flex; align-items:center; gap:8px;
     }
+    .btn:hover{
+      background:linear-gradient(180deg, rgba(27,40,31,.95), rgba(16,22,18,.95));
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      transform: translateY(-1px);
+    }
+
     .btnPrimary{
-      background:var(--accent);
-      color:#000;
-      border:none
+      background:linear-gradient(180deg, var(--accent), var(--accentDark));
+      border:1px solid rgba(255,255,255,.06);
+      color:#08100a;
     }
-    .btn:hover{background:var(--panel2)}
-    .btnPrimary:hover{background:var(--accentDark)}
+    .btnPrimary:hover{
+      filter: brightness(1.03);
+      box-shadow: 0 10px 30px rgba(107,127,58,.20);
+    }
+
+    .badgeRow{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--badgeBorder);
+      background: linear-gradient(180deg, rgba(12,20,16,.95), rgba(10,16,12,.95));
+      color:var(--text);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .badgeDot{
+      width:9px;height:9px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accentGlow);
+      flex:0 0 auto;
+    }
 
     .hero{
       border:2px solid var(--border);
       background:
-        linear-gradient(180deg,rgba(250,204,21,.08),transparent),
-        var(--panel);
+        linear-gradient(180deg, rgba(107,127,58,.12), transparent 55%),
+        rgba(16,22,18,.78);
       border-radius:20px;
       padding:24px;
-      margin-top:16px
+      margin-top:16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.32);
     }
     .hero h2{
-      margin:0 0 10px;
+      margin:10px 0 10px;
       font-size:30px;
-      color:var(--accent)
+      line-height:1.15;
+    }
+    .hero h2 .accent{
+      color: #d7e0c5;
+      text-shadow: 0 0 30px rgba(107,127,58,.22);
     }
     .hero p{
       margin:0 0 16px;
       color:var(--muted);
-      max-width:720px;
-      font-size:16px
+      max-width:780px;
+      font-size:16px;
+      line-height:1.55
     }
+    .heroActions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .heroNote{margin-top:10px;color:var(--muted);font-size:12px}
 
     .layout{
       display:grid;
@@ -101,14 +149,15 @@
 
     .sidebar{
       border:2px solid var(--border);
-      background:var(--panel);
+      background: rgba(16,22,18,.78);
       border-radius:18px;
       padding:14px
     }
     .sideTitle{
-      font-weight:800;
+      font-weight:900;
       margin-bottom:8px;
-      color:var(--accent)
+      color:#d7e0c5;
+      letter-spacing:.2px
     }
 
     .seg,.cats{
@@ -120,35 +169,40 @@
       width:100%;
       text-align:left;
       border:1px solid var(--border);
-      background:transparent;
+      background: rgba(7,10,8,.35);
       color:var(--muted);
-      padding:10px;
-      border-radius:10px;
+      padding:10px 10px;
+      border-radius:12px;
       cursor:pointer;
-      font-weight:600
+      font-weight:800;
+      transition: background .12s ease, transform .08s ease;
     }
-    .seg button.active,
-    .cats button.active{
-      background:var(--accent);
-      color:#000;
-      border:none
+    .seg button:hover,.cats button:hover{
+      background: rgba(22,32,25,.65);
+      transform: translateY(-1px);
+      color: var(--text);
     }
-    .seg button:hover,
-    .cats button:hover{
-      background:var(--panel2);
-      color:var(--text)
+    .seg button.active,.cats button.active{
+      background: linear-gradient(180deg, var(--accent), var(--accentDark));
+      color:#08100a;
+      border:1px solid rgba(255,255,255,.08);
     }
 
     .content{
       border:2px solid var(--border);
-      background:var(--panel);
+      background: rgba(16,22,18,.78);
       border-radius:18px;
       padding:14px
     }
     .content h3{
       margin:0;
       font-size:20px;
-      color:var(--accent)
+      color:#d7e0c5
+    }
+    .contentMeta{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px
     }
 
     .cards{
@@ -157,36 +211,30 @@
       gap:12px;
       margin-top:12px
     }
-    @media(max-width:1000px){
-      .cards{grid-template-columns:repeat(2,1fr)}
-    }
-    @media(max-width:600px){
-      .cards{grid-template-columns:1fr}
-    }
+    @media(max-width:1000px){ .cards{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:600px){ .cards{grid-template-columns:1fr} }
 
     .card{
       border:1px solid var(--border);
       border-radius:16px;
       overflow:hidden;
-      background:linear-gradient(180deg,rgba(250,204,21,.06),transparent)
+      background:
+        linear-gradient(180deg, rgba(107,127,58,.10), transparent 55%),
+        rgba(7,10,8,.25);
     }
     .ph{
       height:120px;
-      background:linear-gradient(135deg,#27272a,#111827)
+      background:
+        radial-gradient(500px 200px at 20% 20%, rgba(107,127,58,.18), transparent 60%),
+        linear-gradient(135deg,#1c2a22,#0c1410);
     }
-    .cardBody{
-      padding:12px
-    }
-    .cardBody strong{
-      display:block;
-      margin-bottom:4px
-    }
-    .cardBody small{
-      color:var(--muted)
-    }
+    .cardBody{padding:12px}
+    .cardBody strong{display:block;margin-bottom:4px}
+    .cardBody small{color:var(--muted)}
+    .cardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     footer{
-      border-top:2px solid var(--accent);
+      border-top:2px solid var(--border);
       margin-top:24px
     }
     .foot{
@@ -204,10 +252,17 @@
 <header>
   <div class="container headerRow">
     <div class="brand">
-      <h1>Hendo Equipment</h1>
-      <p>USA-Made Skid Steer Attachments • Hendersonville, NC</p>
+      <div class="brandTop">
+        <h1>Hendo Equipment</h1>
+        <div class="badgeRow">
+          <span class="badge"><span class="badgeDot"></span> USA Made</span>
+          <span class="badge"><span class="badgeDot"></span> Veteran Owned &amp; Operated</span>
+        </div>
+      </div>
+      <p>Skid Steer &amp; Mini Skid Steer Attachments • Hendersonville, NC</p>
     </div>
-    <div>
+
+    <div class="cta">
       <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
       <a class="btn" href="mailto:whoots821@gmail.com">Email</a>
     </div>
@@ -216,13 +271,26 @@
 
 <main class="container">
   <section class="hero">
-    <h2>USA-Made Skid Steer & Mini Skid Steer Attachments</h2>
+    <div class="badgeRow" style="margin-bottom:10px;">
+      <span class="badge"><span class="badgeDot"></span> USA Made</span>
+      <span class="badge"><span class="badgeDot"></span> Veteran Owned &amp; Operated</span>
+    </div>
+
+    <h2><span class="accent">USA-Made</span> Skid Steer &amp; Mini Skid Steer Attachments</h2>
     <p>
-      Built in the USA for contractors who demand strength, reliability,
-      and real job-site performance. Browse attachments with clear
-      starting-at pricing.
+      Built for contractors who demand strength, reliability, and real job-site performance.
+      Clear starting-at pricing — call or email for availability, options, and lead times.
     </p>
-    <a class="btn btnPrimary" href="#catalog">Browse Attachments</a>
+
+    <div class="heroActions">
+      <a class="btn btnPrimary" href="#catalog">Browse Attachments</a>
+      <a class="btn" href="tel:+18286990157">Call Now</a>
+      <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote%20Request%20-%20Hendo%20Equipment">Request a Quote</a>
+    </div>
+
+    <div class="heroNote">
+      Pricing shown as <strong>Starting at</strong>. Final pricing may vary by options, width, and machine requirements.
+    </div>
   </section>
 
   <section id="catalog" class="layout">
@@ -232,10 +300,15 @@
 
       <div class="sideTitle">Categories</div>
       <div class="cats" id="catList"></div>
+
+      <div style="color:var(--muted);font-size:12px;margin-top:10px;">
+        Need help matching an attachment? Call <strong>(828) 699-0157</strong>.
+      </div>
     </aside>
 
     <div class="content">
       <h3 id="title">Skid Steer Attachments</h3>
+      <div class="contentMeta" id="meta"></div>
       <div class="cards" id="cards"></div>
     </div>
   </section>
@@ -244,7 +317,7 @@
 <footer>
   <div class="container foot">
     <div>© <span id="year"></span> Hendo Equipment</div>
-    <div>Hendersonville, NC • (828) 699-0157 • whoots821@gmail.com</div>
+    <div>Hendersonville, NC • <a href="tel:+18286990157">(828) 699-0157</a> • <a href="mailto:whoots821@gmail.com">whoots821@gmail.com</a></div>
   </div>
 </footer>
 
@@ -252,44 +325,58 @@
 document.getElementById("year").textContent=new Date().getFullYear();
 
 const PRODUCTS=[
- {name:"Grapple Bucket",price:"Starting at $2,495",category:"Buckets",machine:"Skid Steer"},
- {name:"Rock Bucket",price:"Starting at $2,195",category:"Buckets",machine:"Skid Steer"},
- {name:"Root Grapple",price:"Starting at $3,495",category:"Grapples",machine:"Skid Steer"},
- {name:"Pallet Forks",price:"Starting at $1,295",category:"Forks",machine:"Skid Steer"},
- {name:"Auger Drive",price:"Starting at $2,195",category:"Augers",machine:"Skid Steer"},
- {name:"Mini Bucket",price:"Starting at $795",category:"Buckets",machine:"Mini Skid Steer"},
- {name:"Mini Grapple",price:"Starting at $1,895",category:"Grapples",machine:"Mini Skid Steer"},
- {name:"Mini Auger",price:"Starting at $1,695",category:"Augers",machine:"Mini Skid Steer"}
+  // Skid Steer
+  {name:"Grapple Bucket",price:"Starting at $2,495",category:"Buckets",machine:"Skid Steer"},
+  {name:"Rock Bucket",price:"Starting at $2,195",category:"Buckets",machine:"Skid Steer"},
+  {name:"Root Grapple",price:"Starting at $3,495",category:"Grapples",machine:"Skid Steer"},
+  {name:"Pallet Forks",price:"Starting at $1,295",category:"Forks",machine:"Skid Steer"},
+  {name:"Auger Drive",price:"Starting at $2,195",category:"Augers",machine:"Skid Steer"},
+  {name:"Trencher",price:"Starting at $4,995",category:"Trenchers",machine:"Skid Steer"},
+
+  // Mini Skid Steer
+  {name:"Mini Bucket",price:"Starting at $795",category:"Buckets",machine:"Mini Skid Steer"},
+  {name:"Mini Grapple",price:"Starting at $1,895",category:"Grapples",machine:"Mini Skid Steer"},
+  {name:"Mini Auger",price:"Starting at $1,695",category:"Augers",machine:"Mini Skid Steer"},
+  {name:"Mini Forks",price:"Starting at $995",category:"Forks",machine:"Mini Skid Steer"}
 ];
 
 const MACHINES=["Skid Steer","Mini Skid Steer"];
-const CATS=["All","Buckets","Grapples","Augers","Forks"];
+const CATS=["All","Buckets","Grapples","Augers","Forks","Trenchers"];
 
 let machine="Skid Steer",cat="All";
 
 function render(){
- document.getElementById("machineSeg").innerHTML=
-  MACHINES.map(m=>`<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
- document.getElementById("catList").innerHTML=
-  CATS.map(c=>`<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
- document.getElementById("title").textContent=`${machine} Attachments`;
- document.getElementById("cards").innerHTML=
-  PRODUCTS.filter(p=>p.machine===machine&&(cat==="All"||p.category===cat))
-  .map(p=>`
-   <div class="card">
-    <div class="ph"></div>
-    <div class="cardBody">
-     <strong>${p.name}</strong>
-     <small>${p.category}</small><br>
-     <strong>${p.price}</strong><br><br>
-     <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
-     <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote - ${p.name}">Email</a>
-    </div>
-   </div>
-  `).join("");
+  document.getElementById("machineSeg").innerHTML =
+    MACHINES.map(m=>`<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
+
+  document.getElementById("catList").innerHTML =
+    CATS.map(c=>`<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+
+  const filtered = PRODUCTS.filter(p => p.machine===machine && (cat==="All" || p.category===cat));
+
+  document.getElementById("title").textContent = `${machine} Attachments`;
+  document.getElementById("meta").textContent = `${cat==="All" ? "All categories" : cat} • ${filtered.length} item(s)`;
+
+  document.getElementById("cards").innerHTML =
+    filtered.map(p=>`
+      <div class="card">
+        <div class="ph"></div>
+        <div class="cardBody">
+          <strong>${p.name}</strong>
+          <small>${p.category}</small><br>
+          <strong>${p.price}</strong>
+
+          <div class="cardActions">
+            <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
+            <a class="btn" href="mailto:whoots821@gmail.com?subject=${encodeURIComponent("Quote - " + p.name)}">Email</a>
+          </div>
+        </div>
+      </div>
+    `).join("");
 }
-function setMachine(m){machine=m;cat="All";render()}
-function setCat(c){cat=c;render()}
+
+function setMachine(m){ machine=m; cat="All"; render(); }
+function setCat(c){ cat=c; render(); }
 render();
 </script>
 </body>
