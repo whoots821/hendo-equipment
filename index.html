@@ -1,1 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hendo Equipment | Skid Steer & Mini Skid Steer Attachments</title>
+  <meta name="description" content="Hendo Equipment supplies skid steer and mini skid steer attachments. Starting-at pricing. Call (828) 699-0157." />
+  <style>
+    :root{
+      --bg:#09090b; --panel:#18181b; --panel2:#27272a; --text:#fafafa; --muted:#a1a1aa; --border:#3f3f46;
+      --accent:#e5e5e5;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:16px}
+    header{border-bottom:1px solid var(--border);background:rgba(9,9,11,.9);position:sticky;top:0;backdrop-filter:blur(8px);z-index:10}
+    .headerRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:10px 12px;border-radius:12px;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+    .btn:hover{background:var(--panel2)}
+    .btnPrimary{background:var(--accent);color:#000;border-color:transparent}
+    .btnPrimary:hover{filter:brightness(.95)}
+    .grid{display:grid;gap:16px}
+    .hero{padding:18px;border:1px solid var(--border);background:linear-gradient(180deg,var(--panel),rgba(24,24,27,.4));border-radius:18px}
+    .hero h2{margin:0 0 8px;font-size:28px}
+    .hero p{margin:0 0 14px;color:var(--muted);max-width:700px;line-height:1.5}
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start}
+    @media (max-width: 900px){ .layout{grid-template-columns:1fr} }
+    .sidebar{border:1px solid var(--border);background:var(--panel);border-radius:18px;padding:14px;position:sticky;top:84px}
+    @media (max-width: 900px){ .sidebar{position:relative;top:auto} }
+    .sideTitle{font-weight:700;margin:0 0 8px}
+    .seg{display:grid;gap:8px;margin-bottom:14px}
+    .seg button{width:100%;text-align:left;border:1px solid var(--border);background:transparent;color:var(--muted);padding:10px 10px;border-radius:12px;cursor:pointer}
+    .seg button:hover{background:var(--panel2);color:var(--text)}
+    .seg button.active{background:var(--panel2);color:var(--text);border-color:transparent}
+    .cats{display:grid;gap:6px}
+    .cats button{width:100%;text-align:left;border:none;background:transparent;color:var(--muted);padding:8px 10px;border-radius:10px;cursor:pointer}
+    .cats button:hover{background:var(--panel2);color:var(--text)}
+    .cats button.active{background:var(--panel2);color:var(--text)}
+    .content{border:1px solid var(--border);background:var(--panel);border-radius:18px;padding:14px}
+    .contentTop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+    .contentTop h3{margin:0;font-size:18px}
+    .pill{color:var(--muted);font-size:13px}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+    @media (max-width: 1100px){ .cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 600px){ .cards{grid-template-columns:1fr} }
+    .card{border:1px solid var(--border);background:rgba(9,9,11,.35);border-radius:16px;overflow:hidden;display:grid}
+    .ph{height:120px;background:linear-gradient(135deg,#27272a,#111827);opacity:.9}
+    .cardBody{padding:12px;display:grid;gap:6px}
+    .cardBody h4{margin:0;font-size:16px}
+    .muted{color:var(--muted);font-size:13px}
+    footer{border-top:1px solid var(--border);margin-top:18px}
+    .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;padding:16px 0}
+    .small{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container headerRow">
+    <div class="brand">
+      <h1>Hendo Equipment</h1>
+      <p>Skid Steer & Mini Skid Steer Attachments • Hendersonville, NC</p>
+    </div>
+    <div class="cta">
+      <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
+      <a class="btn" href="mailto:whoots821@gmail.com">Email whoots821@gmail.com</a>
+    </div>
+  </div>
+</header>
+
+<main class="container grid">
+  <section class="hero">
+    <h2>Attachments Built for Real Work</h2>
+    <p>Browse skid steer and mini skid steer attachments with starting-at pricing. Call or email for availability, lead times, and quotes.</p>
+    <div class="cta">
+      <a class="btn btnPrimary" href="#catalog">Browse Catalog</a>
+      <a class="btn" href="#quote">Request a Quote</a>
+    </div>
+    <div class="small" style="margin-top:10px;">Pricing shown as <strong>Starting at</strong>. Final pricing may vary by options, width, and machine requirements.</div>
+  </section>
+
+  <section id="catalog" class="layout">
+    <aside class="sidebar">
+      <div class="sideTitle">Machine Type</div>
+      <div class="seg" id="machineSeg"></div>
+
+      <div class="sideTitle" style="margin-top:12px;">Categories</div>
+      <div class="cats" id="catList"></div>
+
+      <div class="small" style="margin-top:12px;">
+        Need help matching an attachment to your machine? Call <strong>(828) 699-0157</strong>.
+      </div>
+    </aside>
+
+    <div class="content">
+      <div class="contentTop">
+        <h3 id="contentTitle">Skid Steer Attachments</h3>
+        <div class="pill" id="contentPill"></div>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <section id="quote" class="content">
+    <h3 style="margin:0 0 10px;">Request a Quote</h3>
+    <p class="muted" style="margin:0 0 12px;max-width:760px;">
+      Tell us what you’re looking for and we’ll respond with options, pricing, and lead time.
+    </p>
+    <div class="cta">
+      <a class="btn btnPrimary" href="tel:+18286990157">Call Now</a>
+      <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote%20Request%20-%20Hendo%20Equipment">Email a Quote Request</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>© <span id="year"></span> Hendo Equipment</div>
+    <div>Hendersonville, NC • <a href="tel:+18286990157">(828) 699-0157</a> • <a href="mailto:whoots821@gmail.com">whoots821@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const PRODUCTS = [
+    // Skid Steer
+    { name:"Grapple Bucket", price:"Starting at $2,495", category:"Buckets", machine:"Skid Steer" },
+    { name:"Rock Bucket", price:"Starting at $2,195", category:"Buckets", machine:"Skid Steer" },
+    { name:"Root Grapple", price:"Starting at $3,495", category:"Grapples", machine:"Skid Steer" },
+    { name:"Pallet Forks", price:"Starting at $1,295", category:"Forks", machine:"Skid Steer" },
+    { name:"Auger Drive", price:"Starting at $2,195", category:"Augers", machine:"Skid Steer" },
+    { name:"Trencher", price:"Starting at $4,995", category:"Trenchers", machine:"Skid Steer" },
+
+    // Mini Skid Steer
+    { name:"Mini Grapple", price:"Starting at $1,895", category:"Grapples", machine:"Mini Skid Steer" },
+    { name:"Mini Bucket", price:"Starting at $795", category:"Buckets", machine:"Mini Skid Steer" },
+    { name:"Mini Auger", price:"Starting at $1,695", category:"Augers", machine:"Mini Skid Steer" },
+    { name:"Mini Forks", price:"Starting at $995", category:"Forks", machine:"Mini Skid Steer" },
+  ];
+
+  const MACHINES = ["Skid Steer", "Mini Skid Steer"];
+  const CATEGORIES = ["All", "Buckets", "Grapples", "Augers", "Forks", "Trenchers"];
+
+  let machine = "Skid Steer";
+  let category = "All";
+
+  const machineSeg = document.getElementById("machineSeg");
+  const catList = document.getElementById("catList");
+  const cards = document.getElementById("cards");
+  const contentTitle = document.getElementById("contentTitle");
+  const contentPill = document.getElementById("contentPill");
+
+  function renderMachineButtons(){
+    machineSeg.innerHTML = "";
+    MACHINES.forEach(m => {
+      const btn = document.createElement("button");
+      btn.textContent = m;
+      btn.className = (m === machine) ? "active" : "";
+      btn.onclick = () => { machine = m; category = "All"; renderAll(); };
+      machineSeg.appendChild(btn);
+    });
+  }
+
+  function renderCategoryButtons(){
+    catList.innerHTML = "";
+    CATEGORIES.forEach(c => {
+      const btn = document.createElement("button");
+      btn.textContent = c;
+      btn.className = (c === category) ? "active" : "";
+      btn.onclick = () => { category = c; renderAll(); };
+      catList.appendChild(btn);
+    });
+  }
+
+  function currentProducts(){
+    return PRODUCTS.filter(p => {
+      if (p.machine !== machine) return false;
+      if (category === "All") return true;
+      return p.category === category;
+    });
+  }
+
+  function renderCards(){
+    const list = currentProducts();
+    cards.innerHTML = "";
+    list.forEach(p => {
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `
+        <div class="ph"></div>
+        <div class="cardBody">
+          <h4>${p.name}</h4>
+          <div class="muted">${p.category}</div>
+          <div style="font-weight:700;">${p.price}</div>
+          <div class="cta" style="margin-top:6px;">
+            <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
+            <a class="btn" href="mailto:whoots821@gmail.com?subject=${encodeURIComponent("Quote Request - " + p.name)}">Email</a>
+          </div>
+        </div>
+      `;
+      cards.appendChild(el);
+    });
+
+    const catLabel = category === "All" ? "All categories" : category;
+    contentTitle.textContent = `${machine} Attachments`;
+    contentPill.textContent = `${catLabel} • ${list.length} item(s)`;
+  }
+
+  function renderAll(){
+    renderMachineButtons();
+    renderCategoryButtons();
+    renderCards();
+  }
+
+  renderAll();
+</script>
+</body>
+</html>
 
