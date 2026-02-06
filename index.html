@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hendo Equipment | USA-Made Skid Steer Attachments</title>
-  <meta name="description" content="USA-made skid steer and mini skid steer attachments. Veteran owned & operated. Starting-at pricing. Call (828) 699-0157. Hendersonville NC." />
+  <title>Hendo Equipment | Skid Steer & Mini Skid Steer Attachments</title>
+  <meta name="description" content="Hendo Equipment — USA-Made attachments. Veteran owned & operated. Skid steer attachments in Hendersonville, NC. Pricing coming soon. Call (828) 699-0157." />
 
   <style>
     :root{
       --bg:#f4f6f4;
       --panel:#ffffff;
-      --panelAlt:#f0f3f0;
+      --panelAlt:#eef2ee;
       --text:#0f172a;
       --muted:#475569;
       --border:#d1d5db;
@@ -18,6 +18,7 @@
       /* OD green */
       --accent:#6b7f3a;
       --accentDark:#55662f;
+      --accentSoft:#e7eddc;
     }
 
     *{box-sizing:border-box}
@@ -27,7 +28,7 @@
       background:var(--bg);
       color:var(--text)
     }
-    a{text-decoration:none;color:inherit}
+    a{color:inherit;text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:16px}
 
     /* HEADER */
@@ -43,12 +44,14 @@
     .brand h1{margin:0;font-size:22px}
     .brand p{margin:0;color:var(--muted);font-size:13px}
 
+    .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .btn{
       border:1px solid var(--border);
       background:var(--panel);
       padding:10px 14px;
       border-radius:10px;
-      font-weight:600
+      font-weight:700;
+      display:inline-flex;align-items:center;gap:8px;
     }
     .btnPrimary{
       background:var(--accent);
@@ -56,6 +59,7 @@
       border:none
     }
     .btnPrimary:hover{background:var(--accentDark)}
+    .btn:hover{background:#f8fafc}
 
     /* BADGES */
     .badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
@@ -64,30 +68,34 @@
       padding:6px 10px;border-radius:999px;
       background:var(--panelAlt);
       border:1px solid var(--border);
-      font-size:12px;font-weight:700
+      font-size:12px;font-weight:800
     }
-    .flag{
-      width:18px;height:12px;display:inline-block
-    }
+    .flag{width:18px;height:12px;display:inline-block;border-radius:2px;overflow:hidden}
 
     /* HERO */
     .hero{
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:18px;
-      padding:24px;
+      padding:22px;
       margin-top:16px
     }
     .hero h2{
       margin:8px 0 10px;
-      font-size:30px;
+      font-size:28px;
       color:var(--accent)
     }
     .hero p{
-      margin:0 0 16px;
-      max-width:780px;
+      margin:0 0 14px;
+      max-width:820px;
       color:var(--muted);
-      font-size:16px
+      font-size:16px;
+      line-height:1.55
+    }
+    .heroNote{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted)
     }
 
     /* LAYOUT */
@@ -107,18 +115,18 @@
       padding:14px
     }
     .sideTitle{
-      font-weight:800;
+      font-weight:900;
       margin-bottom:8px;
       color:var(--accent)
     }
     .seg,.cats{display:grid;gap:6px;margin-bottom:14px}
     .seg button,.cats button{
       width:100%;text-align:left;
-      padding:10px;border-radius:8px;
+      padding:10px;border-radius:10px;
       border:1px solid var(--border);
       background:#fff;
       color:var(--text);
-      font-weight:600;
+      font-weight:800;
       cursor:pointer
     }
     .seg button.active,.cats button.active{
@@ -134,7 +142,11 @@
       border-radius:16px;
       padding:14px
     }
-    .content h3{margin:0;color:var(--accent)}
+    .contentTop{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline
+    }
+    .content h3{margin:0;color:var(--accent);font-size:20px}
+    .pill{color:var(--muted);font-size:12px}
 
     /* CARDS */
     .cards{
@@ -150,13 +162,36 @@
       border:1px solid var(--border);
       border-radius:14px;
       overflow:hidden;
-      background:#fff
+      background:#fff;
+      display:grid
     }
     .ph{
-      height:110px;
-      background:linear-gradient(135deg,#d1d5db,#f3f4f6)
+      height:140px;
+      background:linear-gradient(135deg,#d1d5db,#f3f4f6);
+      position:relative;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .phTag{
+      position:absolute;
+      left:10px; top:10px;
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--accent);
     }
     .cardBody{padding:12px}
+    .cardBody h4{margin:0 0 6px;font-size:16px}
+    .desc{margin:0 0 10px;color:var(--muted);font-size:13px;line-height:1.45}
+    .price{font-weight:900;color:#0f172a}
+    .cardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     footer{
       margin-top:24px;
@@ -176,9 +211,10 @@
   <div class="container headerRow">
     <div class="brand">
       <h1>Hendo Equipment</h1>
+
       <div class="badgeRow">
         <span class="badge">
-          <svg class="flag" viewBox="0 0 7410 3900">
+          <svg class="flag" viewBox="0 0 7410 3900" aria-hidden="true">
             <rect width="7410" height="3900" fill="#b22234"/>
             <g fill="#fff">
               <rect y="300" width="7410" height="300"/>
@@ -194,10 +230,11 @@
         </span>
         <span class="badge">Veteran Owned &amp; Operated</span>
       </div>
-      <p>Skid Steer & Mini Skid Steer Attachments • Hendersonville, NC</p>
+
+      <p>Skid Steer &amp; Mini Skid Steer Attachments • Hendersonville, NC</p>
     </div>
 
-    <div>
+    <div class="cta">
       <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
       <a class="btn" href="mailto:whoots821@gmail.com">Email</a>
     </div>
@@ -206,24 +243,32 @@
 
 <main class="container">
   <section class="hero">
-    <h2>USA-Made Skid Steer & Mini Skid Steer Attachments</h2>
+    <h2>Skid Steer Attachments</h2>
     <p>
-      Built in the USA for contractors who demand strength, reliability,
-      and real job-site performance. Clear starting-at pricing.
+      USA-made attachments backed by a veteran owned &amp; operated business. Browse buckets and grapples below.
+      Pricing will be posted soon — call or email for availability, options, and lead times.
     </p>
+    <div class="heroNote"><strong>Pricing:</strong> Coming Soon</div>
   </section>
 
-  <section id="catalog" class="layout">
+  <section class="layout">
     <aside class="sidebar">
       <div class="sideTitle">Machine Type</div>
       <div class="seg" id="machineSeg"></div>
 
       <div class="sideTitle">Categories</div>
       <div class="cats" id="catList"></div>
+
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);">
+        Need help matching an attachment? Call <strong>(828) 699-0157</strong>.
+      </div>
     </aside>
 
     <div class="content">
-      <h3 id="title">Skid Steer Attachments</h3>
+      <div class="contentTop">
+        <h3 id="title">Skid Steer</h3>
+        <div class="pill" id="meta"></div>
+      </div>
       <div class="cards" id="cards"></div>
     </div>
   </section>
@@ -237,48 +282,154 @@
 </footer>
 
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-const PRODUCTS=[
- {name:"Grapple Bucket",price:"Starting at $2,495",category:"Buckets",machine:"Skid Steer"},
- {name:"Rock Bucket",price:"Starting at $2,195",category:"Buckets",machine:"Skid Steer"},
- {name:"Root Grapple",price:"Starting at $3,495",category:"Grapples",machine:"Skid Steer"},
- {name:"Pallet Forks",price:"Starting at $1,295",category:"Forks",machine:"Skid Steer"},
- {name:"Auger Drive",price:"Starting at $2,195",category:"Augers",machine:"Skid Steer"},
- {name:"Mini Bucket",price:"Starting at $795",category:"Buckets",machine:"Mini Skid Steer"},
- {name:"Mini Grapple",price:"Starting at $1,895",category:"Grapples",machine:"Mini Skid Steer"},
- {name:"Mini Auger",price:"Starting at $1,695",category:"Augers",machine:"Mini Skid Steer"}
-];
+  // PHASE 1: Skid Steer → Buckets & Grapples
+  // Pricing rule: Coming Soon (no numbers shown)
 
-const MACHINES=["Skid Steer","Mini Skid Steer"];
-const CATS=["All","Buckets","Grapples","Augers","Forks"];
+  const PRODUCTS = [
+    // Buckets
+    {
+      name: "General Purpose Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "A versatile bucket for everyday loading, digging, and material handling. Reinforced wear points for reliable job-site performance.",
+      slug: "general-purpose-bucket"
+    },
+    {
+      name: "Heavy Duty Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "Built for demanding applications like gravel and tough digging. Reinforced construction for extended service life under heavy use.",
+      slug: "heavy-duty-bucket"
+    },
+    {
+      name: "Severe Duty Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "Engineered for extreme conditions and high abrasion. Heavy plate construction for maximum durability in the toughest environments.",
+      slug: "severe-duty-bucket"
+    },
+    {
+      name: "Rock Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "Designed to separate rocks and debris from soil. Ideal for landscaping, site cleanup, and material sorting.",
+      slug: "rock-bucket"
+    },
+    {
+      name: "Low Profile Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "Improved sightlines and control for precise grading and finish work. Great visibility without sacrificing strength.",
+      slug: "low-profile-bucket"
+    },
+    {
+      name: "High Capacity Bucket",
+      machine: "Skid Steer",
+      category: "Buckets",
+      description: "Increased volume to move more material per pass. Great for light materials where productivity matters.",
+      slug: "high-capacity-bucket"
+    },
 
-let machine="Skid Steer",cat="All";
+    // Grapples
+    {
+      name: "Root Grapple",
+      machine: "Skid Steer",
+      category: "Grapples",
+      description: "Built for land clearing, brush removal, and debris handling. Strong clamping force for irregular loads.",
+      slug: "root-grapple"
+    },
+    {
+      name: "Heavy Duty Root Grapple",
+      machine: "Skid Steer",
+      category: "Grapples",
+      description: "Reinforced for aggressive land clearing and forestry work. Heavy-duty build for maximum grip and durability.",
+      slug: "heavy-duty-root-grapple"
+    },
+    {
+      name: "Rock Grapple",
+      machine: "Skid Steer",
+      category: "Grapples",
+      description: "Ideal for rocks, demolition debris, and bulky material. Open tine design lets dirt fall through while retaining solids.",
+      slug: "rock-grapple"
+    },
+    {
+      name: "Utility Grapple",
+      machine: "Skid Steer",
+      category: "Grapples",
+      description: "A versatile grapple for brush, logs, and general debris. Balanced design for strength and flexibility.",
+      slug: "utility-grapple"
+    },
+    {
+      name: "Industrial Grapple",
+      machine: "Skid Steer",
+      category: "Grapples",
+      description: "Designed for demanding construction environments. Heavy steel construction for consistent performance and long service life.",
+      slug: "industrial-grapple"
+    }
+  ];
 
-function render(){
- document.getElementById("machineSeg").innerHTML =
-  MACHINES.map(m=>`<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
- document.getElementById("catList").innerHTML =
-  CATS.map(c=>`<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
- document.getElementById("title").textContent = `${machine} Attachments`;
- document.getElementById("cards").innerHTML =
-  PRODUCTS.filter(p=>p.machine===machine&&(cat==="All"||p.category===cat))
-  .map(p=>`
-    <div class="card">
-      <div class="ph"></div>
-      <div class="cardBody">
-        <strong>${p.name}</strong><br>
-        <small>${p.category}</small><br>
-        <strong>${p.price}</strong><br><br>
-        <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
-        <a class="btn" href="mailto:whoots821@gmail.com?subject=Quote - ${p.name}">Email</a>
-      </div>
-    </div>
-  `).join("");
-}
-function setMachine(m){machine=m;cat="All";render()}
-function setCat(c){cat=c;render()}
-render();
+  // Machines: Phase 1 is Skid Steer only, but UI supports future expansion
+  const MACHINES = ["Skid Steer"];
+  const CATS_BY_MACHINE = {
+    "Skid Steer": ["All", "Buckets", "Grapples"]
+  };
+
+  let machine = "Skid Steer";
+  let cat = "All";
+
+  function imgPathForSlug(slug){
+    // Put images in /images and name them like:
+    // images/root-grapple.jpg
+    // images/rock-bucket.jpg
+    // If not found, placeholder stays.
+    return `images/${slug}.jpg`;
+  }
+
+  function render(){
+    document.getElementById("machineSeg").innerHTML =
+      MACHINES.map(m => `<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
+
+    const cats = CATS_BY_MACHINE[machine] || ["All"];
+    document.getElementById("catList").innerHTML =
+      cats.map(c => `<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+
+    const filtered = PRODUCTS.filter(p =>
+      p.machine === machine && (cat === "All" || p.category === cat)
+    );
+
+    document.getElementById("title").textContent = machine;
+    document.getElementById("meta").textContent =
+      `${cat === "All" ? "Buckets & Grapples" : cat} • ${filtered.length} item(s) • Pricing: Coming Soon`;
+
+    document.getElementById("cards").innerHTML = filtered.map(p => {
+      const img = imgPathForSlug(p.slug);
+      return `
+        <div class="card">
+          <div class="ph">
+            <span class="phTag">${p.category}</span>
+            <img src="${img}" alt="${p.name}" onerror="this.style.display='none';" />
+          </div>
+          <div class="cardBody">
+            <h4>${p.name}</h4>
+            <p class="desc">${p.description}</p>
+            <div class="price">Pricing: Coming Soon</div>
+
+            <div class="cardActions">
+              <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
+              <a class="btn" href="mailto:whoots821@gmail.com?subject=${encodeURIComponent("Quote Request - " + p.name)}">Email</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function setMachine(m){ machine = m; cat = "All"; render(); }
+  function setCat(c){ cat = c; render(); }
+
+  render();
 </script>
 </body>
 </html>
