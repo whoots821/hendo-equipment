@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hendo Equipment | Skid Steer & Mini Skid Steer Attachments</title>
-  <meta name="description" content="Hendo Equipment — USA-Made attachments. Veteran owned & operated. Skid steer attachments in Hendersonville, NC. Pricing coming soon. Call (828) 699-0157." />
+  <title>Hendo Equipment | Attachments</title>
+  <meta name="description" content="Hendo Equipment — USA-Made attachments. Veteran owned & operated. Pricing coming soon. Call (828) 699-0157." />
 
   <style>
     :root{
@@ -31,7 +31,6 @@
     a{color:inherit;text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:16px}
 
-    /* HEADER */
     header{
       background:#fff;
       border-bottom:4px solid var(--accent);
@@ -52,6 +51,7 @@
       border-radius:10px;
       font-weight:700;
       display:inline-flex;align-items:center;gap:8px;
+      cursor:pointer;
     }
     .btnPrimary{
       background:var(--accent);
@@ -61,7 +61,6 @@
     .btnPrimary:hover{background:var(--accentDark)}
     .btn:hover{background:#f8fafc}
 
-    /* BADGES */
     .badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .badge{
       display:inline-flex;align-items:center;gap:8px;
@@ -72,7 +71,6 @@
     }
     .flag{width:18px;height:12px;display:inline-block;border-radius:2px;overflow:hidden}
 
-    /* HERO */
     .hero{
       background:var(--panel);
       border:1px solid var(--border);
@@ -98,7 +96,6 @@
       color:var(--muted)
     }
 
-    /* LAYOUT */
     .layout{
       display:grid;
       grid-template-columns:280px 1fr;
@@ -107,7 +104,6 @@
     }
     @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
-    /* SIDEBAR */
     .sidebar{
       background:var(--panel);
       border:1px solid var(--border);
@@ -135,7 +131,6 @@
       border:none
     }
 
-    /* CONTENT */
     .content{
       background:var(--panel);
       border:1px solid var(--border);
@@ -148,7 +143,6 @@
     .content h3{margin:0;color:var(--accent);font-size:20px}
     .pill{color:var(--muted);font-size:12px}
 
-    /* CARDS */
     .cards{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -192,6 +186,43 @@
     .desc{margin:0 0 10px;color:var(--muted);font-size:13px;line-height:1.45}
     .price{font-weight:900;color:#0f172a}
     .cardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+    /* Config UI (dropdown area) */
+    .configBox{
+      margin-top:10px;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--panelAlt);
+      display:grid;
+      gap:10px;
+    }
+    .configGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media(max-width:600px){ .configGrid{grid-template-columns:1fr} }
+    .field label{
+      display:block;
+      font-size:12px;
+      font-weight:900;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    select{
+      width:100%;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:800;
+      color:var(--text);
+    }
+    .selectedLine{
+      font-size:12px;
+      color:var(--muted);
+    }
 
     footer{
       margin-top:24px;
@@ -243,9 +274,9 @@
 
 <main class="container">
   <section class="hero">
-    <h2>Skid Steer Attachments</h2>
+    <h2>Attachments</h2>
     <p>
-      USA-made attachments backed by a veteran owned &amp; operated business. Browse buckets and grapples below.
+      Browse buckets and grapples. Configure options on select products.
       Pricing will be posted soon — call or email for availability, options, and lead times.
     </p>
     <div class="heroNote"><strong>Pricing:</strong> Coming Soon</div>
@@ -284,31 +315,61 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // PHASE 1: Skid Steer → Buckets & Grapples
-  // Pricing rule: Coming Soon (no numbers shown)
+  // Store option selections per product slug
+  const selections = {};
+
+  function imgPathForSlug(slug){
+    // Optional: add images later at /images/<slug>.jpg
+    return `images/${slug}.jpg`;
+  }
+
+  function initSelectionIfNeeded(p){
+    if(!p.options) return;
+    if(selections[p.slug]) return;
+
+    const sel = {};
+    for(const key of Object.keys(p.options)){
+      sel[key] = p.options[key][0];
+    }
+    selections[p.slug] = sel;
+  }
+
+  function updateSelection(slug, key, value){
+    if(!selections[slug]) selections[slug] = {};
+    selections[slug][key] = value;
+    render();
+  }
+
+  function selectionSummary(slug){
+    const s = selections[slug];
+    if(!s) return "";
+    const parts = [];
+    if(s.edge) parts.push(`Edge: ${s.edge}`);
+    if(s.width) parts.push(`Width: ${s.width}`);
+    if(s.duty) parts.push(`Duty: ${s.duty}`);
+    return parts.join(" • ");
+  }
 
   const PRODUCTS = [
-    // Buckets
+    // ===== SKID STEER =====
     {
-      name: "General Purpose Bucket",
+      name: "4-IN-1 Bucket",
       machine: "Skid Steer",
       category: "Buckets",
-      description: "A versatile bucket for everyday loading, digging, and material handling. Reinforced wear points for reliable job-site performance.",
-      slug: "general-purpose-bucket"
+      description: "Multi-purpose bucket for grading, clamping, dozing, and loading. Choose edge, width, and duty options below.",
+      slug: "4-in-1-bucket-skid",
+      options: {
+        edge: ["Smooth", "With Teeth"],
+        width: ['54"', '60"', '72"', '78"', '81"', '84"'],
+        duty: ["Standard Duty", "Heavy Duty", "X-Treme Duty", "Severe Duty"]
+      }
     },
     {
       name: "Heavy Duty Bucket",
       machine: "Skid Steer",
       category: "Buckets",
-      description: "Built for demanding applications like gravel and tough digging. Reinforced construction for extended service life under heavy use.",
+      description: "Built for demanding applications like gravel and tough digging. Reinforced construction for extended service life.",
       slug: "heavy-duty-bucket"
-    },
-    {
-      name: "Severe Duty Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Engineered for extreme conditions and high abrasion. Heavy plate construction for maximum durability in the toughest environments.",
-      slug: "severe-duty-bucket"
     },
     {
       name: "Rock Bucket",
@@ -318,34 +379,11 @@
       slug: "rock-bucket"
     },
     {
-      name: "Low Profile Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Improved sightlines and control for precise grading and finish work. Great visibility without sacrificing strength.",
-      slug: "low-profile-bucket"
-    },
-    {
-      name: "High Capacity Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Increased volume to move more material per pass. Great for light materials where productivity matters.",
-      slug: "high-capacity-bucket"
-    },
-
-    // Grapples
-    {
       name: "Root Grapple",
       machine: "Skid Steer",
       category: "Grapples",
       description: "Built for land clearing, brush removal, and debris handling. Strong clamping force for irregular loads.",
       slug: "root-grapple"
-    },
-    {
-      name: "Heavy Duty Root Grapple",
-      machine: "Skid Steer",
-      category: "Grapples",
-      description: "Reinforced for aggressive land clearing and forestry work. Heavy-duty build for maximum grip and durability.",
-      slug: "heavy-duty-root-grapple"
     },
     {
       name: "Rock Grapple",
@@ -354,38 +392,44 @@
       description: "Ideal for rocks, demolition debris, and bulky material. Open tine design lets dirt fall through while retaining solids.",
       slug: "rock-grapple"
     },
+
+    // ===== MINI SKID STEER =====
     {
-      name: "Utility Grapple",
-      machine: "Skid Steer",
-      category: "Grapples",
-      description: "A versatile grapple for brush, logs, and general debris. Balanced design for strength and flexibility.",
-      slug: "utility-grapple"
+      name: "4-IN-1 Bucket",
+      machine: "Mini Skid Steer",
+      category: "Buckets",
+      description: "Compact 4-in-1 bucket for mini skid steers. Choose edge, width, and duty options below.",
+      slug: "4-in-1-bucket-mini",
+      options: {
+        edge: ["Smooth", "With Teeth"],
+        width: ['48"', '54"', '60"', '66"', '72"'],
+        duty: ["Standard Duty", "Heavy Duty", "X-Treme Duty", "Severe Duty"]
+      }
     },
     {
-      name: "Industrial Grapple",
-      machine: "Skid Steer",
+      name: "Mini Bucket",
+      machine: "Mini Skid Steer",
+      category: "Buckets",
+      description: "Everyday bucket for loading and material handling. Great for contractors needing dependable performance.",
+      slug: "mini-bucket"
+    },
+    {
+      name: "Mini Grapple",
+      machine: "Mini Skid Steer",
       category: "Grapples",
-      description: "Designed for demanding construction environments. Heavy steel construction for consistent performance and long service life.",
-      slug: "industrial-grapple"
+      description: "Compact grapple for brush, logs, and debris handling while maintaining excellent control and visibility.",
+      slug: "mini-grapple"
     }
   ];
 
-  // Machines: Phase 1 is Skid Steer only, but UI supports future expansion
-  const MACHINES = ["Skid Steer"];
+  const MACHINES = ["Skid Steer", "Mini Skid Steer"];
   const CATS_BY_MACHINE = {
-    "Skid Steer": ["All", "Buckets", "Grapples"]
+    "Skid Steer": ["All", "Buckets", "Grapples"],
+    "Mini Skid Steer": ["All", "Buckets", "Grapples"]
   };
 
   let machine = "Skid Steer";
   let cat = "All";
-
-  function imgPathForSlug(slug){
-    // Put images in /images and name them like:
-    // images/root-grapple.jpg
-    // images/rock-bucket.jpg
-    // If not found, placeholder stays.
-    return `images/${slug}.jpg`;
-  }
 
   function render(){
     document.getElementById("machineSeg").innerHTML =
@@ -401,24 +445,63 @@
 
     document.getElementById("title").textContent = machine;
     document.getElementById("meta").textContent =
-      `${cat === "All" ? "Buckets & Grapples" : cat} • ${filtered.length} item(s) • Pricing: Coming Soon`;
+      `${cat === "All" ? "All categories" : cat} • ${filtered.length} item(s) • Pricing: Coming Soon`;
+
+    filtered.forEach(initSelectionIfNeeded);
 
     document.getElementById("cards").innerHTML = filtered.map(p => {
       const img = imgPathForSlug(p.slug);
+      const sum = selectionSummary(p.slug);
+      const emailSubject = encodeURIComponent(
+        `Quote Request - ${p.name}` + (sum ? ` (${sum})` : "")
+      );
+
+      const configHtml = p.options ? `
+        <div class="configBox">
+          <div class="configGrid">
+            <div class="field">
+              <label>Edge</label>
+              <select onchange="updateSelection('${p.slug}','edge',this.value)">
+                ${p.options.edge.map(v => `<option ${selections[p.slug]?.edge===v?'selected':''}>${v}</option>`).join("")}
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Width</label>
+              <select onchange="updateSelection('${p.slug}','width',this.value)">
+                ${p.options.width.map(v => `<option ${selections[p.slug]?.width===v?'selected':''}>${v}</option>`).join("")}
+              </select>
+            </div>
+
+            <div class="field" style="grid-column:1/-1">
+              <label>Duty Rating</label>
+              <select onchange="updateSelection('${p.slug}','duty',this.value)">
+                ${p.options.duty.map(v => `<option ${selections[p.slug]?.duty===v?'selected':''}>${v}</option>`).join("")}
+              </select>
+            </div>
+          </div>
+
+          <div class="selectedLine"><strong>Selected:</strong> ${sum || "—"}</div>
+        </div>
+      ` : ``;
+
       return `
         <div class="card">
           <div class="ph">
             <span class="phTag">${p.category}</span>
             <img src="${img}" alt="${p.name}" onerror="this.style.display='none';" />
           </div>
+
           <div class="cardBody">
             <h4>${p.name}</h4>
             <p class="desc">${p.description}</p>
             <div class="price">Pricing: Coming Soon</div>
 
+            ${configHtml}
+
             <div class="cardActions">
               <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
-              <a class="btn" href="mailto:whoots821@gmail.com?subject=${encodeURIComponent("Quote Request - " + p.name)}">Email</a>
+              <a class="btn" href="mailto:whoots821@gmail.com?subject=${emailSubject}">Email</a>
             </div>
           </div>
         </div>
