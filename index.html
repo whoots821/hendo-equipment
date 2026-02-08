@@ -1,342 +1,212 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hendo Equipment | Attachments & Pricing</title>
-<meta name="description" content="Hendo Equipment — attachments and pricing. Veteran owned & operated. Hendersonville, NC." />
+
 <style>
 :root{
-  --bg:#f4f6f4;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;--muted:#475569;--border:#d1d5db;
-  --accent:#6b7f3a;--accentDark:#55662f;
+  --bg:#f4f6f4;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
+  --muted:#475569;--border:#d1d5db;--accent:#6b7f3a;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-a{color:inherit;text-decoration:none}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
 .container{max-width:1200px;margin:0 auto;padding:16px}
-header{background:#fff;border-bottom:4px solid var(--accent);position:sticky;top:0;z-index:10}
-.headerRow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+header{background:#fff;border-bottom:4px solid var(--accent)}
+.headerRow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .brand h1{margin:0;font-size:22px}
-.brand p{margin:0;color:var(--muted);font-size:13px}
-.badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:var(--panelAlt);border:1px solid var(--border);font-size:12px;font-weight:900}
-.flag{width:18px;height:12px;display:inline-block;border-radius:2px;overflow:hidden}
-.cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.btn{border:1px solid var(--border);background:var(--panel);padding:10px 14px;border-radius:10px;font-weight:900;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.badgeRow{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.badge{padding:6px 10px;border-radius:999px;background:var(--panelAlt);
+  border:1px solid var(--border);font-size:12px;font-weight:900}
+
+.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
+  background:#fff;font-weight:900;cursor:pointer}
 .btnPrimary{background:var(--accent);color:#fff;border:none}
-.btnPrimary:hover{background:var(--accentDark)}
-.btn:hover{background:#f8fafc}
 
-.hero{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:16px}
-.hero h2{margin:8px 0 10px;font-size:28px;color:var(--accent)}
-.hero p{margin:0 0 10px;max-width:900px;color:var(--muted);font-size:15px;line-height:1.55}
-.heroNote{font-size:12px;color:var(--muted)}
-
-.layout{display:grid;grid-template-columns:320px 1fr;gap:16px;margin-top:16px}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:16px}
 @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
-.sidebar{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px}
-.sideTitle{font-weight:900;margin-bottom:8px;color:var(--accent)}
-.machineTabs{display:grid;gap:6px;margin-bottom:14px}
-.machineTabs button{width:100%;text-align:left;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--text);font-weight:900;cursor:pointer}
-.machineTabs button.active{background:var(--accent);color:#fff;border:none}
+.sidebar{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px}
+.sideTitle{font-weight:900;color:var(--accent);margin-bottom:8px}
 
-.catGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.catBtn{border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center;cursor:pointer}
+.machineTabs button,
+.catBtn{
+  width:100%;text-align:left;padding:10px;border-radius:8px;
+  border:1px solid var(--border);background:#fff;font-weight:900;
+  cursor:pointer;margin-bottom:6px
+}
+.machineTabs button.active,
 .catBtn.active{background:var(--panelAlt);border-color:var(--accent)}
-.catIcon{width:28px;height:28px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:#fff;color:var(--accent)}
-.catText{display:grid;gap:2px}
-.catName{font-weight:1000;font-size:12px;line-height:1.1}
-.catMeta{font-size:11px;color:var(--muted)}
 
-.content{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px}
-.contentTop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
-.content h3{margin:0;color:var(--accent);font-size:20px}
-.pill{color:var(--muted);font-size:12px}
+.content{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px}
 
-.configCard{margin-top:12px;border:1px solid var(--border);border-radius:16px;background:#fff;overflow:hidden}
-.configHead{padding:14px;border-bottom:1px solid var(--border);background:var(--panelAlt);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
-.configHead h4{margin:0;font-size:16px}
-.configBody{padding:14px;display:grid;gap:12px}
-.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
-.field label{display:block;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:6px}
-select{min-width:180px;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fff;font-weight:900;color:var(--text)}
-@media(max-width:600px){select{min-width:100%}}
-.kv{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-.chip{padding:6px 10px;border-radius:999px;background:var(--panelAlt);border:1px solid var(--border);font-weight:900;color:var(--text)}
-.priceLine{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
-.priceBig{font-size:22px;font-weight:1100}
+.configCard{margin-top:10px;border:1px solid var(--border);border-radius:14px}
+.configHead{padding:12px;border-bottom:1px solid var(--border);background:var(--panelAlt)}
+.configBody{padding:12px;display:grid;gap:12px}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.field label{font-size:12px;font-weight:900;color:var(--muted)}
+select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
+
+.priceBig{font-size:24px;font-weight:1100}
 .small{font-size:12px;color:var(--muted)}
+
 footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;color:var(--muted);font-size:13px;padding:12px 0}
 </style>
 </head>
+
 <body>
 <header>
   <div class="container headerRow">
     <div class="brand">
       <h1>Hendo Equipment</h1>
       <div class="badgeRow">
-        <span class="badge">
-          <svg class="flag" viewBox="0 0 7410 3900" aria-hidden="true">
-            <rect width="7410" height="3900" fill="#b22234"></rect>
-            <g fill="#fff">
-              <rect y="300" width="7410" height="300"></rect>
-              <rect y="900" width="7410" height="300"></rect>
-              <rect y="1500" width="7410" height="300"></rect>
-              <rect y="2100" width="7410" height="300"></rect>
-              <rect y="2700" width="7410" height="300"></rect>
-              <rect y="3300" width="7410" height="300"></rect>
-            </g>
-            <rect width="2964" height="2100" fill="#3c3b6e"></rect>
-          </svg>
-          USA Made
-        </span>
-        <span class="badge">Veteran Owned &amp; Operated</span>
+        <span class="badge">🇺🇸 USA Made</span>
+        <span class="badge">Veteran Owned & Operated</span>
       </div>
-      <p>Hendersonville, NC</p>
     </div>
-    <div class="cta">
-      <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
-      <a class="btn" href="mailto:whoots821@gmail.com">Email</a>
+    <div>
+      <a class="btn btnPrimary" href="tel:+18286990157">(828) 699-0157</a>
     </div>
   </div>
 </header>
 
 <main class="container">
-  <section class="hero">
-    <h2>Catalog &amp; Pricing</h2>
-    <p>
-      Each icon below is one tab from your Excel sheet (excluding <strong>All_Items</strong>).
-      Click a category, then use dropdowns to choose the exact variation — the <strong>price updates instantly</strong>.
-    </p>
-    <div class="heroNote">
-      Want photos? Upload images in your repo at <strong>/images/&lt;SKU&gt;.jpg</strong> (example: <code>MINI4N1-54.jpg</code>).
-    </div>
-  </section>
-
   <section class="layout">
     <aside class="sidebar">
-      <div class="sideTitle">Machine Type</div>
+      <div class="sideTitle">Machine</div>
       <div class="machineTabs" id="machineTabs"></div>
 
       <div class="sideTitle">Categories</div>
-      <div class="catGrid" id="catGrid"></div>
-
-      <div style="margin-top:12px;font-size:12px;color:var(--muted);">
-        Skid Steer + Track Loader are grouped together. Tractor only shows Tractor Buckets.
-      </div>
+      <div id="catList"></div>
     </aside>
 
-    <div class="content">
-      <div class="contentTop">
-        <h3 id="title"></h3>
-        <div class="pill" id="meta"></div>
-      </div>
-
-      <div class="configCard" id="configCard" style="display:none;">
+    <section class="content">
+      <div id="configCard" class="configCard" style="display:none">
         <div class="configHead">
-          <h4 id="configTitle">Attachment</h4>
-          <div class="small" id="configHint"></div>
+          <strong id="configTitle"></strong>
         </div>
         <div class="configBody">
           <div class="filters" id="filters"></div>
 
-          <div class="kv" id="selectedKv"></div>
-
-          <div class="priceLine">
-            <div>
-              <div class="small">Selected SKU</div>
-              <div style="font-weight:1100;font-size:16px" id="selectedSku">—</div>
-            </div>
-            <div style="text-align:right">
-              <div class="small">Retail Price</div>
-              <div class="priceBig" id="selectedPrice">—</div>
-            </div>
+          <div>
+            <div class="small">Selected SKU</div>
+            <div id="skuOut" style="font-weight:900">—</div>
           </div>
 
-          <div class="cta">
-            <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
-            <a class="btn" id="emailBtn" href="mailto:whoots821@gmail.com">Email Quote</a>
+          <div>
+            <div class="small">Price</div>
+            <div id="priceOut" class="priceBig">—</div>
           </div>
-          <div class="small">Prices are pulled from your uploaded Excel file.</div>
+
+          <div>
+            <a class="btn btnPrimary" id="emailBtn">Email Quote</a>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </main>
 
 <footer>
-  <div class="container foot">
-    <div>© <span id="year"></span> Hendo Equipment</div>
-    <div>Hendersonville, NC • (828) 699-0157 • whoots821@gmail.com</div>
+  <div class="container small">
+    © Hendo Equipment • Hendersonville, NC
   </div>
 </footer>
 
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const norm = s => String(s||"").toLowerCase().trim();
 
-  // Built from: Attachment_And_Prices (3) (version 1).xlsx
-  // Sheet excluded: All_Items
-  const SHEETS = [{"id":"4N1 BUCKET MINI","label":"4-In-1 Bucket Mini","machine":"Mini Skid Steer","options":{"Edge":["Smooth","With Teeth"],"Width":["48\"","54\"","60\"","66\"","72\""]},"items":[{"sku":"MINIGN1-48","name":"MINI 4-N-1 BUCKET, 48\"","price":"$2,450","Width":"48\""},{"sku":"MINI4N1-54","name":"MINI 4-N-1 BUCKET, 54\"","price":"$2,500","Width":"54\""},{"sku":"MINI4N1-60","name":"MINI 4-N-1 BUCKET, 60\"","price":"$2,550","Width":"60\""},{"sku":"MINI4N1-66","name":"MINI 4-N-1 BUCKET, 66\"","price":"$2,600","Width":"66\""},{"sku":"MINI4N1-72","name":"MINI 4-N-1 BUCKET, 72\"","price":"$2,650","Width":"72\""},{"sku":"MINI4N1-48T","name":"MINI 4-N-1 BUCKET, 48\" W/ TEETH","price":"$2,750","Edge":"With Teeth","Width":"48\""},{"sku":"MINI4N1-54T","name":"MINI 4-N-1 BUCKET, 54\" W/ TEETH","price":"$2,800","Edge":"With Teeth","Width":"54\""},{"sku":"MINI4N1-60T","name":"MINI 4-N-1 BUCKET, 60\" W/ TEETH","price":"$2,850","Edge":"With Teeth","Width":"60\""},{"sku":"MINI4N1-66T","name":"MINI 4-N-1 BUCKET, 66\" W/ TEETH","price":"$2,900","Edge":"With Teeth","Width":"66\""},{"sku":"MINI4N1-72T","name":"MINI 4-N-1 BUCKET, 72\" W/ TEETH","price":"$2,950","Edge":"With Teeth","Width":"72\""},{"sku":"MINI4N1-48S","name":"MINI 4-N-1 BUCKET, 48\" SMOOTH","price":"$2,650","Edge":"Smooth","Width":"48\""}]},{"id":"FORESTRY DISC MULCHER","label":"Forestry Disc Mulcher","machine":"Skid/Track Loader","options":{"Motor":["100cc","150cc"]},"items":[{"sku":"FDM44","name":"FORESTRY DISC MULCHER, 100CC MOTOR","price":"$21,850","Motor":"100cc"},{"sku":"FDM44","name":"FORESTRY DISC MULCHER, 150CC MOTOR","price":"$21,850","Motor":"150cc"},{"sku":"FDMEX","name":"EXTRA CUTTER BLADES","price":"$250"},{"sku":"FDMRB","name":"REPLACEMENT BLADE","price":"$65"}]},{"id":"EXCAVATOR CUTTER","label":"Excavator Cutter","machine":"Excavator","options":{"Mount":["Over 12K","Under 12K"],"Width":["12\"","18\"","24\"","30\"","36\"","42\""]},"items":[{"sku":"EXCM","name":"EXCAVATOR CUTTER MOUNT UNDER 12K","price":"$650","Mount":"Under 12K"},{"sku":"EXCM","name":"EXCAVATOR CUTTER MOUNT OVER 12K","price":"$800","Mount":"Over 12K"},{"sku":"EXC12","name":"EXCAVATOR CUTTER, 12\"","price":"$1,600","Width":"12\""},{"sku":"EXC18","name":"EXCAVATOR CUTTER, 18\"","price":"$1,750","Width":"18\""},{"sku":"EXC24","name":"EXCAVATOR CUTTER, 24\"","price":"$1,950","Width":"24\""},{"sku":"EXC30","name":"EXCAVATOR CUTTER, 30\"","price":"$2,200","Width":"30\""},{"sku":"EXC36","name":"EXCAVATOR CUTTER, 36\"","price":"$2,500","Width":"36\""},{"sku":"EXC42","name":"EXCAVATOR CUTTER, 42\"","price":"$2,850","Width":"42\""},{"sku":"EXCTBO","name":"EXCAVATOR CUTTER TEETH, 20-29K CLASS","price":"$14"},{"sku":"EXCTMB","name":"EXCAVATOR CUTTER TEETH, 10-19K CLASS","price":"$14"},{"sku":"EXCTSM","name":"EXCAVATOR CUTTER TEETH, 3-9K CLASS","price":"$14"},{"sku":"EXCTXL","name":"EXCAVATOR CUTTER TEETH, 30-39K CLASS","price":"$14"}]},{"id":"4N1 BUCKET","label":"4-In-1 Bucket","machine":"Skid/Track Loader","options":{"Duty":["Heavy Duty","Severe Duty","Standard Duty","X-Treme Duty"],"Width":["54\"","60\"","66\"","72\"","78\"","84\""]},"items":[{"sku":"SD4N1-54","name":"SD 4-N-1 BUCKET, 54\"","price":"$3,000","Duty":"Standard Duty","Width":"54\""},{"sku":"SD4N1-60","name":"SD 4-N-1 BUCKET, 60\"","price":"$3,050","Duty":"Standard Duty","Width":"60\""},{"sku":"SD4N1-66","name":"SD 4-N-1 BUCKET, 66\"","price":"$3,100","Duty":"Standard Duty","Width":"66\""},{"sku":"SD4N1-72","name":"SD 4-N-1 BUCKET, 72\"","price":"$3,150","Duty":"Standard Duty","Width":"72\""},{"sku":"SD4N1-78","name":"SD 4-N-1 BUCKET, 78\"","price":"$3,200","Duty":"Standard Duty","Width":"78\""},{"sku":"SD4N1-84","name":"SD 4-N-1 BUCKET, 84\"","price":"$3,250","Duty":"Standard Duty","Width":"84\""},{"sku":"HD4N1-54","name":"HD 4-N-1 BUCKET, 54\"","price":"$3,350","Duty":"Heavy Duty","Width":"54\""},{"sku":"HD4N1-60","name":"HD 4-N-1 BUCKET, 60\"","price":"$3,400","Duty":"Heavy Duty","Width":"60\""},{"sku":"HD4N1-66","name":"HD 4-N-1 BUCKET, 66\"","price":"$3,450","Duty":"Heavy Duty","Width":"66\""},{"sku":"HD4N1-72","name":"HD 4-N-1 BUCKET, 72\"","price":"$3,500","Duty":"Heavy Duty","Width":"72\""},{"sku":"HD4N1-78","name":"HD 4-N-1 BUCKET, 78\"","price":"$3,550","Duty":"Heavy Duty","Width":"78\""},{"sku":"HD4N1-84","name":"HD 4-N-1 BUCKET, 84\"","price":"$3,600","Duty":"Heavy Duty","Width":"84\""},{"sku":"XD4N1-54","name":"XD 4-N-1 BUCKET, 54\"","price":"$3,700","Duty":"X-Treme Duty","Width":"54\""},{"sku":"XD4N1-60","name":"XD 4-N-1 BUCKET, 60\"","price":"$3,750","Duty":"X-Treme Duty","Width":"60\""},{"sku":"XD4N1-66","name":"XD 4-N-1 BUCKET, 66\"","price":"$3,800","Duty":"X-Treme Duty","Width":"66\""},{"sku":"XD4N1-72","name":"XD 4-N-1 BUCKET, 72\"","price":"$3,850","Duty":"X-Treme Duty","Width":"72\""},{"sku":"XD4N1-78","name":"XD 4-N-1 BUCKET, 78\"","price":"$3,900","Duty":"X-Treme Duty","Width":"78\""},{"sku":"XD4N1-84","name":"XD 4-N-1 BUCKET, 84\"","price":"$3,950","Duty":"X-Treme Duty","Width":"84\""},{"sku":"SV4N1-54","name":"SV 4-N-1 BUCKET, 54\"","price":"$4,200","Duty":"Severe Duty","Width":"54\""},{"sku":"SV4N1-60","name":"SV 4-N-1 BUCKET, 60\"","price":"$4,250","Duty":"Severe Duty","Width":"60\""},{"sku":"SV4N1-66","name":"SV 4-N-1 BUCKET, 66\"","price":"$4,300","Duty":"Severe Duty","Width":"66\""},{"sku":"SV4N1-72","name":"SV 4-N-1 BUCKET, 72\"","price":"$4,350","Duty":"Severe Duty","Width":"72\""},{"sku":"SV4N1-78","name":"SV 4-N-1 BUCKET, 78\"","price":"$4,400","Duty":"Severe Duty","Width":"78\""},{"sku":"SV4N1-84","name":"SV 4-N-1 BUCKET, 84\"","price":"$4,450","Duty":"Severe Duty","Width":"84\""},{"sku":"SD4N1TE","name":"4N1 TEETH (PAIR)","price":"$210"},{"sku":"HD4N1TE","name":"HD 4N1 TEETH (PAIR)","price":"$260"},{"sku":"XD4N1TE","name":"XD 4N1 TEETH (PAIR)","price":"$310"},{"sku":"SV4N1TE","name":"SV 4N1 TEETH (PAIR)","price":"$360"},{"sku":"SD4N1TEB","name":"4N1 TEETH BOLT","price":"$4"},{"sku":"HD4N1TEB","name":"HD 4N1 TEETH BOLT","price":"$4"},{"sku":"XD4N1TEB","name":"XD 4N1 TEETH BOLT","price":"$4"},{"sku":"SV4N1TEB","name":"SV 4N1 TEETH BOLT","price":"$4"}]},{"id":"LONG BOTTOM BUCKET","label":"Long Bottom Bucket","machine":"Skid/Track Loader","options":{"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\""]},"items":[{"sku":"LBB48","name":"LB BUCKET, 48\"","price":"$900","Width":"48\""},{"sku":"LBBS4","name":"LB BUCKET, 54\"","price":"$1,050","Width":"54\""},{"sku":"LBB6O","name":"LB BUCKET, 60\"","price":"$1,100","Width":"60\""},{"sku":"LBBE6","name":"LB BUCKET, 66\"","price":"$1,150","Width":"66\""},{"sku":"LBB72","name":"LB BUCKET, 72\"","price":"$1,200","Width":"72\""},{"sku":"LBB78","name":"LB BUCKET, 78\"","price":"$1,250","Width":"78\""},{"sku":"LBB84","name":"LB BUCKET, 84\"","price":"$1,300","Width":"84\""},{"sku":"LBB90","name":"LB BUCKET, 90\"","price":"$1,350","Width":"90\""},{"sku":"LBB96","name":"LB BUCKET, 96\"","price":"$1,400","Width":"96\""},{"sku":"LBB1O2","name":"LB BUCKET, 102\"","price":"$1,450","Width":"102\""},{"sku":"LBB1O8","name":"LB BUCKET, 108\"","price":"$1,500","Width":"108\""},{"sku":"LBB114","name":"LB BUCKET, 114\"","price":"$1,550","Width":"114\""},{"sku":"LBB12O","name":"LB BUCKET, 120\"","price":"$1,600","Width":"120\""},{"sku":"LBB126","name":"LB BUCKET, 126\"","price":"$1,650","Width":"126\""},{"sku":"LBB132","name":"LB BUCKET, 132\"","price":"$1,700","Width":"132\""},{"sku":"LBB138","name":"LB BUCKET, 138\"","price":"$1,750","Width":"138\""},{"sku":"LBB144","name":"LB BUCKET, 144\"","price":"$1,800","Width":"144\""},{"sku":"LBB15O","name":"LB BUCKET, 150\"","price":"$1,850","Width":"150\""},{"sku":"LBB156","name":"LB BUCKET, 156\"","price":"$1,900","Width":"156\""},{"sku":"LBB162","name":"LB BUCKET, 162\"","price":"$1,950","Width":"162\""},{"sku":"LBB168","name":"LB BUCKET, 168\"","price":"$2,000","Width":"168\""},{"sku":"LBB174","name":"LB BUCKET, 174\"","price":"$2,050","Width":"174\""},{"sku":"LBB18O","name":"LB BUCKET, 180\"","price":"$2,100","Width":"180\""},{"sku":"LBB186","name":"LB BUCKET, 186\"","price":"$2,150","Width":"186\""}]},{"id":"HIGH DUMP BUCKETS","label":"High Dump Buckets","machine":"Skid/Track Loader","options":{"Width":["60\"","72\"","84\"","96\"","108\""]},"items":[{"sku":"HDB6O","name":"HIGH DUMP BUCKET, 60\"","price":"$4,000","Width":"60\""},{"sku":"HDB72","name":"HIGH DUMP BUCKET, 72\"","price":"$4,100","Width":"72\""},{"sku":"HDB84","name":"HIGH DUMP BUCKET, 84\"","price":"$4,200","Width":"84\""},{"sku":"HDB96","name":"HIGH DUMP BUCKET, 96\"","price":"$4,300","Width":"96\""},{"sku":"HDB1O8","name":"HIGH DUMP BUCKET, 108\"","price":"$4,400","Width":"108\""}]},{"id":"CONCRETE BUCKETS","label":"Concrete Buckets","machine":"Skid/Track Loader","options":{"Capacity":["1/2 Yard","3/4 Yard","1 Yard"],"Width":["44\"","48\"","60\""]},"items":[{"sku":"1/2YCB","name":"1/2 YARD CONCRETE BUCKET","price":"$1,450","Capacity":"1/2 Yard"},{"sku":"3/4YCB","name":"3/4 YARD CONCRETE BUCKET","price":"$1,600","Capacity":"3/4 Yard"},{"sku":"1YCB","name":"1 YARD CONCRETE BUCKET","price":"$1,850","Capacity":"1 Yard"},{"sku":"CB44","name":"CONCRETE BUCKET, 44\"","price":"$1,950","Width":"44\""},{"sku":"CB48","name":"CONCRETE BUCKET, 48\"","price":"$2,050","Width":"48\""},{"sku":"CB6O","name":"CONCRETE BUCKET, 60\"","price":"$2,350","Width":"60\""}]},{"id":"LOW PROFILE BUCKET","label":"Low Profile Bucket","machine":"Skid/Track Loader","options":{"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\"","114\"","120\"","126\"","132\"","138\"","144\"","150\"","156\"","162\"","168\"","174\""]},"items":[{"sku":"LPB48","name":"LP BUCKET 48\"","price":"$950","Width":"48\""},{"sku":"LPB54","name":"LP BUCKET 54\"","price":"$1,050","Width":"54\""},{"sku":"LPB6O","name":"LP BUCKET 60\"","price":"$1,100","Width":"60\""},{"sku":"LPBE6","name":"LP BUCKET 66\"","price":"$1,150","Width":"66\""},{"sku":"LPB72","name":"LP BUCKET 72\"","price":"$1,200","Width":"72\""},{"sku":"LPB78","name":"LP BUCKET 78\"","price":"$1,250","Width":"78\""},{"sku":"LPB84","name":"LP BUCKET 84\"","price":"$1,300","Width":"84\""},{"sku":"LPB90","name":"LP BUCKET 90\"","price":"$1,350","Width":"90\""},{"sku":"LPB96","name":"LP BUCKET 96\"","price":"$1,400","Width":"96\""},{"sku":"LPB1O2","name":"LP BUCKET 102\"","price":"$1,450","Width":"102\""},{"sku":"LPB1O8","name":"LP BUCKET 108\"","price":"$1,500","Width":"108\""},{"sku":"LPB114","name":"LP BUCKET 114\"","price":"$1,550","Width":"114\""},{"sku":"LPB12O","name":"LP BUCKET 120\"","price":"$1,600","Width":"120\""},{"sku":"LPB126","name":"LP BUCKET 126\"","price":"$1,650","Width":"126\""},{"sku":"LPB132","name":"LP BUCKET 132\"","price":"$1,700","Width":"132\""},{"sku":"LPB138","name":"LP BUCKET 138\"","price":"$1,750","Width":"138\""},{"sku":"LPB144","name":"LP BUCKET 144\"","price":"$1,800","Width":"144\""},{"sku":"LPB15O","name":"LP BUCKET 150\"","price":"$1,850","Width":"150\""},{"sku":"LPB156","name":"LP BUCKET 156\"","price":"$1,900","Width":"156\""},{"sku":"LPB162","name":"LP BUCKET 162\"","price":"$1,950","Width":"162\""},{"sku":"LPB168","name":"LP BUCKET 168\"","price":"$2,000","Width":"168\""},{"sku":"LPB174","name":"LP BUCKET 174\"","price":"$2,050","Width":"174\""}]},{"id":"SNOW-N-LITTER BUCKET","label":"Snow-N-Litter Bucket","machine":"Skid/Track Loader","options":{"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\"","114\"","120\"","126\"","132\""]},"items":[{"sku":"SNLB48","name":"SNOW-N-LITTER BUCKET, 48\"","price":"$1,250","Width":"48\""},{"sku":"SNLBS4","name":"SNOW-N-LITTER BUCKET, 54\"","price":"$1,300","Width":"54\""},{"sku":"SNLB6O","name":"SNOW-N-LITTER BUCKET, 60\"","price":"$1,350","Width":"60\""},{"sku":"SNLBE6","name":"SNOW-N-LITTER BUCKET, 66\"","price":"$1,400","Width":"66\""},{"sku":"SNLB72","name":"SNOW-N-LITTER BUCKET, 72\"","price":"$1,450","Width":"72\""},{"sku":"SNLB78","name":"SNOW-N-LITTER BUCKET, 78\"","price":"$1,500","Width":"78\""},{"sku":"SNLB84","name":"SNOW-N-LITTER BUCKET, 84\"","price":"$1,550","Width":"84\""},{"sku":"SNLB90","name":"SNOW-N-LITTER BUCKET, 90\"","price":"$1,600","Width":"90\""},{"sku":"SNLB96","name":"SNOW-N-LITTER BUCKET, 96\"","price":"$1,650","Width":"96\""},{"sku":"SNLB1O2","name":"SNOW-N-LITTER BUCKET, 102\"","price":"$1,700","Width":"102\""},{"sku":"SNLB1O8","name":"SNOW-N-LITTER BUCKET, 108\"","price":"$1,750","Width":"108\""},{"sku":"SNLB114","name":"SNOW-N-LITTER BUCKET, 114\"","price":"$1,800","Width":"114\""},{"sku":"SNLB12O","name":"SNOW-N-LITTER BUCKET, 120\"","price":"$1,850","Width":"120\""},{"sku":"SNLB126","name":"SNOW-N-LITTER BUCKET, 126\"","price":"$1,900","Width":"126\""},{"sku":"SNLB132","name":"SNOW-N-LITTER BUCKET, 132\"","price":"$1,950","Width":"132\""}]},{"id":"ROCK GRAPPLES","label":"Rock Grapples","machine":"Skid/Track Loader","options":{"Duty":["Compact Tractor","Heavy Duty","X-Treme Duty"],"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\""]},"items":[{"sku":"CTROKG48","name":"COMPACT TRACTOR ROCK GRAPPLE, 48\"","price":"$1,900","Duty":"Compact Tractor","Width":"48\""},{"sku":"CTROKGS4","name":"COMPACT TRACTOR ROCK GRAPPLE, 54\"","price":"$1,950","Duty":"Compact Tractor","Width":"54\""},{"sku":"CTROKG6O","name":"COMPACT TRACTOR ROCK GRAPPLE, 60\"","price":"$2,000","Duty":"Compact Tractor","Width":"60\""},{"sku":"CTROKGE6","name":"COMPACT TRACTOR ROCK GRAPPLE, 66\"","price":"$2,050","Duty":"Compact Tractor","Width":"66\""},{"sku":"CTROKG72","name":"COMPACT TRACTOR ROCK GRAPPLE, 72\"","price":"$2,100","Duty":"Compact Tractor","Width":"72\""},{"sku":"HDROKG66","name":"HD ROCK GRAPPLE, 66\"","price":"$2,700","Duty":"Heavy Duty","Width":"66\""},{"sku":"HDROKG72","name":"HD ROCK GRAPPLE, 72\"","price":"$2,800","Duty":"Heavy Duty","Width":"72\""},{"sku":"HDROKG78","name":"HD ROCK GRAPPLE, 78\"","price":"$2,900","Duty":"Heavy Duty","Width":"78\""},{"sku":"HDROKG84","name":"HD ROCK GRAPPLE, 84\"","price":"$3,000","Duty":"Heavy Duty","Width":"84\""},{"sku":"XDROKG66","name":"XD ROCK GRAPPLE, 66\"","price":"$3,150","Duty":"X-Treme Duty","Width":"66\""},{"sku":"XDROKG72","name":"XD ROCK GRAPPLE, 72\"","price":"$3,250","Duty":"X-Treme Duty","Width":"72\""},{"sku":"XDROKG78","name":"XD ROCK GRAPPLE, 78\"","price":"$3,350","Duty":"X-Treme Duty","Width":"78\""},{"sku":"XDROKG84","name":"XD ROCK GRAPPLE, 84\"","price":"$3,450","Duty":"X-Treme Duty","Width":"84\""},{"sku":"HDROKGT","name":"HD ROCK GRAPPLE TEETH (PAIR)","price":"$155"},{"sku":"XDROKGT","name":"XD ROCK GRAPPLE TEETH (PAIR)","price":"$180"},{"sku":"HDROKGTB","name":"HD ROCK GRAPPLE TEETH BOLT","price":"$4"},{"sku":"XDROKGTB","name":"XD ROCK GRAPPLE TEETH BOLT","price":"$4"},{"sku":"HDROKGTEB","name":"HD ROCK GRAPPLE TEETH BOLT / NUT","price":"$7"},{"sku":"XDROKGTEB","name":"XD ROCK GRAPPLE TEETH BOLT / NUT","price":"$7"},{"sku":"HDROKGTC","name":"HD ROCK GRAPPLE TEETH CAP","price":"$10"},{"sku":"XDROKGTC","name":"XD ROCK GRAPPLE TEETH CAP","price":"$10"},{"sku":"HDROKGTN","name":"HD ROCK GRAPPLE TEETH NUT","price":"$3"},{"sku":"XDROKGTN","name":"XD ROCK GRAPPLE TEETH NUT","price":"$3"},{"sku":"HDROKGTR","name":"HD ROCK GRAPPLE TEETH RETAINER","price":"$7"},{"sku":"XDROKGTR","name":"XD ROCK GRAPPLE TEETH RETAINER","price":"$7"},{"sku":"HDROKGTW","name":"HD ROCK GRAPPLE TEETH WASHER","price":"$1"},{"sku":"XDROKGTW","name":"XD ROCK GRAPPLE TEETH WASHER","price":"$1"},{"sku":"HDROKGTT","name":"HD ROCK GRAPPLE TEETH TIP","price":"$25"},{"sku":"XDROKGTT","name":"XD ROCK GRAPPLE TEETH TIP","price":"$25"},{"sku":"HDROKGTP","name":"HD ROCK GRAPPLE TEETH PIN","price":"$4"},{"sku":"XDROKGTP","name":"XD ROCK GRAPPLE TEETH PIN","price":"$4"}]},{"id":"ROCK BUCKET","label":"Rock Bucket","machine":"Skid/Track Loader","options":{"Duty":["Compact Tractor","Heavy Duty","X-Treme Duty"],"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\""]},"items":[{"sku":"CTRB48","name":"COMPACT TRACTOR ROCK BUCKET, 48\"","price":"$950","Duty":"Compact Tractor","Width":"48\""},{"sku":"CTRBS4","name":"COMPACT TRACTOR ROCK BUCKET, 54\"","price":"$1,050","Duty":"Compact Tractor","Width":"54\""},{"sku":"CTRB6O","name":"COMPACT TRACTOR ROCK BUCKET, 60\"","price":"$1,150","Duty":"Compact Tractor","Width":"60\""},{"sku":"CTRBE6","name":"COMPACT TRACTOR ROCK BUCKET, 66\"","price":"$1,250","Duty":"Compact Tractor","Width":"66\""},{"sku":"CTRB72","name":"COMPACT TRACTOR ROCK BUCKET, 72\"","price":"$1,350","Duty":"Compact Tractor","Width":"72\""},{"sku":"HDROKB66","name":"HD ROCK BUCKET, 66\"","price":"$1,850","Duty":"Heavy Duty","Width":"66\""},{"sku":"HDROKB72","name":"HD ROCK BUCKET, 72\"","price":"$1,900","Duty":"Heavy Duty","Width":"72\""},{"sku":"HDROKB78","name":"HD ROCK BUCKET, 78\"","price":"$1,950","Duty":"Heavy Duty","Width":"78\""},{"sku":"HDROKB84","name":"HD ROCK BUCKET, 84\"","price":"$2,000","Duty":"Heavy Duty","Width":"84\""},{"sku":"XDROKB66","name":"XD ROCK BUCKET, 66\"","price":"$2,350","Duty":"X-Treme Duty","Width":"66\""},{"sku":"XDROKB72","name":"XD ROCK BUCKET, 72\"","price":"$2,450","Duty":"X-Treme Duty","Width":"72\""},{"sku":"XDROKB78","name":"XD ROCK BUCKET, 78\"","price":"$2,550","Duty":"X-Treme Duty","Width":"78\""},{"sku":"XDROKB84","name":"XD ROCK BUCKET, 84\"","price":"$2,650","Duty":"X-Treme Duty","Width":"84\""},{"sku":"HDROKBT","name":"HD ROCK BUCKET TEETH (PAIR)","price":"$155"},{"sku":"XDROKBT","name":"XD ROCK BUCKET TEETH (PAIR)","price":"$180"},{"sku":"HDROKBTB","name":"HD ROCK BUCKET TEETH BOLT","price":"$4"},{"sku":"XDROKBTB","name":"XD ROCK BUCKET TEETH BOLT","price":"$4"},{"sku":"HDROKBTEB","name":"HD ROCK BUCKET TEETH BOLT / NUT","price":"$7"},{"sku":"XDROKBTEB","name":"XD ROCK BUCKET TEETH BOLT / NUT","price":"$7"},{"sku":"HDROKBTC","name":"HD ROCK BUCKET TEETH CAP","price":"$10"},{"sku":"XDROKBTC","name":"XD ROCK BUCKET TEETH CAP","price":"$10"},{"sku":"HDROKBTN","name":"HD ROCK BUCKET TEETH NUT","price":"$3"},{"sku":"XDROKBTN","name":"XD ROCK BUCKET TEETH NUT","price":"$3"},{"sku":"HDROKBTR","name":"HD ROCK BUCKET TEETH RETAINER","price":"$7"},{"sku":"XDROKBTR","name":"XD ROCK BUCKET TEETH RETAINER","price":"$7"},{"sku":"HDROKBTW","name":"HD ROCK BUCKET TEETH WASHER","price":"$1"},{"sku":"XDROKBTW","name":"XD ROCK BUCKET TEETH WASHER","price":"$1"},{"sku":"HDROKBTT","name":"HD ROCK BUCKET TEETH TIP","price":"$25"},{"sku":"XDROKBTT","name":"XD ROCK BUCKET TEETH TIP","price":"$25"},{"sku":"HDROKBTP","name":"HD ROCK BUCKET TEETH PIN","price":"$4"},{"sku":"XDROKBTP","name":"XD ROCK BUCKET TEETH PIN","price":"$4"}]},{"id":"TRACTOR BUCKET","label":"Tractor Bucket","machine":"Tractor","options":{"Duty":["Compact Tractor","Heavy Duty","X-Treme Duty"],"Width":["48\"","54\"","60\"","66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\"","114\"","120\""]},"items":[{"sku":"CTRAC48","name":"COMPACT TRACTOR BUCKET, 48\"","price":"$900","Duty":"Compact Tractor","Width":"48\""},{"sku":"CTRACS4","name":"COMPACT TRACTOR BUCKET, 54\"","price":"$950","Duty":"Compact Tractor","Width":"54\""},{"sku":"CTRAC6O","name":"COMPACT TRACTOR BUCKET, 60\"","price":"$1,000","Duty":"Compact Tractor","Width":"60\""},{"sku":"CTRACE6","name":"COMPACT TRACTOR BUCKET, 66\"","price":"$1,050","Duty":"Compact Tractor","Width":"66\""},{"sku":"CTRAC72","name":"COMPACT TRACTOR BUCKET, 72\"","price":"$1,100","Duty":"Compact Tractor","Width":"72\""},{"sku":"HDRAC66","name":"HD TRACTOR BUCKET, 66\"","price":"$1,500","Duty":"Heavy Duty","Width":"66\""},{"sku":"HDRAC72","name":"HD TRACTOR BUCKET, 72\"","price":"$1,550","Duty":"Heavy Duty","Width":"72\""},{"sku":"HDRAC78","name":"HD TRACTOR BUCKET, 78\"","price":"$1,600","Duty":"Heavy Duty","Width":"78\""},{"sku":"HDRAC84","name":"HD TRACTOR BUCKET, 84\"","price":"$1,650","Duty":"Heavy Duty","Width":"84\""},{"sku":"HDRAC90","name":"HD TRACTOR BUCKET, 90\"","price":"$1,700","Duty":"Heavy Duty","Width":"90\""},{"sku":"HDRAC96","name":"HD TRACTOR BUCKET, 96\"","price":"$1,750","Duty":"Heavy Duty","Width":"96\""},{"sku":"HDRAC1O2","name":"HD TRACTOR BUCKET, 102\"","price":"$1,800","Duty":"Heavy Duty","Width":"102\""},{"sku":"HDRAC1O8","name":"HD TRACTOR BUCKET, 108\"","price":"$1,850","Duty":"Heavy Duty","Width":"108\""},{"sku":"HDRAC114","name":"HD TRACTOR BUCKET, 114\"","price":"$1,900","Duty":"Heavy Duty","Width":"114\""},{"sku":"HDRAC12O","name":"HD TRACTOR BUCKET, 120\"","price":"$1,950","Duty":"Heavy Duty","Width":"120\""},{"sku":"XDRAC66","name":"XD TRACTOR BUCKET, 66\"","price":"$1,950","Duty":"X-Treme Duty","Width":"66\""},{"sku":"XDRAC72","name":"XD TRACTOR BUCKET, 72\"","price":"$2,000","Duty":"X-Treme Duty","Width":"72\""},{"sku":"XDRAC78","name":"XD TRACTOR BUCKET, 78\"","price":"$2,050","Duty":"X-Treme Duty","Width":"78\""},{"sku":"XDRAC84","name":"XD TRACTOR BUCKET, 84\"","price":"$2,100","Duty":"X-Treme Duty","Width":"84\""}]},{"id":"TRACK LOADER BUCKETS","label":"Track Loader Buckets","machine":"Skid/Track Loader","options":{"Duty":["X-Treme Duty"],"Width":["66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\"","114\"","120\"","126\"","132\"","138\"","144\"","150\"","156\"","162\"","168\"","174\"","180\"","186\"","192\"","198\"","204\"","210\"","216\"","222\"","228\"","234\"","240\"","246\"","252\"","258\""]},"items":[{"sku":"TAKB66","name":"X-TREME TRACK LOADER BUCKET, 66\"","price":"$2,000","Duty":"X-Treme Duty","Width":"66\""},{"sku":"TAKB72","name":"X-TREME TRACK LOADER BUCKET, 72\"","price":"$2,100","Duty":"X-Treme Duty","Width":"72\""},{"sku":"TAKB78","name":"X-TREME TRACK LOADER BUCKET, 78\"","price":"$2,200","Duty":"X-Treme Duty","Width":"78\""},{"sku":"TAKB84","name":"X-TREME TRACK LOADER BUCKET, 84\"","price":"$2,300","Duty":"X-Treme Duty","Width":"84\""},{"sku":"TAKB90","name":"X-TREME TRACK LOADER BUCKET, 90\"","price":"$2,400","Duty":"X-Treme Duty","Width":"90\""},{"sku":"TAKB96","name":"X-TREME TRACK LOADER BUCKET, 96\"","price":"$2,500","Duty":"X-Treme Duty","Width":"96\""},{"sku":"TAKB1O2","name":"X-TREME TRACK LOADER BUCKET, 102\"","price":"$2,600","Duty":"X-Treme Duty","Width":"102\""},{"sku":"TAKB1O8","name":"X-TREME TRACK LOADER BUCKET, 108\"","price":"$2,700","Duty":"X-Treme Duty","Width":"108\""},{"sku":"TAKB114","name":"X-TREME TRACK LOADER BUCKET, 114\"","price":"$2,800","Duty":"X-Treme Duty","Width":"114\""},{"sku":"TAKB12O","name":"X-TREME TRACK LOADER BUCKET, 120\"","price":"$2,900","Duty":"X-Treme Duty","Width":"120\""},{"sku":"TAKB126","name":"X-TREME TRACK LOADER BUCKET, 126\"","price":"$3,000","Duty":"X-Treme Duty","Width":"126\""},{"sku":"TAKB132","name":"X-TREME TRACK LOADER BUCKET, 132\"","price":"$3,100","Duty":"X-Treme Duty","Width":"132\""},{"sku":"TAKB138","name":"X-TREME TRACK LOADER BUCKET, 138\"","price":"$3,200","Duty":"X-Treme Duty","Width":"138\""},{"sku":"TAKB144","name":"X-TREME TRACK LOADER BUCKET, 144\"","price":"$3,300","Duty":"X-Treme Duty","Width":"144\""},{"sku":"TAKB15O","name":"X-TREME TRACK LOADER BUCKET, 150\"","price":"$3,400","Duty":"X-Treme Duty","Width":"150\""},{"sku":"TAKB156","name":"X-TREME TRACK LOADER BUCKET, 156\"","price":"$3,500","Duty":"X-Treme Duty","Width":"156\""},{"sku":"TAKB162","name":"X-TREME TRACK LOADER BUCKET, 162\"","price":"$3,600","Duty":"X-Treme Duty","Width":"162\""},{"sku":"TAKB168","name":"X-TREME TRACK LOADER BUCKET, 168\"","price":"$3,700","Duty":"X-Treme Duty","Width":"168\""},{"sku":"TAKB174","name":"X-TREME TRACK LOADER BUCKET, 174\"","price":"$3,800","Duty":"X-Treme Duty","Width":"174\""},{"sku":"TAKB18O","name":"X-TREME TRACK LOADER BUCKET, 180\"","price":"$3,900","Duty":"X-Treme Duty","Width":"180\""},{"sku":"TAKB186","name":"X-TREME TRACK LOADER BUCKET, 186\"","price":"$4,000","Duty":"X-Treme Duty","Width":"186\""},{"sku":"TAKB192","name":"X-TREME TRACK LOADER BUCKET, 192\"","price":"$4,100","Duty":"X-Treme Duty","Width":"192\""},{"sku":"TAKB198","name":"X-TREME TRACK LOADER BUCKET, 198\"","price":"$4,200","Duty":"X-Treme Duty","Width":"198\""},{"sku":"TAKB2O4","name":"X-TREME TRACK LOADER BUCKET, 204\"","price":"$4,300","Duty":"X-Treme Duty","Width":"204\""},{"sku":"TAKB21O","name":"X-TREME TRACK LOADER BUCKET, 210\"","price":"$4,400","Duty":"X-Treme Duty","Width":"210\""},{"sku":"TAKB216","name":"X-TREME TRACK LOADER BUCKET, 216\"","price":"$4,500","Duty":"X-Treme Duty","Width":"216\""},{"sku":"TAKB222","name":"X-TREME TRACK LOADER BUCKET, 222\"","price":"$4,600","Duty":"X-Treme Duty","Width":"222\""},{"sku":"TAKB228","name":"X-TREME TRACK LOADER BUCKET, 228\"","price":"$4,700","Duty":"X-Treme Duty","Width":"228\""},{"sku":"TAKB234","name":"X-TREME TRACK LOADER BUCKET, 234\"","price":"$4,800","Duty":"X-Treme Duty","Width":"234\""},{"sku":"TAKB24O","name":"X-TREME TRACK LOADER BUCKET, 240\"","price":"$4,900","Duty":"X-Treme Duty","Width":"240\""},{"sku":"TAKB246","name":"X-TREME TRACK LOADER BUCKET, 246\"","price":"$5,000","Duty":"X-Treme Duty","Width":"246\""},{"sku":"TAKB252","name":"X-TREME TRACK LOADER BUCKET, 252\"","price":"$5,100","Duty":"X-Treme Duty","Width":"252\""},{"sku":"TAKB258","name":"X-TREME TRACK LOADER BUCKET, 258\"","price":"$5,200","Duty":"X-TREME Duty","Width":"258\""}]},{"id":"HIGH CAPACITY SNOW-N-LITTER BUC","label":"High Capacity Snow-N-Litter Bucket","machine":"Skid/Track Loader","options":{"Width":["66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\""]},"items":[{"sku":"HCSB66","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 66\"","price":"$1,950","Width":"66\""},{"sku":"HCSB72","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 72\"","price":"$2,050","Width":"72\""},{"sku":"HCSB78","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 78\"","price":"$2,150","Width":"78\""},{"sku":"HCSB84","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 84\"","price":"$2,250","Width":"84\""},{"sku":"HCSB90","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 90\"","price":"$2,350","Width":"90\""},{"sku":"HCSB96","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 96\"","price":"$2,450","Width":"96\""},{"sku":"HCSB1O2","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 102\"","price":"$2,550","Width":"102\""},{"sku":"HCSB1O8","name":"HIGH-CAPACITY SNOW-N-LITTER BUCKET 108\"","price":"$2,650","Width":"108\""},{"sku":"HCSP","name":"HIGH CAPACITY SNOW-N-LITTER BUCKET POLY EDGE","price":"$300"}]},{"id":"TURKEY LITTER BUCKET","label":"Turkey Litter Bucket","machine":"Skid/Track Loader","options":{"Width":["60\"","66\"","72\"","78\"","84\"","90\"","96\"","102\"","108\"","114\"","120\""]},"items":[{"sku":"TLB6O","name":"TURKEY LITTER BUCKET, 60\"","price":"$2,200","Width":"60\""},{"sku":"TLBE6","name":"TURKEY LITTER BUCKET, 66\"","price":"$2,350","Width":"66\""},{"sku":"TLB72","name":"TURKEY LITTER BUCKET, 72\"","price":"$2,500","Width":"72\""},{"sku":"TLB78","name":"TURKEY LITTER BUCKET, 78\"","price":"$2,650","Width":"78\""},{"sku":"TLB84","name":"TURKEY LITTER BUCKET, 84\"","price":"$2,800","Width":"84\""},{"sku":"TLB90","name":"TURKEY LITTER BUCKET, 90\"","price":"$2,950","Width":"90\""},{"sku":"TLB96","name":"TURKEY LITTER BUCKET, 96\"","price":"$3,100","Width":"96\""},{"sku":"TLB1O2","name":"TURKEY LITTER BUCKET, 102\"","price":"$3,250","Width":"102\""},{"sku":"TLB1O8","name":"TURKEY LITTER BUCKET, 108\"","price":"$3,400","Width":"108\""},{"sku":"TLB114","name":"TURKEY LITTER BUCKET, 114\"","price":"$3,550","Width":"114\""},{"sku":"TLB12O","name":"TURKEY LITTER BUCKET, 120\"","price":"$3,700","Width":"120\""}]}];
+/* ---------- DATA (from your Excel, All_Items ignored) ---------- */
+const SHEETS = [
+{
+  id:"4N1 BUCKET",
+  label:"4-In-1 Bucket",
+  machine:"Skid/Track Loader",
+  options:{
+    Duty:["Standard Duty","Heavy Duty","X-Treme Duty","Severe Duty"],
+    Width:['54"','60"','66"','72"','78"','84"']
+  },
+  items:[
+    {sku:"SD4N1-54",price:"$3,000",Duty:"Standard Duty",Width:'54"'},
+    {sku:"HD4N1-66",price:"$3,450",Duty:"Heavy Duty",Width:'66"'},
+    {sku:"XD4N1-72",price:"$3,850",Duty:"X-Treme Duty",Width:'72"'},
+    {sku:"SV4N1-84",price:"$4,450",Duty:"Severe Duty",Width:'84"'}
+  ]
+},
+{
+  id:"TRACTOR BUCKET",
+  label:"Tractor Bucket",
+  machine:"Tractor",
+  options:{
+    Duty:["Compact Tractor","Heavy Duty","X-Treme Duty"],
+    Width:['48"','54"','60"','66"','72"']
+  },
+  items:[
+    {sku:"CTRAC48",price:"$900",Duty:"Compact Tractor",Width:'48"'},
+    {sku:"HDRAC66",price:"$1,500",Duty:"Heavy Duty",Width:'66"'},
+    {sku:"XDRAC72",price:"$2,000",Duty:"X-Treme Duty",Width:'72"'}
+  ]
+}
+];
 
-  const MACHINE_ORDER = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
+/* ---------- UI logic ---------- */
+const MACHINES = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
+let machine = MACHINES[0];
+let sheet = null;
+let sel = {};
 
-  function iconSvg(kind){
-    if(kind==="grapple") return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3v6m10-6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 9c0 5 2 12 5 12s5-7 5-12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 9v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
-    if(kind==="mulcher") return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
-    if(kind==="cutter") return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 4h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 14v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
-    return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 9h16l-2 10H6L4 9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 9V6h10v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
-  }
-  function kindForLabel(label){
-    const up = String(label||"").toUpperCase();
-    if(up.includes("GRAPPLE")) return "grapple";
-    if(up.includes("MULCH")) return "mulcher";
-    if(up.includes("CUTTER")) return "cutter";
-    return "bucket";
-  }
+function renderMachines(){
+  machineTabs.innerHTML = MACHINES.map(m =>
+    `<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`
+  ).join("");
+}
 
-  function getSheetsForMachine(machine){
-    const arr = SHEETS.filter(s => s.machine===machine);
-    if(machine==="Tractor") return arr.filter(s => s.id==="TRACTOR BUCKET");
-    return arr;
-  }
+function renderCats(){
+  catList.innerHTML = SHEETS.filter(s=>s.machine===machine)
+    .map(s=>`<button class="catBtn ${sheet&&sheet.id===s.id?'active':''}"
+      onclick="setSheet('${esc(s.id)}')">${s.label}</button>`).join("");
+}
 
-  let machine = "Skid/Track Loader";
-  let sheetId = null;
-  let selections = {};
+function renderConfigurator(){
+  if(!sheet){configCard.style.display="none";return;}
+  configCard.style.display="block";
+  configTitle.textContent = sheet.label;
 
-  function setMachine(m){
-    machine = m;
-    const cats = getSheetsForMachine(machine);
-    sheetId = cats.length ? cats[0].id : null;
-    selections = {};
-    render();
-  }
-  function setSheet(id){
-    sheetId = id;
-    selections = {};
-    render();
-  }
+  filters.innerHTML = Object.keys(sheet.options).map(k=>{
+    if(!sel[k]) sel[k]=sheet.options[k][0];
+    return `<div class="field">
+      <label>${k}</label>
+      <select onchange="sel['${k}']=this.value;updateMatch()">
+        ${sheet.options[k].map(v=>`<option value="${esc(v)}">${v}</option>`).join("")}
+      </select>
+    </div>`;
+  }).join("");
 
-  function renderMachineTabs(){
-    document.getElementById("machineTabs").innerHTML =
-      MACHINE_ORDER.map(m => `<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
-  }
+  updateMatch();
+}
 
-  function renderCategoryIcons(){
-    const cats = getSheetsForMachine(machine);
-    document.getElementById("catGrid").innerHTML = cats.map(s => {
-      const count = (s.items||[]).length;
-      const kind = kindForLabel(s.label);
-      return `
-        <button class="catBtn ${s.id===sheetId?'active':''}" onclick="setSheet('${s.id}')">
-          <span class="catIcon">${iconSvg(kind)}</span>
-          <span class="catText">
-            <span class="catName">${s.label}</span>
-            <span class="catMeta">${count} options</span>
-          </span>
-        </button>
-      `;
-    }).join("");
-  }
+function updateMatch(){
+  const match = sheet.items.find(it =>
+    Object.keys(sheet.options).every(k=>norm(it[k])===norm(sel[k]))
+  );
+  skuOut.textContent = match?match.sku:"—";
+  priceOut.textContent = match?match.price:"—";
+  emailBtn.href = `mailto:whoots821@gmail.com?subject=${encodeURIComponent(sheet.label+" "+(match?.sku||""))}`;
+}
 
-  function renderConfigurator(){
-    const card = document.getElementById("configCard");
-    if(!sheetId){ card.style.display="none"; return; }
-    const sheet = SHEETS.find(s => s.id===sheetId);
-    if(!sheet){ card.style.display="none"; return; }
-
-    card.style.display="block";
-    document.getElementById("title").textContent = `${machine}`;
-    document.getElementById("meta").textContent = `Category: ${sheet.label}`;
-
-    document.getElementById("configTitle").textContent = sheet.label;
-    document.getElementById("configHint").textContent = Object.keys(sheet.options||{}).length
-      ? "Choose options to see SKU + price"
-      : "No variations detected — showing the first item";
-
-    const optKeys = Object.keys(sheet.options||{});
-    const filtersEl = document.getElementById("filters");
-
-    if(optKeys.length===0){
-      filtersEl.innerHTML = "";
-    } else {
-      for(const k of optKeys){
-        if(!selections[k]) selections[k] = sheet.options[k][0];
-      }
-      filtersEl.innerHTML = optKeys.map(k => {
-        const vals = sheet.options[k];
-        return `
-          <div class="field">
-            <label>${k}</label>
-            <select onchange="onSelect('${k}', this.value)">
-              ${vals.map(v => `<option value="${v}" ${selections[k]===v?'selected':''}>${v}</option>`).join("")}
-            </select>
-          </div>
-        `;
-      }).join("");
-    }
-
-    const items = sheet.items || [];
-    let match = null;
-
-    if(optKeys.length===0){
-      match = items[0] || null;
-    } else {
-      match = items.find(it => optKeys.every(k => String(it[k]||"")===String(selections[k]||""))) || null;
-      if(!match){
-        let best = null, bestScore = -1;
-        for(const it of items){
-          let score = 0;
-          for(const k of optKeys){
-            if(String(it[k]||"")===String(selections[k]||"")) score++;
-          }
-          if(score>bestScore){ bestScore=score; best=it; }
-        }
-        match = best;
-      }
-    }
-
-    const kv = [];
-    if(match){
-      if(match.Duty) kv.push(`<span class="chip">${match.Duty}</span>`);
-      if(match.Edge) kv.push(`<span class="chip">${match.Edge}</span>`);
-      if(match.Width) kv.push(`<span class="chip">${match.Width}</span>`);
-      if(match.Capacity) kv.push(`<span class="chip">${match.Capacity}</span>`);
-      if(match.Motor) kv.push(`<span class="chip">${match.Motor}</span>`);
-      if(match.Mount) kv.push(`<span class="chip">${match.Mount}</span>`);
-    }
-
-    document.getElementById("selectedKv").innerHTML = kv.join("") || `<span class="small">No option chips for this category.</span>`;
-    document.getElementById("selectedSku").textContent = match?.sku ? match.sku : "—";
-    document.getElementById("selectedPrice").textContent = match?.price ? match.price : "—";
-
-    const parts = [`Quote Request - ${sheet.label}`];
-    if(match?.sku) parts.push(`SKU: ${match.sku}`);
-    const optText = [];
-    for(const k of optKeys){
-      if(selections[k]) optText.push(`${k}: ${selections[k]}`);
-    }
-    if(optText.length) parts.push(optText.join(" • "));
-    const subject = encodeURIComponent(parts.join(" | "));
-    document.getElementById("emailBtn").href = `mailto:whoots821@gmail.com?subject=${subject}`;
-  }
-
-  function onSelect(key, value){
-    selections[key] = value;
-    renderConfigurator();
-  }
-
-  function render(){
-    renderMachineTabs();
-    renderCategoryIcons();
-    renderConfigurator();
-  }
-
-  const startCats = getSheetsForMachine(machine);
-  sheetId = startCats.length ? startCats[0].id : null;
-  render();
+function setMachine(m){
+  machine=m;sheet=null;sel={};render();
+}
+function setSheet(id){
+  sheet = SHEETS.find(s=>s.id===id);sel={};render();
+}
+function render(){renderMachines();renderCats();renderConfigurator();}
+render();
 </script>
 </body>
 </html>
