@@ -3,268 +3,95 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hendo Equipment | Attachments</title>
-  <meta name="description" content="Hendo Equipment — USA-Made attachments. Veteran owned & operated. Pricing coming soon. Call (828) 699-0157." />
-
+  <title>Hendo Equipment | Attachments & Pricing</title>
+  <meta name="description" content="Hendo Equipment — attachments and pricing. Veteran owned & operated. Hendersonville, NC." />
   <style>
     :root{
-      --bg:#f4f6f4;
-      --panel:#ffffff;
-      --panelAlt:#eef2ee;
-      --text:#0f172a;
-      --muted:#475569;
-      --border:#d1d5db;
-
-      /* OD green */
-      --accent:#6b7f3a;
-      --accentDark:#55662f;
-      --accentSoft:#e7eddc;
+      --bg:#f4f6f4; --panel:#ffffff; --panelAlt:#eef2ee; --text:#0f172a; --muted:#475569; --border:#d1d5db;
+      --accent:#6b7f3a; --accentDark:#55662f;
     }
-
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text)
-    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
     a{color:inherit;text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:16px}
 
-    header{
-      background:#fff;
-      border-bottom:4px solid var(--accent);
-      position:sticky;top:0;z-index:10
-    }
-    .headerRow{
-      display:flex;justify-content:space-between;align-items:center;
-      gap:12px;flex-wrap:wrap
-    }
+    header{background:#fff;border-bottom:4px solid var(--accent);position:sticky;top:0;z-index:10}
+    .headerRow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .brand h1{margin:0;font-size:22px}
     .brand p{margin:0;color:var(--muted);font-size:13px}
 
     .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .btn{
-      border:1px solid var(--border);
-      background:var(--panel);
-      padding:10px 14px;
-      border-radius:10px;
-      font-weight:700;
-      display:inline-flex;align-items:center;gap:8px;
-      cursor:pointer;
-    }
-    .btnPrimary{
-      background:var(--accent);
-      color:#fff;
-      border:none
-    }
+    .btn{border:1px solid var(--border);background:var(--panel);padding:10px 14px;border-radius:10px;font-weight:900;display:inline-flex;align-items:center;gap:8px}
+    .btnPrimary{background:var(--accent);color:#fff;border:none}
     .btnPrimary:hover{background:var(--accentDark)}
     .btn:hover{background:#f8fafc}
 
     .badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;
-      background:var(--panelAlt);
-      border:1px solid var(--border);
-      font-size:12px;font-weight:800
-    }
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:var(--panelAlt);border:1px solid var(--border);font-size:12px;font-weight:900}
     .flag{width:18px;height:12px;display:inline-block;border-radius:2px;overflow:hidden}
 
-    .hero{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:22px;
-      margin-top:16px
-    }
-    .hero h2{
-      margin:8px 0 10px;
-      font-size:28px;
-      color:var(--accent)
-    }
-    .hero p{
-      margin:0 0 14px;
-      max-width:820px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.55
-    }
-    .heroNote{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted)
-    }
+    .hero{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:16px}
+    .hero h2{margin:8px 0 10px;font-size:28px;color:var(--accent)}
+    .hero p{margin:0 0 10px;max-width:820px;color:var(--muted);font-size:15px;line-height:1.55}
+    .heroNote{font-size:12px;color:var(--muted)}
 
-    .layout{
-      display:grid;
-      grid-template-columns:280px 1fr;
-      gap:16px;
-      margin-top:16px
-    }
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:16px;margin-top:16px}
     @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
-    .sidebar{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px
-    }
-    .sideTitle{
-      font-weight:900;
-      margin-bottom:8px;
-      color:var(--accent)
-    }
+    .sidebar{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px}
+    .sideTitle{font-weight:900;margin-bottom:8px;color:var(--accent)}
     .seg,.cats{display:grid;gap:6px;margin-bottom:14px}
-    .seg button,.cats button{
-      width:100%;text-align:left;
-      padding:10px;border-radius:10px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      font-weight:800;
-      cursor:pointer
-    }
-    .seg button.active,.cats button.active{
-      background:var(--accent);
-      color:#fff;
-      border:none
-    }
+    .seg button,.cats button{width:100%;text-align:left;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--text);font-weight:900;cursor:pointer}
+    .seg button.active,.cats button.active{background:var(--accent);color:#fff;border:none}
 
-    .content{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px
-    }
-    .contentTop{
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline
-    }
+    .content{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px}
+    .contentTop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
     .content h3{margin:0;color:var(--accent);font-size:20px}
     .pill{color:var(--muted);font-size:12px}
 
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:12px
-    }
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
     @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:600px){.cards{grid-template-columns:1fr}}
 
-    .card{
-      border:1px solid var(--border);
-      border-radius:14px;
-      overflow:hidden;
-      background:#fff;
-      display:grid
-    }
-    .ph{
-      height:140px;
-      background:linear-gradient(135deg,#d1d5db,#f3f4f6);
-      position:relative;
-    }
-    .ph img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .phTag{
-      position:absolute;
-      left:10px; top:10px;
-      background:rgba(255,255,255,.92);
-      border:1px solid var(--border);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      color:var(--accent);
-    }
+    .card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;display:grid}
+    .ph{height:140px;background:linear-gradient(135deg,#d1d5db,#f3f4f6);position:relative}
+    .ph img{width:100%;height:100%;object-fit:cover;display:block}
+    .phTag{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.92);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;color:var(--accent)}
     .cardBody{padding:12px}
-    .cardBody h4{margin:0 0 6px;font-size:16px}
-    .desc{margin:0 0 10px;color:var(--muted);font-size:13px;line-height:1.45}
-    .price{font-weight:900;color:#0f172a}
+    .cardBody h4{margin:0 0 6px;font-size:15px}
+    .sku{font-size:12px;color:var(--muted);font-weight:900}
+    .price{margin-top:8px;font-weight:1000}
     .cardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
-    /* Config UI (dropdown area) */
-    .configBox{
-      margin-top:10px;
-      padding:10px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:var(--panelAlt);
-      display:grid;
-      gap:10px;
-    }
-    .configGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    @media(max-width:600px){ .configGrid{grid-template-columns:1fr} }
-    .field label{
-      display:block;
-      font-size:12px;
-      font-weight:900;
-      color:var(--muted);
-      margin-bottom:6px;
-    }
-    select{
-      width:100%;
-      padding:10px;
-      border-radius:10px;
-      border:1px solid var(--border);
-      background:#fff;
-      font-weight:800;
-      color:var(--text);
-    }
-    .selectedLine{
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    footer{
-      margin-top:24px;
-      border-top:1px solid var(--border);
-      background:#fff
-    }
-    .foot{
-      display:flex;justify-content:space-between;
-      flex-wrap:wrap;color:var(--muted);
-      font-size:13px;padding:12px 0
-    }
+    footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
+    .foot{display:flex;justify-content:space-between;flex-wrap:wrap;color:var(--muted);font-size:13px;padding:12px 0}
   </style>
 </head>
-
 <body>
 <header>
   <div class="container headerRow">
     <div class="brand">
       <h1>Hendo Equipment</h1>
-
       <div class="badgeRow">
         <span class="badge">
           <svg class="flag" viewBox="0 0 7410 3900" aria-hidden="true">
-            <rect width="7410" height="3900" fill="#b22234"/>
+            <rect width="7410" height="3900" fill="#b22234"></rect>
             <g fill="#fff">
-              <rect y="300" width="7410" height="300"/>
-              <rect y="900" width="7410" height="300"/>
-              <rect y="1500" width="7410" height="300"/>
-              <rect y="2100" width="7410" height="300"/>
-              <rect y="2700" width="7410" height="300"/>
-              <rect y="3300" width="7410" height="300"/>
+              <rect y="300" width="7410" height="300"></rect>
+              <rect y="900" width="7410" height="300"></rect>
+              <rect y="1500" width="7410" height="300"></rect>
+              <rect y="2100" width="7410" height="300"></rect>
+              <rect y="2700" width="7410" height="300"></rect>
+              <rect y="3300" width="7410" height="300"></rect>
             </g>
-            <rect width="2964" height="2100" fill="#3c3b6e"/>
+            <rect width="2964" height="2100" fill="#3c3b6e"></rect>
           </svg>
           USA Made
         </span>
         <span class="badge">Veteran Owned &amp; Operated</span>
       </div>
-
-      <p>Skid Steer &amp; Mini Skid Steer Attachments • Hendersonville, NC</p>
+      <p>Hendersonville, NC</p>
     </div>
-
     <div class="cta">
       <a class="btn btnPrimary" href="tel:+18286990157">Call (828) 699-0157</a>
       <a class="btn" href="mailto:whoots821@gmail.com">Email</a>
@@ -274,12 +101,9 @@
 
 <main class="container">
   <section class="hero">
-    <h2>Attachments</h2>
-    <p>
-      Browse buckets and grapples. Configure options on select products.
-      Pricing will be posted soon — call or email for availability, options, and lead times.
-    </p>
-    <div class="heroNote"><strong>Pricing:</strong> Coming Soon</div>
+    <h2>Catalog &amp; Pricing</h2>
+    <p>Browse by machine type and category. (Imported from your Excel file — all tabs included except <strong>All_Items</strong>.)</p>
+    <div class="heroNote">To show images, add files in your repo at <strong>/images/&lt;slug&gt;.jpg</strong>.</div>
   </section>
 
   <section class="layout">
@@ -297,7 +121,7 @@
 
     <div class="content">
       <div class="contentTop">
-        <h3 id="title">Skid Steer</h3>
+        <h3 id="title"></h3>
         <div class="pill" id="meta"></div>
       </div>
       <div class="cards" id="cards"></div>
@@ -315,202 +139,209 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Store option selections per product slug
-  const selections = {};
+  const MACHINES = ['Skid Steer', 'Mini Skid Steer', 'Track Loader', 'Tractor', 'Excavator'];
 
-  function imgPathForSlug(slug){
-    // Optional: add images later at /images/<slug>.jpg
-    return `images/${slug}.jpg`;
-  }
-
-  function initSelectionIfNeeded(p){
-    if(!p.options) return;
-    if(selections[p.slug]) return;
-
-    const sel = {};
-    for(const key of Object.keys(p.options)){
-      sel[key] = p.options[key][0];
-    }
-    selections[p.slug] = sel;
-  }
-
-  function updateSelection(slug, key, value){
-    if(!selections[slug]) selections[slug] = {};
-    selections[slug][key] = value;
-    render();
-  }
-
-  function selectionSummary(slug){
-    const s = selections[slug];
-    if(!s) return "";
-    const parts = [];
-    if(s.edge) parts.push(`Edge: ${s.edge}`);
-    if(s.width) parts.push(`Width: ${s.width}`);
-    if(s.duty) parts.push(`Duty: ${s.duty}`);
-    return parts.join(" • ");
-  }
-
-  const PRODUCTS = [
-    // ===== SKID STEER =====
-    {
-      name: "4-IN-1 Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Multi-purpose bucket for grading, clamping, dozing, and loading. Choose edge, width, and duty options below.",
-      slug: "4-in-1-bucket-skid",
-      options: {
-        edge: ["Smooth", "With Teeth"],
-        width: ['54"', '60"', '72"', '78"', '81"', '84"'],
-        duty: ["Standard Duty", "Heavy Duty", "X-Treme Duty", "Severe Duty"]
-      }
-    },
-    {
-      name: "Heavy Duty Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Built for demanding applications like gravel and tough digging. Reinforced construction for extended service life.",
-      slug: "heavy-duty-bucket"
-    },
-    {
-      name: "Rock Bucket",
-      machine: "Skid Steer",
-      category: "Buckets",
-      description: "Designed to separate rocks and debris from soil. Ideal for landscaping, site cleanup, and material sorting.",
-      slug: "rock-bucket"
-    },
-    {
-      name: "Root Grapple",
-      machine: "Skid Steer",
-      category: "Grapples",
-      description: "Built for land clearing, brush removal, and debris handling. Strong clamping force for irregular loads.",
-      slug: "root-grapple"
-    },
-    {
-      name: "Rock Grapple",
-      machine: "Skid Steer",
-      category: "Grapples",
-      description: "Ideal for rocks, demolition debris, and bulky material. Open tine design lets dirt fall through while retaining solids.",
-      slug: "rock-grapple"
-    },
-
-    // ===== MINI SKID STEER =====
-    {
-      name: "4-IN-1 Bucket",
-      machine: "Mini Skid Steer",
-      category: "Buckets",
-      description: "Compact 4-in-1 bucket for mini skid steers. Choose edge, width, and duty options below.",
-      slug: "4-in-1-bucket-mini",
-      options: {
-        edge: ["Smooth", "With Teeth"],
-        width: ['48"', '54"', '60"', '66"', '72"'],
-        duty: ["Standard Duty", "Heavy Duty", "X-Treme Duty", "Severe Duty"]
-      }
-    },
-    {
-      name: "Mini Bucket",
-      machine: "Mini Skid Steer",
-      category: "Buckets",
-      description: "Everyday bucket for loading and material handling. Great for contractors needing dependable performance.",
-      slug: "mini-bucket"
-    },
-    {
-      name: "Mini Grapple",
-      machine: "Mini Skid Steer",
-      category: "Grapples",
-      description: "Compact grapple for brush, logs, and debris handling while maintaining excellent control and visibility.",
-      slug: "mini-grapple"
-    }
-  ];
-
-  const MACHINES = ["Skid Steer", "Mini Skid Steer"];
   const CATS_BY_MACHINE = {
-    "Skid Steer": ["All", "Buckets", "Grapples"],
-    "Mini Skid Steer": ["All", "Buckets", "Grapples"]
+    'Skid Steer': [
+      'Concrete Buckets',
+      'Forestry Disc Mulcher',
+      'Heavy Duty 4N1 Bucket',
+      'High Capacity Snow-N-Litter Buc',
+      'High Dump Buckets',
+      'Long Bottom Bucket',
+      'Low Profile Bucket',
+      'Rock Bucket',
+      'Rock Grapples',
+      'Severe Duty 4N1 Bucket',
+      'Snow-N-Litter Bucket',
+      'Standard Duty 4N1 Bucket',
+      'Turkey Litter Bucket',
+      'X-Treme Duty 4N1 Bucket'
+    ],
+    'Mini Skid Steer': ['4N1 Bucket Mini'],
+    'Track Loader': ['Track Loader Buckets'],
+    'Tractor': ['Rock Bucket', 'Rock Grapples', 'Tractor Bucket'],
+    'Excavator': ['Excavator Cutter']
   };
 
-  let machine = "Skid Steer";
-  let cat = "All";
+  const PRODUCTS = [
+  {name:"Mini 4-N-1 Bucket, 48”",sku:"MINIGN1-48",price:"$2,450",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-48"},
+  {name:"Mini 4-N-1 Bucket, 54”",sku:"MINI4N1-54",price:"$2,500",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-54"},
+  {name:"Mini 4-N-1 Bucket, 60”",sku:"MINI4N1-60",price:"$2,550",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-60"},
+  {name:"Mini 4-N-1 Bucket, 66”",sku:"MINI4N1-66",price:"$2,600",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-66"},
+  {name:"Mini 4-N-1 Bucket, 72”",sku:"MINI4N1-72",price:"$2,650",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-72"},
+  {name:"Mini 4-N-1 Bucket, 48” W/ Teeth",sku:"MINIGN1-48T",price:"$2,650",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-48-w-teeth"},
+  {name:"Mini 4-N-1 Bucket, 54” W/ Teeth",sku:"MINI4N1-54T",price:"$2,700",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-54-w-teeth"},
+  {name:"Mini 4-N-1 Bucket, 60” W/ Teeth",sku:"MINI4N1-60T",price:"$2,750",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-60-w-teeth"},
+  {name:"Mini 4-N-1 Bucket, 66” W/ Teeth",sku:"MINI4N1-66T",price:"$2,800",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-66-w-teeth"},
+  {name:"Mini 4-N-1 Bucket, 72” W/ Teeth",sku:"MINI4N1-72T",price:"$2,850",machine:"Mini Skid Steer",category:"4N1 Bucket Mini",slug:"mini-4-n-1-bucket-72-w-teeth"},
+
+  {name:"Forestry Disc Mulcher, 50”",sku:"FDM50",price:"$8,995",machine:"Skid Steer",category:"Forestry Disc Mulcher",slug:"forestry-disc-mulcher-50"},
+  {name:"Forestry Disc Mulcher, 60”",sku:"FDM60",price:"$9,495",machine:"Skid Steer",category:"Forestry Disc Mulcher",slug:"forestry-disc-mulcher-60"},
+
+  {name:"Excavator Cutter, 30”",sku:"EC30",price:"$6,995",machine:"Excavator",category:"Excavator Cutter",slug:"excavator-cutter-30"},
+  {name:"Excavator Cutter, 40”",sku:"EC40",price:"$7,495",machine:"Excavator",category:"Excavator Cutter",slug:"excavator-cutter-40"},
+
+  {name:"X-Treme Duty 4-N-1 Bucket, 66”",sku:"XD4N1-66",price:"$5,495",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-66"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 72”",sku:"XD4N1-72",price:"$5,695",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-72"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 78”",sku:"XD4N1-78",price:"$5,895",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-78"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 81”",sku:"XD4N1-81",price:"$6,095",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-81"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 84”",sku:"XD4N1-84",price:"$6,295",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-84"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 66” W/ Teeth",sku:"XD4N1-66T",price:"$5,795",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-66-w-teeth"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 72” W/ Teeth",sku:"XD4N1-72T",price:"$5,995",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-72-w-teeth"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 78” W/ Teeth",sku:"XD4N1-78T",price:"$6,195",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-78-w-teeth"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 81” W/ Teeth",sku:"XD4N1-81T",price:"$6,395",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-81-w-teeth"},
+  {name:"X-Treme Duty 4-N-1 Bucket, 84” W/ Teeth",sku:"XD4N1-84T",price:"$6,595",machine:"Skid Steer",category:"X-Treme Duty 4N1 Bucket",slug:"x-treme-duty-4-n-1-bucket-84-w-teeth"},
+
+  {name:"Heavy Duty 4-N-1 Bucket, 66”",sku:"HD4N1-66",price:"$4,995",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-66"},
+  {name:"Heavy Duty 4-N-1 Bucket, 72”",sku:"HD4N1-72",price:"$5,195",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-72"},
+  {name:"Heavy Duty 4-N-1 Bucket, 78”",sku:"HD4N1-78",price:"$5,395",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-78"},
+  {name:"Heavy Duty 4-N-1 Bucket, 81”",sku:"HD4N1-81",price:"$5,595",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-81"},
+  {name:"Heavy Duty 4-N-1 Bucket, 84”",sku:"HD4N1-84",price:"$5,795",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-84"},
+  {name:"Heavy Duty 4-N-1 Bucket, 66” W/ Teeth",sku:"HD4N1-66T",price:"$5,295",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-66-w-teeth"},
+  {name:"Heavy Duty 4-N-1 Bucket, 72” W/ Teeth",sku:"HD4N1-72T",price:"$5,495",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-72-w-teeth"},
+  {name:"Heavy Duty 4-N-1 Bucket, 78” W/ Teeth",sku:"HD4N1-78T",price:"$5,695",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-78-w-teeth"},
+  {name:"Heavy Duty 4-N-1 Bucket, 81” W/ Teeth",sku:"HD4N1-81T",price:"$5,895",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-81-w-teeth"},
+  {name:"Heavy Duty 4-N-1 Bucket, 84” W/ Teeth",sku:"HD4N1-84T",price:"$6,095",machine:"Skid Steer",category:"Heavy Duty 4N1 Bucket",slug:"heavy-duty-4-n-1-bucket-84-w-teeth"},
+
+  {name:"Standard Duty 4-N-1 Bucket, 66”",sku:"SD4N1-66",price:"$4,295",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-66"},
+  {name:"Standard Duty 4-N-1 Bucket, 72”",sku:"SD4N1-72",price:"$4,495",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-72"},
+  {name:"Standard Duty 4-N-1 Bucket, 78”",sku:"SD4N1-78",price:"$4,695",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-78"},
+  {name:"Standard Duty 4-N-1 Bucket, 81”",sku:"SD4N1-81",price:"$4,895",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-81"},
+  {name:"Standard Duty 4-N-1 Bucket, 84”",sku:"SD4N1-84",price:"$5,095",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-84"},
+  {name:"Standard Duty 4-N-1 Bucket, 66” W/ Teeth",sku:"SD4N1-66T",price:"$4,595",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-66-w-teeth"},
+  {name:"Standard Duty 4-N-1 Bucket, 72” W/ Teeth",sku:"SD4N1-72T",price:"$4,795",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-72-w-teeth"},
+  {name:"Standard Duty 4-N-1 Bucket, 78” W/ Teeth",sku:"SD4N1-78T",price:"$4,995",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-78-w-teeth"},
+  {name:"Standard Duty 4-N-1 Bucket, 81” W/ Teeth",sku:"SD4N1-81T",price:"$5,195",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-81-w-teeth"},
+  {name:"Standard Duty 4-N-1 Bucket, 84” W/ Teeth",sku:"SD4N1-84T",price:"$5,395",machine:"Skid Steer",category:"Standard Duty 4N1 Bucket",slug:"standard-duty-4-n-1-bucket-84-w-teeth"},
+
+  {name:"Long Bottom Bucket, 54”",sku:"LBB-54",price:"$2,895",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-54"},
+  {name:"Long Bottom Bucket, 60”",sku:"LBB-60",price:"$2,995",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-60"},
+  {name:"Long Bottom Bucket, 66”",sku:"LBB-66",price:"$3,095",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-66"},
+  {name:"Long Bottom Bucket, 72”",sku:"LBB-72",price:"$3,195",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-72"},
+  {name:"Long Bottom Bucket, 78”",sku:"LBB-78",price:"$3,295",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-78"},
+  {name:"Long Bottom Bucket, 81”",sku:"LBB-81",price:"$3,395",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-81"},
+  {name:"Long Bottom Bucket, 84”",sku:"LBB-84",price:"$3,495",machine:"Skid Steer",category:"Long Bottom Bucket",slug:"long-bottom-bucket-84"},
+
+  {name:"High Dump Bucket, 66”",sku:"HDB-66",price:"$4,195",machine:"Skid Steer",category:"High Dump Buckets",slug:"high-dump-bucket-66"},
+  {name:"High Dump Bucket, 72”",sku:"HDB-72",price:"$4,395",machine:"Skid Steer",category:"High Dump Buckets",slug:"high-dump-bucket-72"},
+  {name:"High Dump Bucket, 78”",sku:"HDB-78",price:"$4,595",machine:"Skid Steer",category:"High Dump Buckets",slug:"high-dump-bucket-78"},
+  {name:"High Dump Bucket, 81”",sku:"HDB-81",price:"$4,795",machine:"Skid Steer",category:"High Dump Buckets",slug:"high-dump-bucket-81"},
+  {name:"High Dump Bucket, 84”",sku:"HDB-84",price:"$4,995",machine:"Skid Steer",category:"High Dump Buckets",slug:"high-dump-bucket-84"},
+
+  {name:"Concrete Bucket, 1/4 Yard",sku:"CB14",price:"$2,995",machine:"Skid Steer",category:"Concrete Buckets",slug:"concrete-bucket-1-4-yard"},
+  {name:"Concrete Bucket, 1/2 Yard",sku:"CB12",price:"$3,595",machine:"Skid Steer",category:"Concrete Buckets",slug:"concrete-bucket-1-2-yard"},
+
+  {name:"Severe Duty 4-N-1 Bucket, 66”",sku:"SV4N1-66",price:"$5,795",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-66"},
+  {name:"Severe Duty 4-N-1 Bucket, 72”",sku:"SV4N1-72",price:"$5,995",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-72"},
+  {name:"Severe Duty 4-N-1 Bucket, 78”",sku:"SV4N1-78",price:"$6,195",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-78"},
+  {name:"Severe Duty 4-N-1 Bucket, 81”",sku:"SV4N1-81",price:"$6,395",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-81"},
+  {name:"Severe Duty 4-N-1 Bucket, 84”",sku:"SV4N1-84",price:"$6,595",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-84"},
+  {name:"Severe Duty 4-N-1 Bucket, 66” W/ Teeth",sku:"SV4N1-66T",price:"$6,095",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-66-w-teeth"},
+  {name:"Severe Duty 4-N-1 Bucket, 72” W/ Teeth",sku:"SV4N1-72T",price:"$6,295",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-72-w-teeth"},
+  {name:"Severe Duty 4-N-1 Bucket, 78” W/ Teeth",sku:"SV4N1-78T",price:"$6,495",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-78-w-teeth"},
+  {name:"Severe Duty 4-N-1 Bucket, 81” W/ Teeth",sku:"SV4N1-81T",price:"$6,695",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-81-w-teeth"},
+  {name:"Severe Duty 4-N-1 Bucket, 84” W/ Teeth",sku:"SV4N1-84T",price:"$6,895",machine:"Skid Steer",category:"Severe Duty 4N1 Bucket",slug:"severe-duty-4-n-1-bucket-84-w-teeth"},
+
+  {name:"Low Profile Bucket, 54”",sku:"LPB-54",price:"$2,895",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-54"},
+  {name:"Low Profile Bucket, 60”",sku:"LPB-60",price:"$2,995",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-60"},
+  {name:"Low Profile Bucket, 66”",sku:"LPB-66",price:"$3,095",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-66"},
+  {name:"Low Profile Bucket, 72”",sku:"LPB-72",price:"$3,195",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-72"},
+  {name:"Low Profile Bucket, 78”",sku:"LPB-78",price:"$3,295",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-78"},
+  {name:"Low Profile Bucket, 81”",sku:"LPB-81",price:"$3,395",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-81"},
+  {name:"Low Profile Bucket, 84”",sku:"LPB-84",price:"$3,495",machine:"Skid Steer",category:"Low Profile Bucket",slug:"low-profile-bucket-84"},
+
+  {name:"Snow-N-Litter Bucket, 66”",sku:"SNLB-66",price:"$3,895",machine:"Skid Steer",category:"Snow-N-Litter Bucket",slug:"snow-n-litter-bucket-66"},
+  {name:"Snow-N-Litter Bucket, 72”",sku:"SNLB-72",price:"$3,995",machine:"Skid Steer",category:"Snow-N-Litter Bucket",slug:"snow-n-litter-bucket-72"},
+  {name:"Snow-N-Litter Bucket, 78”",sku:"SNLB-78",price:"$4,095",machine:"Skid Steer",category:"Snow-N-Litter Bucket",slug:"snow-n-litter-bucket-78"},
+  {name:"Snow-N-Litter Bucket, 81”",sku:"SNLB-81",price:"$4,195",machine:"Skid Steer",category:"Snow-N-Litter Bucket",slug:"snow-n-litter-bucket-81"},
+  {name:"Snow-N-Litter Bucket, 84”",sku:"SNLB-84",price:"$4,295",machine:"Skid Steer",category:"Snow-N-Litter Bucket",slug:"snow-n-litter-bucket-84"},
+
+  {name:"Rock Grapple, 48”",sku:"CTRG48",price:"$1,950",machine:"Tractor",category:"Rock Grapples",slug:"compact-tractor-rock-grapple-48"},
+  {name:"Rock Grapple, 54”",sku:"CTRG54",price:"$2,050",machine:"Tractor",category:"Rock Grapples",slug:"compact-tractor-rock-grapple-54"},
+  {name:"Rock Grapple, 60”",sku:"CTRG60",price:"$2,150",machine:"Tractor",category:"Rock Grapples",slug:"compact-tractor-rock-grapple-60"},
+  {name:"Rock Grapple, 66”",sku:"CTRG66",price:"$2,250",machine:"Tractor",category:"Rock Grapples",slug:"compact-tractor-rock-grapple-66"},
+  {name:"Rock Grapple, 72”",sku:"CTRG72",price:"$2,350",machine:"Tractor",category:"Rock Grapples",slug:"compact-tractor-rock-grapple-72"},
+  {name:"Rock Grapple, 84”",sku:"RG84",price:"$5,795",machine:"Skid Steer",category:"Rock Grapples",slug:"rock-grapple-84"},
+  {name:"Rock Grapple, 78”",sku:"RG78",price:"$5,595",machine:"Skid Steer",category:"Rock Grapples",slug:"rock-grapple-78"},
+  {name:"Rock Grapple, 72”",sku:"RG72",price:"$5,395",machine:"Skid Steer",category:"Rock Grapples",slug:"rock-grapple-72"},
+  {name:"Rock Grapple, 66”",sku:"RG66",price:"$5,195",machine:"Skid Steer",category:"Rock Grapples",slug:"rock-grapple-66"},
+
+  {name:"Rock Bucket, 48”",sku:"CTRB48",price:"$950",machine:"Tractor",category:"Rock Bucket",slug:"compact-tractor-rock-bucket-48"},
+  {name:"Rock Bucket, 54”",sku:"CTRBS4",price:"$1,050",machine:"Tractor",category:"Rock Bucket",slug:"compact-tractor-rock-bucket-54"},
+  {name:"Rock Bucket, 60”",sku:"CTRB6O",price:"$1,150",machine:"Tractor",category:"Rock Bucket",slug:"compact-tractor-rock-bucket-60"},
+  {name:"Rock Bucket, 66”",sku:"CTRBE6",price:"$1,250",machine:"Tractor",category:"Rock Bucket",slug:"compact-tractor-rock-bucket-66"},
+  {name:"Rock Bucket, 72”",sku:"CTRB72",price:"$1,350",machine:"Tractor",category:"Rock Bucket",slug:"compact-tractor-rock-bucket-72"},
+  {name:"Rock Bucket, 84”",sku:"RB84",price:"$4,595",machine:"Skid Steer",category:"Rock Bucket",slug:"rock-bucket-84"},
+  {name:"Rock Bucket, 78”",sku:"RB78",price:"$4,395",machine:"Skid Steer",category:"Rock Bucket",slug:"rock-bucket-78"},
+  {name:"Rock Bucket, 72”",sku:"RB72",price:"$4,195",machine:"Skid Steer",category:"Rock Bucket",slug:"rock-bucket-72"},
+  {name:"Rock Bucket, 66”",sku:"RB66",price:"$3,995",machine:"Skid Steer",category:"Rock Bucket",slug:"rock-bucket-66"},
+
+  {name:"Tractor Bucket, 48”",sku:"TB48",price:"$725",machine:"Tractor",category:"Tractor Bucket",slug:"tractor-bucket-48"},
+  {name:"Tractor Bucket, 54”",sku:"TB54",price:"$825",machine:"Tractor",category:"Tractor Bucket",slug:"tractor-bucket-54"},
+  {name:"Tractor Bucket, 60”",sku:"TB60",price:"$925",machine:"Tractor",category:"Tractor Bucket",slug:"tractor-bucket-60"},
+  {name:"Tractor Bucket, 66”",sku:"TB66",price:"$1,025",machine:"Tractor",category:"Tractor Bucket",slug:"tractor-bucket-66"},
+  {name:"Tractor Bucket, 72”",sku:"TB72",price:"$1,125",machine:"Tractor",category:"Tractor Bucket",slug:"tractor-bucket-72"},
+
+  {name:"Track Loader Bucket, 84”",sku:"TLB84",price:"$5,495",machine:"Track Loader",category:"Track Loader Buckets",slug:"track-loader-bucket-84"},
+  {name:"Track Loader Bucket, 78”",sku:"TLB78",price:"$5,295",machine:"Track Loader",category:"Track Loader Buckets",slug:"track-loader-bucket-78"},
+  {name:"Track Loader Bucket, 72”",sku:"TLB72",price:"$5,095",machine:"Track Loader",category:"Track Loader Buckets",slug:"track-loader-bucket-72"},
+
+  {name:"High Capacity Snow-N-Litter Bucket, 96”",sku:"HCSNLB-96",price:"$5,295",machine:"Skid Steer",category:"High Capacity Snow-N-Litter Buc",slug:"high-capacity-snow-n-litter-bucket-96"},
+  {name:"High Capacity Snow-N-Litter Bucket, 90”",sku:"HCSNLB-90",price:"$5,095",machine:"Skid Steer",category:"High Capacity Snow-N-Litter Buc",slug:"high-capacity-snow-n-litter-bucket-90"},
+
+  {name:"Turkey Litter Bucket, 96”",sku:"TLB-96",price:"$5,195",machine:"Skid Steer",category:"Turkey Litter Bucket",slug:"turkey-litter-bucket-96"},
+  {name:"Turkey Litter Bucket, 90”",sku:"TLB-90",price:"$4,995",machine:"Skid Steer",category:"Turkey Litter Bucket",slug:"turkey-litter-bucket-90"}
+  ];
+
+  function imgPathForSlug(slug){ return `images/${slug}.jpg`; }
+
+  let machine = MACHINES[0];
+  let cat = (CATS_BY_MACHINE[machine] && CATS_BY_MACHINE[machine][0]) ? CATS_BY_MACHINE[machine][0] : "";
+
+  function setMachine(m){
+    machine = m;
+    cat = (CATS_BY_MACHINE[machine] && CATS_BY_MACHINE[machine][0]) ? CATS_BY_MACHINE[machine][0] : "";
+    render();
+  }
+  function setCat(c){ cat = c; render(); }
 
   function render(){
     document.getElementById("machineSeg").innerHTML =
       MACHINES.map(m => `<button class="${m===machine?'active':''}" onclick="setMachine('${m}')">${m}</button>`).join("");
 
-    const cats = CATS_BY_MACHINE[machine] || ["All"];
+    const cats = CATS_BY_MACHINE[machine] || [];
     document.getElementById("catList").innerHTML =
       cats.map(c => `<button class="${c===cat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
 
-    const filtered = PRODUCTS.filter(p =>
-      p.machine === machine && (cat === "All" || p.category === cat)
-    );
+    const filtered = PRODUCTS.filter(p => p.machine===machine && p.category===cat);
 
-    document.getElementById("title").textContent = machine;
-    document.getElementById("meta").textContent =
-      `${cat === "All" ? "All categories" : cat} • ${filtered.length} item(s) • Pricing: Coming Soon`;
-
-    filtered.forEach(initSelectionIfNeeded);
+    document.getElementById("title").textContent = `${machine} — ${cat}`;
+    document.getElementById("meta").textContent = `${filtered.length} item(s)`;
 
     document.getElementById("cards").innerHTML = filtered.map(p => {
       const img = imgPathForSlug(p.slug);
-      const sum = selectionSummary(p.slug);
-      const emailSubject = encodeURIComponent(
-        `Quote Request - ${p.name}` + (sum ? ` (${sum})` : "")
-      );
-
-      const configHtml = p.options ? `
-        <div class="configBox">
-          <div class="configGrid">
-            <div class="field">
-              <label>Edge</label>
-              <select onchange="updateSelection('${p.slug}','edge',this.value)">
-                ${p.options.edge.map(v => `<option ${selections[p.slug]?.edge===v?'selected':''}>${v}</option>`).join("")}
-              </select>
-            </div>
-
-            <div class="field">
-              <label>Width</label>
-              <select onchange="updateSelection('${p.slug}','width',this.value)">
-                ${p.options.width.map(v => `<option ${selections[p.slug]?.width===v?'selected':''}>${v}</option>`).join("")}
-              </select>
-            </div>
-
-            <div class="field" style="grid-column:1/-1">
-              <label>Duty Rating</label>
-              <select onchange="updateSelection('${p.slug}','duty',this.value)">
-                ${p.options.duty.map(v => `<option ${selections[p.slug]?.duty===v?'selected':''}>${v}</option>`).join("")}
-              </select>
-            </div>
-          </div>
-
-          <div class="selectedLine"><strong>Selected:</strong> ${sum || "—"}</div>
-        </div>
-      ` : ``;
-
+      const subject = encodeURIComponent(`Quote Request - ${p.name} (SKU: ${p.sku})`);
+      const price = p.price ? p.price : "Call for pricing";
       return `
         <div class="card">
           <div class="ph">
             <span class="phTag">${p.category}</span>
             <img src="${img}" alt="${p.name}" onerror="this.style.display='none';" />
           </div>
-
           <div class="cardBody">
             <h4>${p.name}</h4>
-            <p class="desc">${p.description}</p>
-            <div class="price">Pricing: Coming Soon</div>
-
-            ${configHtml}
-
+            <div class="sku">SKU: ${p.sku}</div>
+            <div class="price">${price}</div>
             <div class="cardActions">
               <a class="btn btnPrimary" href="tel:+18286990157">Call</a>
-              <a class="btn" href="mailto:whoots821@gmail.com?subject=${emailSubject}">Email</a>
+              <a class="btn" href="mailto:whoots821@gmail.com?subject=${subject}">Email</a>
             </div>
           </div>
         </div>
       `;
     }).join("");
   }
-
-  function setMachine(m){ machine = m; cat = "All"; render(); }
-  function setCat(c){ cat = c; render(); }
 
   render();
 </script>
