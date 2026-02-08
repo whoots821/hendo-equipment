@@ -1,426 +1,401 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hendo Equipment</title>
-  <meta name="description" content="Hendo Equipment - attachments, buckets, grapples and more." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hendo Equipment | Attachments & Pricing</title>
 
-  <style>
-    :root{
-      --bg:#f6f6f6;
-      --card:#ffffff;
-      --text:#111;
-      --muted:#666;
-      --border:#e6e6e6;
-      --shadow: 0 1px 14px rgba(0,0,0,.06);
-      --radius:14px;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header{
-      background:#111;
-      color:#fff;
-      padding:18px 18px;
-    }
-    header .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    header h1{
-      font-size:18px;
-      margin:0;
-      letter-spacing:.3px;
-    }
-    header nav a{
-      color:#fff;
-      text-decoration:none;
-      opacity:.9;
-      margin-left:12px;
-      font-weight:600;
-      font-size:14px;
-    }
-    header nav a:hover{ opacity:1; text-decoration:underline; }
+<style>
+:root{
+  --bg:#f4f6f4;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
+  --muted:#475569;--border:#d1d5db;--accent:#6b7f3a;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:16px}
 
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:20px 18px 36px;
-    }
+header{background:#fff;border-bottom:4px solid var(--accent)}
+.headerRow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.brand h1{margin:0;font-size:22px}
+.badgeRow{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.badge{padding:6px 10px;border-radius:999px;background:var(--panelAlt);
+  border:1px solid var(--border);font-size:12px;font-weight:900}
 
-    .hero{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-      margin-bottom:16px;
-    }
-    .hero h2{ margin:0 0 6px; font-size:18px; }
-    .hero p{ margin:0; color:var(--muted); }
+.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
+  background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
+.btnPrimary{background:var(--accent);color:#fff;border:none}
 
-    .bar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 14px 0 16px;
-    }
-    .btn{
-      padding:10px 12px;
-      border-radius: 999px;
-      border: 1px solid #ddd;
-      background:#fff;
-      cursor:pointer;
-      font-weight:700;
-      font-size:13px;
-      transition: .12s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn.active{
-      background:#111;
-      color:#fff;
-      border-color:#111;
-    }
+.layout{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:16px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
 
-    .tiles{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap:14px;
-    }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-height: 160px;
-    }
-    .title{
-      font-weight:800;
-      font-size:16px;
-    }
-    .controls{
-      display:grid;
-      gap:10px;
-    }
-    select{
-      width:100%;
-      padding:10px;
-      border-radius: 10px;
-      border:1px solid #ddd;
-      background:#fff;
-      font-weight:600;
-    }
-    .priceRow{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap:10px;
-    }
-    .priceLabel{ color:var(--muted); font-weight:600; }
-    .priceValue{ font-weight:900; font-size:18px; }
-    .skuLine{
-      color: var(--muted);
-      font-size:12px;
-      min-height: 16px;
-    }
-    .quote{
-      padding:10px 12px;
-      border-radius:10px;
-      border:1px solid #111;
-      background:#fff;
-      cursor:pointer;
-      font-weight:800;
-    }
-    .quote:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-    }
+.sidebar{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px}
+.sideTitle{font-weight:900;color:var(--accent);margin-bottom:8px}
 
-    .status{
-      margin-top:10px;
-      color: var(--muted);
-      font-size: 13px;
-    }
+.machineTabs button,
+.catBtn{
+  width:100%;text-align:left;padding:10px;border-radius:8px;
+  border:1px solid var(--border);background:#fff;font-weight:900;
+  cursor:pointer;margin-bottom:6px
+}
+.machineTabs button.active,
+.catBtn.active{background:var(--panelAlt);border-color:var(--accent)}
 
-    footer{
-      text-align:center;
-      color: var(--muted);
-      padding: 22px 10px;
-      font-size: 13px;
-    }
-    code.inline{
-      background:#fff;
-      border:1px solid var(--border);
-      padding:2px 6px;
-      border-radius:8px;
-    }
-  </style>
+.content{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px}
+
+.pageTitle{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.pageTitle h2{margin:0;font-size:18px}
+.pageTitle .small{font-size:12px;color:var(--muted)}
+
+.tilesGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.tile{
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#fff;
+  overflow:hidden;
+}
+.tileHead{
+  padding:12px;
+  background:var(--panelAlt);
+  border-bottom:1px solid var(--border);
+}
+.tileHead .name{font-weight:1000}
+.tileBody{padding:12px;display:grid;gap:10px}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.field label{font-size:12px;font-weight:900;color:var(--muted)}
+select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
+
+.priceBig{font-size:22px;font-weight:1100}
+.small{font-size:12px;color:var(--muted)}
+
+footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap">
+<header>
+  <div class="container headerRow">
+    <div class="brand">
       <h1>Hendo Equipment</h1>
-      <nav>
-        <a href="#catalog">Products</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="badgeRow">
+        <span class="badge">🇺🇸 USA Made</span>
+        <span class="badge">Veteran Owned & Operated</span>
+      </div>
     </div>
-  </header>
+    <div>
+      <a class="btn btnPrimary" href="tel:+18286990157">(828) 699-0157</a>
+    </div>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <h2>Attachments & Pricing</h2>
-      <p>Select a category (Excel tab), then choose duty + width to see price update instantly.</p>
-      <div class="status" id="status">Loading catalog…</div>
+<main class="container">
+  <section class="layout">
+    <aside class="sidebar">
+      <div class="sideTitle">Machine</div>
+      <div class="machineTabs" id="machineTabs"></div>
+
+      <div class="sideTitle">Categories</div>
+      <div id="catList"></div>
+    </aside>
+
+    <section class="content">
+      <div class="pageTitle">
+        <h2 id="categoryTitle">Select a category</h2>
+        <div class="small" id="categoryHint">Choose a machine and category on the left. Then pick duty + width and price updates instantly.</div>
+      </div>
+
+      <div id="tiles" class="tilesGrid"></div>
+
+      <div class="small" id="status" style="margin-top:12px;color:var(--muted)"></div>
     </section>
+  </section>
+</main>
 
-    <section id="catalog">
-      <div class="bar" id="categoryBar"></div>
-      <div class="tiles" id="tiles"></div>
-    </section>
+<footer>
+  <div class="container small">
+    © Hendo Equipment • Hendersonville, NC
+  </div>
+</footer>
 
-    <section id="contact" class="hero" style="margin-top:16px;">
-      <h2>Contact</h2>
-      <p>
-        Want a quote? Use <code class="inline">Request quote</code> on a tile or contact us directly.
-      </p>
-      <p style="margin-top:10px; color:var(--muted);">
-        Update the email address in the code where it says <code class="inline">hendosales@example.com</code>.
-      </p>
-    </section>
-  </main>
+<script>
+/* ================================
+   FULL Excel-driven Configurator
+   Data source: /data/hendo_catalog.json
+   ================================ */
 
-  <footer>
-    © <span id="year"></span> Hendo Equipment
-  </footer>
+/* ---------- config ---------- */
+const DATA_URL = "./data/hendo_catalog.json";     // put hendo_catalog.json in repo at /data/hendo_catalog.json
+const QUOTE_EMAIL = "whoots821@gmail.com";        // change if you want
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+/* ---------- helpers ---------- */
+const escAttr = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const norm = s => String(s ?? "").toLowerCase().trim();
+const money = n => {
+  const num = Number(n);
+  if (!Number.isFinite(num)) return "—";
+  return "$" + Math.round(num).toLocaleString();
+};
+const uniq = arr => [...new Set((arr||[]).filter(v => v !== undefined && v !== null && v !== ""))];
+const numericSort = arr => uniq(arr).slice().sort((a,b)=>Number(a)-Number(b));
 
-  <script>
-    (async function () {
-      // ✅ Put hendo_catalog.json here in your repo:
-      // /data/hendo_catalog.json
-      // GitHub Pages will then serve it at:
-      // https://whoots821.github.io/hendo-equipment/data/hendo_catalog.json
-      const DATA_URL = "./data/hendo_catalog.json";
+/* ---------- machine mapping (keeps your sidebar layout) ---------- */
+function inferMachine(categoryName){
+  const n = norm(categoryName);
+  if (n.includes("tractor")) return "Tractor";
+  if (n.includes("excavator")) return "Excavator";
+  if (n.includes("mini")) return "Mini Skid Steer";
+  return "Skid/Track Loader";
+}
 
-      const statusEl = document.getElementById("status");
-      const categoryBar = document.getElementById("categoryBar");
-      const tilesEl = document.getElementById("tiles");
+/* ---------- DOM ---------- */
+const machineTabs = document.getElementById("machineTabs");
+const catList = document.getElementById("catList");
+const tilesEl = document.getElementById("tiles");
+const statusEl = document.getElementById("status");
+const categoryTitle = document.getElementById("categoryTitle");
+const categoryHint = document.getElementById("categoryHint");
 
-      function slugify(s) {
-        return String(s || "")
-          .toLowerCase()
-          .replace(/&/g, "and")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-      }
+/* ---------- state ---------- */
+let RAW = null;                 // raw JSON object
+let CATEGORIES = [];            // [{ id, label, machine, items }]
+let MACHINES = [];              // ["Skid/Track Loader", ...]
+let machine = null;             // selected machine
+let category = null;            // selected category object
 
-      function money(n) {
-        const num = Number(n);
-        if (!Number.isFinite(num)) return "";
-        return "$" + Math.round(num).toLocaleString();
-      }
+/* ---------- data utils ---------- */
+function getVariant(item, duty, width){
+  // lookup keys are "Duty|Width" OR "|Width" when duty is null/none
+  const d = duty ? String(duty) : "";
+  const w = (width === "" || width === null || width === undefined) ? "" : String(width);
+  const key = `${d}|${w}`;
+  return item.lookup?.[key] || null;
+}
 
-      function uniqueSorted(arr) {
-        return [...new Set(arr.filter(Boolean))].sort((a, b) => {
-          const na = Number(a), nb = Number(b);
-          if (Number.isFinite(na) && Number.isFinite(nb)) return na - nb;
-          return String(a).localeCompare(String(b));
-        });
-      }
+function buildCategoriesFromRaw(raw){
+  // raw is an object keyed by tab name -> { category, items }
+  const cats = Object.entries(raw).map(([tabName, obj]) => {
+    const label = obj?.category || tabName;
+    const machine = inferMachine(label);
+    return {
+      id: tabName,
+      label,
+      machine,
+      items: Array.isArray(obj?.items) ? obj.items : []
+    };
+  });
 
-      function getVariant(item, duty, width) {
-        const key = `${duty || ""}|${String(width || "")}`;
-        return (item.lookup && item.lookup[key]) ? item.lookup[key] : null;
-      }
+  // sort categories by label
+  cats.sort((a,b)=>a.label.localeCompare(b.label));
+  return cats;
+}
 
-      function renderCategoryButtons(categories, activeSlug) {
-        categoryBar.innerHTML = "";
-        categories.forEach(cat => {
-          const btn = document.createElement("button");
-          btn.className = "btn" + (cat.slug === activeSlug ? " active" : "");
-          btn.textContent = cat.name;
-          btn.onclick = () => setActiveCategory(cat.slug);
-          categoryBar.appendChild(btn);
-        });
-      }
+function buildMachines(categories){
+  const set = new Set(categories.map(c => c.machine));
+  // Stable order:
+  const order = ["Skid/Track Loader", "Mini Skid Steer", "Tractor", "Excavator"];
+  return order.filter(m => set.has(m));
+}
 
-      function tileTemplate(item) {
-        const card = document.createElement("div");
-        card.className = "card";
+/* ---------- render ---------- */
+function renderMachines(){
+  machineTabs.innerHTML = (MACHINES||[]).map(m => `
+    <button class="${m===machine ? "active" : ""}" onclick="setMachine('${escAttr(m)}')">${m}</button>
+  `).join("");
+}
 
-        const title = document.createElement("div");
-        title.className = "title";
-        title.textContent = item.name || "Item";
+function renderCats(){
+  const list = CATEGORIES.filter(c => c.machine === machine);
+  catList.innerHTML = list.map(c => `
+    <button class="catBtn ${category && category.id===c.id ? "active" : ""}" onclick="setCategory('${escAttr(c.id)}')">
+      ${c.label}
+    </button>
+  `).join("");
 
-        const duties = uniqueSorted((item.variants || []).map(v => v.duty));
-        const widths = uniqueSorted((item.variants || []).map(v => v.width));
+  if (!list.length){
+    catList.innerHTML = `<div class="small" style="color:var(--muted)">No categories for this machine.</div>`;
+  }
+}
 
-        const controls = document.createElement("div");
-        controls.className = "controls";
-        controls.style.gridTemplateColumns = duties.length ? "1fr 1fr" : "1fr";
+function makeTile(item){
+  const duties = uniq(item?.options?.duty || []).filter(d => norm(d) !== "none");
+  const widths = numericSort(item?.options?.width || []);
 
-        let dutySelect = null;
-        if (duties.length) {
-          dutySelect = document.createElement("select");
-          dutySelect.innerHTML =
-            `<option value="">Select duty</option>` +
-            duties.map(d => `<option value="${d}">${d}</option>`).join("");
-          controls.appendChild(dutySelect);
-        }
+  // default selections
+  let selectedDuty = duties.length ? duties[0] : "";
+  let selectedWidth = widths.length ? widths[0] : "";
 
-        const widthSelect = document.createElement("select");
-        widthSelect.innerHTML =
-          `<option value="">Select width</option>` +
-          widths.map(w => `<option value="${w}">${w}"</option>`).join("");
-        controls.appendChild(widthSelect);
+  const tile = document.createElement("div");
+  tile.className = "tile";
 
-        const priceRow = document.createElement("div");
-        priceRow.className = "priceRow";
+  tile.innerHTML = `
+    <div class="tileHead">
+      <div class="name">${escAttr(item?.name || "Item")}</div>
+    </div>
+    <div class="tileBody">
+      <div class="filters">
+        ${duties.length ? `
+          <div class="field">
+            <label>Duty</label>
+            <select class="dutySel">
+              ${duties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
+            </select>
+          </div>
+        ` : ""}
+        <div class="field">
+          <label>Width (in)</label>
+          <select class="widthSel">
+            ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
+          </select>
+        </div>
+      </div>
 
-        const priceLabel = document.createElement("div");
-        priceLabel.className = "priceLabel";
-        priceLabel.textContent = "Price:";
+      <div>
+        <div class="small">Selected SKU</div>
+        <div class="skuOut" style="font-weight:900">—</div>
+      </div>
 
-        const priceValue = document.createElement("div");
-        priceValue.className = "priceValue";
-        priceValue.textContent = "Select options";
+      <div>
+        <div class="small">Price</div>
+        <div class="priceOut priceBig">—</div>
+      </div>
 
-        priceRow.appendChild(priceLabel);
-        priceRow.appendChild(priceValue);
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btnPrimary emailBtn" href="#">Email Quote</a>
+      </div>
+    </div>
+  `;
 
-        const skuLine = document.createElement("div");
-        skuLine.className = "skuLine";
+  const dutySel = tile.querySelector(".dutySel");
+  const widthSel = tile.querySelector(".widthSel");
+  const skuOut = tile.querySelector(".skuOut");
+  const priceOut = tile.querySelector(".priceOut");
+  const emailBtn = tile.querySelector(".emailBtn");
 
-        const quoteBtn = document.createElement("button");
-        quoteBtn.className = "quote";
-        quoteBtn.textContent = "Request quote";
-        quoteBtn.disabled = true;
+  function update(){
+    const d = dutySel ? dutySel.value : "";
+    const w = widthSel ? widthSel.value : "";
+    const v = getVariant(item, d, w);
 
-        let selectedVariant = null;
+    skuOut.textContent = v?.sku || "—";
+    priceOut.textContent = v ? money(v.price) : "—";
 
-        function updatePrice() {
-          const duty = dutySelect ? dutySelect.value : "";
-          const width = widthSelect.value;
+    const subject = encodeURIComponent(`Quote request: ${(item?.name || "Item")} ${v?.sku ? "(" + v.sku + ")" : ""}`);
+    const body = encodeURIComponent(
+      `Hi Hendo Equipment,\n\n` +
+      `I’d like a quote for:\n` +
+      `Category: ${category?.label || ""}\n` +
+      `Item: ${item?.name || ""}\n` +
+      (d ? `Duty: ${d}\n` : "") +
+      (w ? `Width: ${w}"\n` : "") +
+      (v?.sku ? `SKU: ${v.sku}\n` : "") +
+      (v ? `Price shown: ${money(v.price)}\n` : "") +
+      `\nName:\nPhone:\nLocation:\n\nThanks!`
+    );
 
-          selectedVariant = getVariant(item, duty, width);
+    emailBtn.href = `mailto:${QUOTE_EMAIL}?subject=${subject}&body=${body}`;
+  }
 
-          if (selectedVariant) {
-            priceValue.textContent = money(selectedVariant.price);
-            skuLine.textContent = selectedVariant.sku ? ("SKU: " + selectedVariant.sku) : "";
-            quoteBtn.disabled = false;
-          } else {
-            priceValue.textContent = "Select options";
-            skuLine.textContent = "";
-            quoteBtn.disabled = true;
-          }
-        }
+  if (dutySel) dutySel.addEventListener("change", update);
+  if (widthSel) widthSel.addEventListener("change", update);
 
-        if (dutySelect) dutySelect.addEventListener("change", updatePrice);
-        widthSelect.addEventListener("change", updatePrice);
+  // set defaults in UI
+  if (dutySel && selectedDuty) dutySel.value = selectedDuty;
+  if (widthSel && selectedWidth) widthSel.value = String(selectedWidth);
 
-        quoteBtn.addEventListener("click", () => {
-          if (!selectedVariant) return;
+  update();
+  return tile;
+}
 
-          // ✅ CHANGE THIS EMAIL:
-          const TO_EMAIL = "hendosales@example.com";
+function renderTiles(){
+  tilesEl.innerHTML = "";
+  if (!category){
+    categoryTitle.textContent = "Select a category";
+    categoryHint.textContent = "Choose a machine and category on the left. Then pick duty + width and price updates instantly.";
+    statusEl.textContent = "";
+    return;
+  }
 
-          const subject = encodeURIComponent(`Quote request: ${item.name}`);
-          const body = encodeURIComponent(
-            `Hi Hendo Equipment,\n\n` +
-            `I’d like a quote for:\n` +
-            `Item: ${item.name}\n` +
-            (selectedVariant.duty ? `Duty: ${selectedVariant.duty}\n` : "") +
-            `Width: ${selectedVariant.width}"\n` +
-            (selectedVariant.sku ? `SKU: ${selectedVariant.sku}\n` : "") +
-            `Price shown: ${money(selectedVariant.price)}\n\n` +
-            `Name:\nPhone:\nLocation:\n\nThanks!`
-          );
+  categoryTitle.textContent = category.label;
+  categoryHint.textContent = "Pick duty + width. Price updates instantly.";
 
-          window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
-        });
+  const items = Array.isArray(category.items) ? category.items : [];
+  if (!items.length){
+    statusEl.textContent = "No items found in this category.";
+    return;
+  }
 
-        card.appendChild(title);
-        card.appendChild(controls);
-        card.appendChild(priceRow);
-        card.appendChild(skuLine);
-        card.appendChild(quoteBtn);
+  items.forEach(item => tilesEl.appendChild(makeTile(item)));
+  statusEl.textContent = `Showing ${items.length} item${items.length===1?"":"s"}.`;
+}
 
-        return card;
-      }
+function render(){
+  renderMachines();
+  renderCats();
+  renderTiles();
+}
 
-      let CATEGORIES = [];
-      let ACTIVE = null;
+/* ---------- actions ---------- */
+function setMachine(m){
+  machine = m;
+  category = null;
 
-      function renderTiles(categorySlug) {
-        const cat = CATEGORIES.find(c => c.slug === categorySlug);
-        tilesEl.innerHTML = "";
-        if (!cat) return;
+  // remember
+  try { localStorage.setItem("hendo_machine", machine); } catch(e){}
 
-        (cat.items || []).forEach(item => {
-          tilesEl.appendChild(tileTemplate(item));
-        });
-      }
+  render();
+}
 
-      function setActiveCategory(slug) {
-        ACTIVE = slug;
-        renderCategoryButtons(CATEGORIES, ACTIVE);
-        renderTiles(ACTIVE);
+function setCategory(id){
+  category = CATEGORIES.find(c => c.id === id) || null;
 
-        try { localStorage.setItem("hendo_active_category", ACTIVE); } catch (e) {}
-      }
+  // remember
+  try { localStorage.setItem("hendo_category", category?.id || ""); } catch(e){}
 
-      try {
-        const res = await fetch(DATA_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status + " loading catalog JSON");
+  render();
+}
 
-        const catalog = await res.json();
+/* ---------- init ---------- */
+(async function init(){
+  statusEl.textContent = "Loading catalog…";
 
-        // categories are your Excel tabs (All_Items is already excluded in the JSON)
-        CATEGORIES = (catalog.categories || []).map(c => ({
-          ...c,
-          slug: c.slug || slugify(c.name)
-        }));
+  try{
+    const res = await fetch(DATA_URL, { cache: "no-store" });
+    if(!res.ok) throw new Error(`Failed to load ${DATA_URL} (HTTP ${res.status})`);
+    RAW = await res.json();
 
-        if (!CATEGORIES.length) {
-          statusEl.textContent = "No categories found in catalog JSON.";
-          return;
-        }
+    // RAW is keyed by tab names. All_Items is not included in this JSON.
+    CATEGORIES = buildCategoriesFromRaw(RAW);
+    MACHINES = buildMachines(CATEGORIES);
 
-        const saved = (() => {
-          try { return localStorage.getItem("hendo_active_category"); }
-          catch (e) { return null; }
-        })();
+    // restore selections if possible
+    let savedMachine = null;
+    let savedCategory = null;
+    try{
+      savedMachine = localStorage.getItem("hendo_machine");
+      savedCategory = localStorage.getItem("hendo_category");
+    }catch(e){}
 
-        const first = CATEGORIES[0].slug;
-        statusEl.textContent = "Loaded. Choose a category to view products.";
-        setActiveCategory(saved && CATEGORIES.some(c => c.slug === saved) ? saved : first);
+    machine = (savedMachine && MACHINES.includes(savedMachine)) ? savedMachine : (MACHINES[0] || "Skid/Track Loader");
 
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent =
-          "Could not load catalog JSON. " +
-          "Make sure you uploaded /data/hendo_catalog.json to your repo. " +
-          "Error: " + (err && err.message ? err.message : err);
-      }
-    })();
-  </script>
+    // if saved category belongs to current machine, select it; otherwise pick first in machine
+    const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
+    if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
+      category = catsForMachine.find(c => c.id === savedCategory);
+    } else {
+      category = catsForMachine[0] || null;
+    }
+
+    statusEl.textContent = "";
+    render();
+  }catch(err){
+    console.error(err);
+    statusEl.textContent = `Could not load catalog JSON. Put hendo_catalog.json in /data and verify path: ${DATA_URL}. Error: ${err.message || err}`;
+  }
+})();
+</script>
 </body>
 </html>
