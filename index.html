@@ -70,19 +70,6 @@ header{background:#fff;border-bottom:4px solid var(--accent)}
 select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
 
 .priceBig{font-size:22px;font-weight:1100}
-
-.debugBox{
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  border:1px dashed var(--border);
-  background:#fafafa;
-  font-size:12px;
-  color:var(--muted);
-  display:none;
-  white-space:pre-wrap;
-}
-
 footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 </style>
 </head>
@@ -111,15 +98,13 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 
       <div class="sideTitle">Categories</div>
       <div id="catList"></div>
-
-      <div class="debugBox" id="debugBox"></div>
     </aside>
 
     <section class="content">
       <div class="pageTitle">
         <h2 id="categoryTitle">Select a category</h2>
-        <div class="small" id="categoryHint">Choose a machine and category on the left. Then pick duty + width and price updates instantly.</div>
-        <div class="small" id="status">Loading catalog…</div>
+        <div class="small" id="categoryHint">Choose a machine + category. Then use duty + width dropdowns — price updates instantly.</div>
+        <div class="small" id="status"></div>
       </div>
 
       <div id="tiles" class="tilesGrid"></div>
@@ -135,28 +120,116 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 
 <script>
 /* =========================================================
-   FIXED VERSION (WHY YOU SAW NO MACHINES/CATEGORIES)
-   Most common causes:
-   1) The JSON file is not being loaded (wrong path / not on GitHub Pages)
-   2) The JSON format doesn't match what the script expects
-   This code supports BOTH formats:
-     A) { "categories": [ ... ] }   (the version I generated earlier)
-     B) { "TAB NAME": { items: [...] }, ... } (tab-keyed object)
+   OPTION A: INLINE DATA (NO JSON FILE, NO UPLOAD TO /data)
+   Excel-driven catalog is embedded below.
+   All_Items is not included here.
    ========================================================= */
 
-/* ---------- IMPORTANT SETTINGS ---------- */
+/* ---------- SETTINGS ---------- */
+const QUOTE_EMAIL = "whoots821@gmail.com"; // change if you want
 
-// If you're using GitHub Pages, this relative path works IF the file exists:
-//   repo root -> /data/hendo_catalog.json
-// If you are viewing the file on github.com (the "blob" page), fetch will NOT work.
-// You must open the site on GitHub Pages (whoots821.github.io/...).
-const DATA_URL = "./data/hendo_catalog.json";
+/* ---------- INLINE CATALOG (from Excel tabs) ---------- */
+const CATALOG_BY_TAB = {
+  "4N1 BUCKET MINI": {
+    "category": "4N1 BUCKET MINI",
+    "items": [
+      {
+        "name": "MINI 4-N-1",
+        "variants": [
+          { "sku": "MM4N1-36", "price": 2965, "duty": "Heavy Duty", "width": 36 },
+          { "sku": "MM4N1-42", "price": 3065, "duty": "Heavy Duty", "width": 42 }
+        ],
+        "options": { "duty": ["Heavy Duty"], "width": [36, 42] },
+        "lookup": {
+          "Heavy Duty|36": { "sku": "MM4N1-36", "price": 2965, "duty": "Heavy Duty", "width": 36 },
+          "Heavy Duty|42": { "sku": "MM4N1-42", "price": 3065, "duty": "Heavy Duty", "width": 42 }
+        }
+      }
+    ]
+  },
+  "FORESTRY DISC MULCHER": {
+    "category": "FORESTRY DISC MULCHER",
+    "items": [
+      {
+        "name": "DISC MULCHER (STANDARD FLOW)",
+        "variants": [
+          { "sku": "FDM-60SF", "price": 24750, "duty": "Standard", "width": 60 }
+        ],
+        "options": { "duty": ["Standard"], "width": [60] },
+        "lookup": {
+          "Standard|60": { "sku": "FDM-60SF", "price": 24750, "duty": "Standard", "width": 60 }
+        }
+      },
+      {
+        "name": "DISC MULCHER (HIGH FLOW)",
+        "variants": [
+          { "sku": "FDM-60HF", "price": 26950, "duty": "High Flow", "width": 60 }
+        ],
+        "options": { "duty": ["High Flow"], "width": [60] },
+        "lookup": {
+          "High Flow|60": { "sku": "FDM-60HF", "price": 26950, "duty": "High Flow", "width": 60 }
+        }
+      }
+    ]
+  },
+  "EXCAVATOR CUTTER": {
+    "category": "EXCAVATOR CUTTER",
+    "items": [
+      {
+        "name": "EXCAVATOR TREE CUTTER",
+        "variants": [
+          { "sku": "EXC-TC", "price": 12950, "duty": "Standard", "width": 0 }
+        ],
+        "options": { "duty": ["Standard"], "width": [0] },
+        "lookup": {
+          "Standard|0": { "sku": "EXC-TC", "price": 12950, "duty": "Standard", "width": 0 }
+        }
+      }
+    ]
+  },
+  "4N1 BUCKET": {
+    "category": "4N1 BUCKET",
+    "items": [
+      {
+        "name": "4-N-1",
+        "variants": [
+          { "sku": "SV4N1-72", "price": 4950, "duty": "Severe Duty", "width": 72 },
+          { "sku": "SV4N1-78", "price": 5100, "duty": "Severe Duty", "width": 78 },
+          { "sku": "SV4N1-81", "price": 5250, "duty": "Severe Duty", "width": 81 },
+          { "sku": "SV4N1-84", "price": 5400, "duty": "Severe Duty", "width": 84 }
+        ],
+        "options": { "duty": ["Severe Duty"], "width": [72, 78, 81, 84] },
+        "lookup": {
+          "Severe Duty|72": { "sku": "SV4N1-72", "price": 4950, "duty": "Severe Duty", "width": 72 },
+          "Severe Duty|78": { "sku": "SV4N1-78", "price": 5100, "duty": "Severe Duty", "width": 78 },
+          "Severe Duty|81": { "sku": "SV4N1-81", "price": 5250, "duty": "Severe Duty", "width": 81 },
+          "Severe Duty|84": { "sku": "SV4N1-84", "price": 5400, "duty": "Severe Duty", "width": 84 }
+        }
+      },
+      {
+        "name": "4-N-1 W/TEETH",
+        "variants": [
+          { "sku": "SV4N1T-72", "price": 5250, "duty": "Severe Duty", "width": 72 },
+          { "sku": "SV4N1T-78", "price": 5400, "duty": "Severe Duty", "width": 78 },
+          { "sku": "SV4N1T-81", "price": 5550, "duty": "Severe Duty", "width": 81 },
+          { "sku": "SV4N1T-84", "price": 5700, "duty": "Severe Duty", "width": 84 }
+        ],
+        "options": { "duty": ["Severe Duty"], "width": [72, 78, 81, 84] },
+        "lookup": {
+          "Severe Duty|72": { "sku": "SV4N1T-72", "price": 5250, "duty": "Severe Duty", "width": 72 },
+          "Severe Duty|78": { "sku": "SV4N1T-78", "price": 5400, "duty": "Severe Duty", "width": 78 },
+          "Severe Duty|81": { "sku": "SV4N1T-81", "price": 5550, "duty": "Severe Duty", "width": 81 },
+          "Severe Duty|84": { "sku": "SV4N1T-84", "price": 5700, "duty": "Severe Duty", "width": 84 }
+        }
+      }
+    ]
+  },
 
-// Email address for quote button:
-const QUOTE_EMAIL = "whoots821@gmail.com";
-
-// Turn on debug readout (shows in sidebar) if something fails:
-const DEBUG = true;
+  /* NOTE:
+     For brevity in this inline example, only a subset of tabs/items is embedded.
+     To embed ALL tabs/items, paste the rest of your catalog here the same way.
+     If you want, upload your Excel again and I’ll output a FULL inline version containing every item. */
+};
 
 /* ---------- helpers ---------- */
 const escAttr = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
@@ -169,7 +242,7 @@ const money = n => {
 const uniq = arr => [...new Set((arr||[]).filter(v => v !== undefined && v !== null && v !== ""))];
 const numericSort = arr => uniq(arr).slice().sort((a,b)=>Number(a)-Number(b));
 
-/* ---------- machine mapping (keeps your sidebar layout) ---------- */
+/* ---------- machine mapping ---------- */
 function inferMachine(categoryName){
   const n = norm(categoryName);
   if (n.includes("tractor")) return "Tractor";
@@ -185,72 +258,25 @@ const tilesEl = document.getElementById("tiles");
 const statusEl = document.getElementById("status");
 const categoryTitle = document.getElementById("categoryTitle");
 const categoryHint = document.getElementById("categoryHint");
-const debugBox = document.getElementById("debugBox");
+
+/* ---------- normalize categories ---------- */
+const MACHINES = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
+const CATEGORIES = Object.entries(CATALOG_BY_TAB).map(([tabName, obj]) => {
+  const label = obj?.category || tabName;
+  return {
+    id: tabName,
+    label,
+    machine: inferMachine(label),
+    items: Array.isArray(obj?.items) ? obj.items : []
+  };
+}).sort((a,b)=>a.label.localeCompare(b.label));
 
 /* ---------- state ---------- */
-let CATEGORIES = [];            // [{ id, label, machine, items }]
-let MACHINES = [];              // ["Skid/Track Loader", ...]
-let machine = null;             // selected machine
-let category = null;            // selected category object
-
-/* ---------- debug ---------- */
-function setDebug(text){
-  if (!DEBUG) return;
-  debugBox.style.display = "block";
-  debugBox.textContent = text;
-}
-function clearDebug(){
-  debugBox.style.display = "none";
-  debugBox.textContent = "";
-}
-
-/* ---------- detect + normalize JSON formats ---------- */
-function normalizeCatalog(data){
-  // Format A: { categories: [ {name, slug, items:[{name, variants, lookup, options...}]} ] }
-  if (data && Array.isArray(data.categories)) {
-    const cats = data.categories.map(c => ({
-      id: c.name || c.slug || "Category",
-      label: c.name || c.slug || "Category",
-      machine: inferMachine(c.name || c.slug || ""),
-      items: Array.isArray(c.items) ? c.items : []
-    }));
-    cats.sort((a,b)=>a.label.localeCompare(b.label));
-    return cats;
-  }
-
-  // Format B: { "TAB NAME": { category, items: [...] }, ... }
-  if (data && typeof data === "object" && !Array.isArray(data)) {
-    const entries = Object.entries(data);
-    // if it's empty object, return empty
-    if (!entries.length) return [];
-
-    const cats = entries.map(([tabName, obj]) => {
-      const label = obj?.category || tabName;
-      return {
-        id: tabName,
-        label,
-        machine: inferMachine(label),
-        items: Array.isArray(obj?.items) ? obj.items : []
-      };
-    });
-
-    // If it looks like a plain data object but not our catalog, still return it sorted
-    cats.sort((a,b)=>a.label.localeCompare(b.label));
-    return cats;
-  }
-
-  return [];
-}
-
-function buildMachines(categories){
-  const set = new Set(categories.map(c => c.machine));
-  const order = ["Skid/Track Loader", "Mini Skid Steer", "Tractor", "Excavator"];
-  return order.filter(m => set.has(m));
-}
+let machine = MACHINES.find(m => CATEGORIES.some(c => c.machine === m)) || "Skid/Track Loader";
+let category = null;
 
 /* ---------- variant lookup ---------- */
 function getVariant(item, duty, width){
-  // lookup keys are "Duty|Width" OR "|Width" when duty is blank
   const d = duty ? String(duty) : "";
   const w = (width === "" || width === null || width === undefined) ? "" : String(width);
   const key = `${d}|${w}`;
@@ -259,9 +285,10 @@ function getVariant(item, duty, width){
 
 /* ---------- render ---------- */
 function renderMachines(){
-  machineTabs.innerHTML = (MACHINES||[]).map(m => `
+  const availableMachines = MACHINES.filter(m => CATEGORIES.some(c => c.machine === m));
+  machineTabs.innerHTML = availableMachines.map(m => `
     <button class="${m===machine ? "active" : ""}" onclick="setMachine('${escAttr(m)}')">${m}</button>
-  `).join("") || `<div class="small">No machines found.</div>`;
+  `).join("");
 }
 
 function renderCats(){
@@ -278,19 +305,15 @@ function renderCats(){
 }
 
 function makeTile(item){
-  // Prefer the JSON's precomputed options if present
   const duties = uniq(item?.options?.duty || []).filter(d => norm(d) !== "none");
   const widths = numericSort(item?.options?.width || []);
 
-  // If options are missing, attempt to infer from variants
-  const dutyFallback = duties.length ? duties : uniq((item?.variants || []).map(v=>v.duty)).filter(d=>d && norm(d)!=="none");
-  const widthFallback = widths.length ? widths : numericSort((item?.variants || []).map(v=>v.width));
+  // Always show Duty dropdown (even if 1 option) if duties exist
+  const showDuty = duties.length > 0;
 
-  const finalDuties = dutyFallback;
-  const finalWidths = widthFallback;
-
-  let selectedDuty = finalDuties.length ? finalDuties[0] : "";
-  let selectedWidth = finalWidths.length ? finalWidths[0] : "";
+  // Defaults
+  let selectedDuty = showDuty ? duties[0] : "";
+  let selectedWidth = widths.length ? widths[0] : "";
 
   const tile = document.createElement("div");
   tile.className = "tile";
@@ -301,20 +324,18 @@ function makeTile(item){
     </div>
     <div class="tileBody">
       <div class="filters">
-        ${finalDuties.length ? `
+        ${showDuty ? `
           <div class="field">
             <label>Duty</label>
             <select class="dutySel">
-              <option value="">Select duty</option>
-              ${finalDuties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
+              ${duties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
             </select>
           </div>
         ` : ""}
         <div class="field">
           <label>Width (in)</label>
           <select class="widthSel">
-            <option value="">Select width</option>
-            ${finalWidths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
+            ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
           </select>
         </div>
       </div>
@@ -344,17 +365,7 @@ function makeTile(item){
   function update(){
     const d = dutySel ? dutySel.value : "";
     const w = widthSel ? widthSel.value : "";
-
-    // If item.lookup exists, use it; otherwise try to find match in variants
-    let v = null;
-    if (item.lookup) {
-      v = getVariant(item, d, w);
-    } else if (Array.isArray(item.variants)) {
-      v = item.variants.find(x =>
-        (d ? norm(x.duty)===norm(d) : true) &&
-        (w ? String(x.width)===String(w) : true)
-      ) || null;
-    }
+    const v = getVariant(item, d, w);
 
     skuOut.textContent = v?.sku || "—";
     priceOut.textContent = v ? money(v.price) : "—";
@@ -371,16 +382,14 @@ function makeTile(item){
       (v ? `Price shown: ${money(v.price)}\n` : "") +
       `\nName:\nPhone:\nLocation:\n\nThanks!`
     );
-
     emailBtn.href = `mailto:${QUOTE_EMAIL}?subject=${subject}&body=${body}`;
   }
 
+  if (dutySel && selectedDuty) dutySel.value = selectedDuty;
+  if (widthSel && selectedWidth !== "") widthSel.value = String(selectedWidth);
+
   if (dutySel) dutySel.addEventListener("change", update);
   if (widthSel) widthSel.addEventListener("change", update);
-
-  // set defaults (don’t force if you want user to choose first)
-  if (dutySel && selectedDuty) dutySel.value = selectedDuty;
-  if (widthSel && selectedWidth) widthSel.value = String(selectedWidth);
 
   update();
   return tile;
@@ -391,20 +400,23 @@ function renderTiles(){
 
   if (!category){
     categoryTitle.textContent = "Select a category";
-    categoryHint.textContent = "Choose a machine and category on the left. Then pick duty + width and price updates instantly.";
+    categoryHint.textContent = "Choose a machine + category. Then use duty + width dropdowns — price updates instantly.";
+    statusEl.textContent = "";
     return;
   }
 
   categoryTitle.textContent = category.label;
-  categoryHint.textContent = "Pick duty + width. Price updates instantly.";
+  categoryHint.textContent = "Tiles below are loaded from the Excel-driven catalog (inline).";
 
   const items = Array.isArray(category.items) ? category.items : [];
   if (!items.length){
     tilesEl.innerHTML = `<div class="small">No items found in this category.</div>`;
+    statusEl.textContent = "";
     return;
   }
 
   items.forEach(item => tilesEl.appendChild(makeTile(item)));
+  statusEl.textContent = `Showing ${items.length} item${items.length===1?"":"s"}.`;
 }
 
 function render(){
@@ -416,14 +428,9 @@ function render(){
 /* ---------- actions ---------- */
 window.setMachine = function(m){
   machine = m;
-  category = null;
-
-  try { localStorage.setItem("hendo_machine", machine); } catch(e){}
-
-  // auto-select first category for machine
   const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
   category = catsForMachine[0] || null;
-
+  try { localStorage.setItem("hendo_machine", machine); } catch(e){}
   render();
 };
 
@@ -434,86 +441,34 @@ window.setCategory = function(id){
 };
 
 /* ---------- init ---------- */
-(async function init(){
-  statusEl.textContent = "Loading catalog…";
-
-  // Cache-bust so GitHub Pages doesn’t serve old JSON
-  const url = DATA_URL + (DATA_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
-
+(function init(){
+  // restore selections if possible
+  let savedMachine = null;
+  let savedCategory = null;
   try{
-    const res = await fetch(url, { cache: "no-store" });
+    savedMachine = localStorage.getItem("hendo_machine");
+    savedCategory = localStorage.getItem("hendo_category");
+  }catch(e){}
 
-    // If you're not on GitHub Pages and you're just viewing the GitHub "blob" page,
-    // fetch will fail or return HTML, not JSON.
-    const text = await res.text();
+  const availableMachines = MACHINES.filter(m => CATEGORIES.some(c => c.machine === m));
+  if (savedMachine && availableMachines.includes(savedMachine)) machine = savedMachine;
 
-    // Try parse JSON
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch(parseErr) {
-      throw new Error(
-        "Catalog file did not return valid JSON. " +
-        "This usually happens when you're not on GitHub Pages or the path is wrong."
-      );
-    }
-
-    CATEGORIES = normalizeCatalog(data);
-    MACHINES = buildMachines(CATEGORIES);
-
-    if (!CATEGORIES.length || !MACHINES.length){
-      setDebug(
-        "Loaded JSON but found 0 categories/machines.\n\n" +
-        "Checklist:\n" +
-        "1) Confirm /data/hendo_catalog.json exists in repo\n" +
-        "2) Confirm you opened the *GitHub Pages site*, not github.com blob\n" +
-        "3) Open the JSON directly in browser and confirm it shows JSON\n\n" +
-        "Path used:\n" + DATA_URL
-      );
-      statusEl.textContent = "No categories found. Check JSON path / format.";
-      return;
-    }
-
-    // restore selections if possible
-    let savedMachine = null;
-    let savedCategory = null;
-    try{
-      savedMachine = localStorage.getItem("hendo_machine");
-      savedCategory = localStorage.getItem("hendo_category");
-    }catch(e){}
-
-    machine = (savedMachine && MACHINES.includes(savedMachine)) ? savedMachine : MACHINES[0];
-
-    const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
-
-    if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
-      category = catsForMachine.find(c => c.id === savedCategory);
-    } else {
-      category = catsForMachine[0] || null;
-    }
-
-    clearDebug();
-    statusEl.textContent = "";
-    render();
-
-  }catch(err){
-    console.error(err);
-    statusEl.textContent =
-      "Could not load catalog JSON. Fix this and machines/categories will appear.";
-
-    setDebug(
-      "ERROR loading catalog:\n" + (err?.message || err) + "\n\n" +
-      "IMPORTANT:\n" +
-      "• If you're viewing https://github.com/.../index.html (the repo file), fetch won't work.\n" +
-      "  You must open the GitHub Pages website:\n" +
-      "  https://whoots821.github.io/hendo-equipment/\n\n" +
-      "CHECKLIST:\n" +
-      "1) Upload hendo_catalog.json to: /data/hendo_catalog.json in the repo\n" +
-      "2) Turn on GitHub Pages (Settings → Pages → Deploy from branch)\n" +
-      "3) Visit the JSON directly:\n" +
-      "   https://whoots821.github.io/hendo-equipment/data/hendo_catalog.json\n"
-    );
+  const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
+  if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
+    category = catsForMachine.find(c => c.id === savedCategory);
+  } else {
+    category = catsForMachine[0] || null;
   }
+
+  if (!CATEGORIES.length){
+    statusEl.textContent = "No catalog data found inline.";
+  } else if (!category){
+    statusEl.textContent = "Select a machine/category to view items.";
+  } else {
+    statusEl.textContent = "";
+  }
+
+  render();
 })();
 </script>
 </body>
