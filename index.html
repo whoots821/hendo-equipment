@@ -44,7 +44,7 @@ header{background:#fff;border-bottom:4px solid var(--accent)}
 
 .pageTitle{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
 .pageTitle h2{margin:0;font-size:18px}
-.pageTitle .small{font-size:12px;color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
 
 .tilesGrid{
   display:grid;
@@ -70,7 +70,18 @@ header{background:#fff;border-bottom:4px solid var(--accent)}
 select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
 
 .priceBig{font-size:22px;font-weight:1100}
-.small{font-size:12px;color:var(--muted)}
+
+.debugBox{
+  margin-top:10px;
+  padding:10px;
+  border-radius:10px;
+  border:1px dashed var(--border);
+  background:#fafafa;
+  font-size:12px;
+  color:var(--muted);
+  display:none;
+  white-space:pre-wrap;
+}
 
 footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 </style>
@@ -100,17 +111,18 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 
       <div class="sideTitle">Categories</div>
       <div id="catList"></div>
+
+      <div class="debugBox" id="debugBox"></div>
     </aside>
 
     <section class="content">
       <div class="pageTitle">
         <h2 id="categoryTitle">Select a category</h2>
         <div class="small" id="categoryHint">Choose a machine and category on the left. Then pick duty + width and price updates instantly.</div>
+        <div class="small" id="status">Loading catalog…</div>
       </div>
 
       <div id="tiles" class="tilesGrid"></div>
-
-      <div class="small" id="status" style="margin-top:12px;color:var(--muted)"></div>
     </section>
   </section>
 </main>
@@ -122,14 +134,29 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 </footer>
 
 <script>
-/* ================================
-   FULL Excel-driven Configurator
-   Data source: /data/hendo_catalog.json
-   ================================ */
+/* =========================================================
+   FIXED VERSION (WHY YOU SAW NO MACHINES/CATEGORIES)
+   Most common causes:
+   1) The JSON file is not being loaded (wrong path / not on GitHub Pages)
+   2) The JSON format doesn't match what the script expects
+   This code supports BOTH formats:
+     A) { "categories": [ ... ] }   (the version I generated earlier)
+     B) { "TAB NAME": { items: [...] }, ... } (tab-keyed object)
+   ========================================================= */
 
-/* ---------- config ---------- */
-const DATA_URL = "./data/hendo_catalog.json";     // put hendo_catalog.json in repo at /data/hendo_catalog.json
-const QUOTE_EMAIL = "whoots821@gmail.com";        // change if you want
+/* ---------- IMPORTANT SETTINGS ---------- */
+
+// If you're using GitHub Pages, this relative path works IF the file exists:
+//   repo root -> /data/hendo_catalog.json
+// If you are viewing the file on github.com (the "blob" page), fetch will NOT work.
+// You must open the site on GitHub Pages (whoots821.github.io/...).
+const DATA_URL = "./data/hendo_catalog.json";
+
+// Email address for quote button:
+const QUOTE_EMAIL = "whoots821@gmail.com";
+
+// Turn on debug readout (shows in sidebar) if something fails:
+const DEBUG = true;
 
 /* ---------- helpers ---------- */
 const escAttr = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
@@ -158,53 +185,83 @@ const tilesEl = document.getElementById("tiles");
 const statusEl = document.getElementById("status");
 const categoryTitle = document.getElementById("categoryTitle");
 const categoryHint = document.getElementById("categoryHint");
+const debugBox = document.getElementById("debugBox");
 
 /* ---------- state ---------- */
-let RAW = null;                 // raw JSON object
 let CATEGORIES = [];            // [{ id, label, machine, items }]
 let MACHINES = [];              // ["Skid/Track Loader", ...]
 let machine = null;             // selected machine
 let category = null;            // selected category object
 
-/* ---------- data utils ---------- */
+/* ---------- debug ---------- */
+function setDebug(text){
+  if (!DEBUG) return;
+  debugBox.style.display = "block";
+  debugBox.textContent = text;
+}
+function clearDebug(){
+  debugBox.style.display = "none";
+  debugBox.textContent = "";
+}
+
+/* ---------- detect + normalize JSON formats ---------- */
+function normalizeCatalog(data){
+  // Format A: { categories: [ {name, slug, items:[{name, variants, lookup, options...}]} ] }
+  if (data && Array.isArray(data.categories)) {
+    const cats = data.categories.map(c => ({
+      id: c.name || c.slug || "Category",
+      label: c.name || c.slug || "Category",
+      machine: inferMachine(c.name || c.slug || ""),
+      items: Array.isArray(c.items) ? c.items : []
+    }));
+    cats.sort((a,b)=>a.label.localeCompare(b.label));
+    return cats;
+  }
+
+  // Format B: { "TAB NAME": { category, items: [...] }, ... }
+  if (data && typeof data === "object" && !Array.isArray(data)) {
+    const entries = Object.entries(data);
+    // if it's empty object, return empty
+    if (!entries.length) return [];
+
+    const cats = entries.map(([tabName, obj]) => {
+      const label = obj?.category || tabName;
+      return {
+        id: tabName,
+        label,
+        machine: inferMachine(label),
+        items: Array.isArray(obj?.items) ? obj.items : []
+      };
+    });
+
+    // If it looks like a plain data object but not our catalog, still return it sorted
+    cats.sort((a,b)=>a.label.localeCompare(b.label));
+    return cats;
+  }
+
+  return [];
+}
+
+function buildMachines(categories){
+  const set = new Set(categories.map(c => c.machine));
+  const order = ["Skid/Track Loader", "Mini Skid Steer", "Tractor", "Excavator"];
+  return order.filter(m => set.has(m));
+}
+
+/* ---------- variant lookup ---------- */
 function getVariant(item, duty, width){
-  // lookup keys are "Duty|Width" OR "|Width" when duty is null/none
+  // lookup keys are "Duty|Width" OR "|Width" when duty is blank
   const d = duty ? String(duty) : "";
   const w = (width === "" || width === null || width === undefined) ? "" : String(width);
   const key = `${d}|${w}`;
   return item.lookup?.[key] || null;
 }
 
-function buildCategoriesFromRaw(raw){
-  // raw is an object keyed by tab name -> { category, items }
-  const cats = Object.entries(raw).map(([tabName, obj]) => {
-    const label = obj?.category || tabName;
-    const machine = inferMachine(label);
-    return {
-      id: tabName,
-      label,
-      machine,
-      items: Array.isArray(obj?.items) ? obj.items : []
-    };
-  });
-
-  // sort categories by label
-  cats.sort((a,b)=>a.label.localeCompare(b.label));
-  return cats;
-}
-
-function buildMachines(categories){
-  const set = new Set(categories.map(c => c.machine));
-  // Stable order:
-  const order = ["Skid/Track Loader", "Mini Skid Steer", "Tractor", "Excavator"];
-  return order.filter(m => set.has(m));
-}
-
 /* ---------- render ---------- */
 function renderMachines(){
   machineTabs.innerHTML = (MACHINES||[]).map(m => `
     <button class="${m===machine ? "active" : ""}" onclick="setMachine('${escAttr(m)}')">${m}</button>
-  `).join("");
+  `).join("") || `<div class="small">No machines found.</div>`;
 }
 
 function renderCats(){
@@ -216,17 +273,24 @@ function renderCats(){
   `).join("");
 
   if (!list.length){
-    catList.innerHTML = `<div class="small" style="color:var(--muted)">No categories for this machine.</div>`;
+    catList.innerHTML = `<div class="small">No categories for this machine.</div>`;
   }
 }
 
 function makeTile(item){
+  // Prefer the JSON's precomputed options if present
   const duties = uniq(item?.options?.duty || []).filter(d => norm(d) !== "none");
   const widths = numericSort(item?.options?.width || []);
 
-  // default selections
-  let selectedDuty = duties.length ? duties[0] : "";
-  let selectedWidth = widths.length ? widths[0] : "";
+  // If options are missing, attempt to infer from variants
+  const dutyFallback = duties.length ? duties : uniq((item?.variants || []).map(v=>v.duty)).filter(d=>d && norm(d)!=="none");
+  const widthFallback = widths.length ? widths : numericSort((item?.variants || []).map(v=>v.width));
+
+  const finalDuties = dutyFallback;
+  const finalWidths = widthFallback;
+
+  let selectedDuty = finalDuties.length ? finalDuties[0] : "";
+  let selectedWidth = finalWidths.length ? finalWidths[0] : "";
 
   const tile = document.createElement("div");
   tile.className = "tile";
@@ -237,18 +301,20 @@ function makeTile(item){
     </div>
     <div class="tileBody">
       <div class="filters">
-        ${duties.length ? `
+        ${finalDuties.length ? `
           <div class="field">
             <label>Duty</label>
             <select class="dutySel">
-              ${duties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
+              <option value="">Select duty</option>
+              ${finalDuties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
             </select>
           </div>
         ` : ""}
         <div class="field">
           <label>Width (in)</label>
           <select class="widthSel">
-            ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
+            <option value="">Select width</option>
+            ${finalWidths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
           </select>
         </div>
       </div>
@@ -278,7 +344,17 @@ function makeTile(item){
   function update(){
     const d = dutySel ? dutySel.value : "";
     const w = widthSel ? widthSel.value : "";
-    const v = getVariant(item, d, w);
+
+    // If item.lookup exists, use it; otherwise try to find match in variants
+    let v = null;
+    if (item.lookup) {
+      v = getVariant(item, d, w);
+    } else if (Array.isArray(item.variants)) {
+      v = item.variants.find(x =>
+        (d ? norm(x.duty)===norm(d) : true) &&
+        (w ? String(x.width)===String(w) : true)
+      ) || null;
+    }
 
     skuOut.textContent = v?.sku || "—";
     priceOut.textContent = v ? money(v.price) : "—";
@@ -302,7 +378,7 @@ function makeTile(item){
   if (dutySel) dutySel.addEventListener("change", update);
   if (widthSel) widthSel.addEventListener("change", update);
 
-  // set defaults in UI
+  // set defaults (don’t force if you want user to choose first)
   if (dutySel && selectedDuty) dutySel.value = selectedDuty;
   if (widthSel && selectedWidth) widthSel.value = String(selectedWidth);
 
@@ -312,10 +388,10 @@ function makeTile(item){
 
 function renderTiles(){
   tilesEl.innerHTML = "";
+
   if (!category){
     categoryTitle.textContent = "Select a category";
     categoryHint.textContent = "Choose a machine and category on the left. Then pick duty + width and price updates instantly.";
-    statusEl.textContent = "";
     return;
   }
 
@@ -324,12 +400,11 @@ function renderTiles(){
 
   const items = Array.isArray(category.items) ? category.items : [];
   if (!items.length){
-    statusEl.textContent = "No items found in this category.";
+    tilesEl.innerHTML = `<div class="small">No items found in this category.</div>`;
     return;
   }
 
   items.forEach(item => tilesEl.appendChild(makeTile(item)));
-  statusEl.textContent = `Showing ${items.length} item${items.length===1?"":"s"}.`;
 }
 
 function render(){
@@ -339,37 +414,65 @@ function render(){
 }
 
 /* ---------- actions ---------- */
-function setMachine(m){
+window.setMachine = function(m){
   machine = m;
   category = null;
 
-  // remember
   try { localStorage.setItem("hendo_machine", machine); } catch(e){}
 
-  render();
-}
+  // auto-select first category for machine
+  const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
+  category = catsForMachine[0] || null;
 
-function setCategory(id){
+  render();
+};
+
+window.setCategory = function(id){
   category = CATEGORIES.find(c => c.id === id) || null;
-
-  // remember
   try { localStorage.setItem("hendo_category", category?.id || ""); } catch(e){}
-
   render();
-}
+};
 
 /* ---------- init ---------- */
 (async function init(){
   statusEl.textContent = "Loading catalog…";
 
-  try{
-    const res = await fetch(DATA_URL, { cache: "no-store" });
-    if(!res.ok) throw new Error(`Failed to load ${DATA_URL} (HTTP ${res.status})`);
-    RAW = await res.json();
+  // Cache-bust so GitHub Pages doesn’t serve old JSON
+  const url = DATA_URL + (DATA_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
 
-    // RAW is keyed by tab names. All_Items is not included in this JSON.
-    CATEGORIES = buildCategoriesFromRaw(RAW);
+  try{
+    const res = await fetch(url, { cache: "no-store" });
+
+    // If you're not on GitHub Pages and you're just viewing the GitHub "blob" page,
+    // fetch will fail or return HTML, not JSON.
+    const text = await res.text();
+
+    // Try parse JSON
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch(parseErr) {
+      throw new Error(
+        "Catalog file did not return valid JSON. " +
+        "This usually happens when you're not on GitHub Pages or the path is wrong."
+      );
+    }
+
+    CATEGORIES = normalizeCatalog(data);
     MACHINES = buildMachines(CATEGORIES);
+
+    if (!CATEGORIES.length || !MACHINES.length){
+      setDebug(
+        "Loaded JSON but found 0 categories/machines.\n\n" +
+        "Checklist:\n" +
+        "1) Confirm /data/hendo_catalog.json exists in repo\n" +
+        "2) Confirm you opened the *GitHub Pages site*, not github.com blob\n" +
+        "3) Open the JSON directly in browser and confirm it shows JSON\n\n" +
+        "Path used:\n" + DATA_URL
+      );
+      statusEl.textContent = "No categories found. Check JSON path / format.";
+      return;
+    }
 
     // restore selections if possible
     let savedMachine = null;
@@ -379,21 +482,37 @@ function setCategory(id){
       savedCategory = localStorage.getItem("hendo_category");
     }catch(e){}
 
-    machine = (savedMachine && MACHINES.includes(savedMachine)) ? savedMachine : (MACHINES[0] || "Skid/Track Loader");
+    machine = (savedMachine && MACHINES.includes(savedMachine)) ? savedMachine : MACHINES[0];
 
-    // if saved category belongs to current machine, select it; otherwise pick first in machine
     const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
+
     if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
       category = catsForMachine.find(c => c.id === savedCategory);
     } else {
       category = catsForMachine[0] || null;
     }
 
+    clearDebug();
     statusEl.textContent = "";
     render();
+
   }catch(err){
     console.error(err);
-    statusEl.textContent = `Could not load catalog JSON. Put hendo_catalog.json in /data and verify path: ${DATA_URL}. Error: ${err.message || err}`;
+    statusEl.textContent =
+      "Could not load catalog JSON. Fix this and machines/categories will appear.";
+
+    setDebug(
+      "ERROR loading catalog:\n" + (err?.message || err) + "\n\n" +
+      "IMPORTANT:\n" +
+      "• If you're viewing https://github.com/.../index.html (the repo file), fetch won't work.\n" +
+      "  You must open the GitHub Pages website:\n" +
+      "  https://whoots821.github.io/hendo-equipment/\n\n" +
+      "CHECKLIST:\n" +
+      "1) Upload hendo_catalog.json to: /data/hendo_catalog.json in the repo\n" +
+      "2) Turn on GitHub Pages (Settings → Pages → Deploy from branch)\n" +
+      "3) Visit the JSON directly:\n" +
+      "   https://whoots821.github.io/hendo-equipment/data/hendo_catalog.json\n"
+    );
   }
 })();
 </script>
