@@ -65,11 +65,13 @@ header{background:#fff;border-bottom:4px solid var(--accent)}
 }
 .tileHead .name{font-weight:1000}
 .tileBody{padding:12px;display:grid;gap:10px}
+
 .filters{display:flex;gap:10px;flex-wrap:wrap}
 .field label{font-size:12px;font-weight:900;color:var(--muted)}
 select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
 
 .priceBig{font-size:22px;font-weight:1100}
+
 footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 </style>
 </head>
@@ -103,7 +105,7 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
     <section class="content">
       <div class="pageTitle">
         <h2 id="categoryTitle">Select a category</h2>
-        <div class="small" id="categoryHint">Choose a machine + category. Then use duty + width dropdowns — price updates instantly.</div>
+        <div class="small" id="categoryHint">Pick duty / smooth-teeth / width — price updates instantly.</div>
         <div class="small" id="status"></div>
       </div>
 
@@ -120,116 +122,16 @@ footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
 
 <script>
 /* =========================================================
-   OPTION A: INLINE DATA (NO JSON FILE, NO UPLOAD TO /data)
-   Excel-driven catalog is embedded below.
-   All_Items is not included here.
+   OPTION A: INLINE DATA (NO JSON FILE)
+   Built from your Excel: Attachment_And_Prices (3) (version 1).xlsx
+   All_Items ignored.
+   Smooth/Teeth is an Edge dropdown.
    ========================================================= */
 
-/* ---------- SETTINGS ---------- */
 const QUOTE_EMAIL = "whoots821@gmail.com"; // change if you want
 
-/* ---------- INLINE CATALOG (from Excel tabs) ---------- */
-const CATALOG_BY_TAB = {
-  "4N1 BUCKET MINI": {
-    "category": "4N1 BUCKET MINI",
-    "items": [
-      {
-        "name": "MINI 4-N-1",
-        "variants": [
-          { "sku": "MM4N1-36", "price": 2965, "duty": "Heavy Duty", "width": 36 },
-          { "sku": "MM4N1-42", "price": 3065, "duty": "Heavy Duty", "width": 42 }
-        ],
-        "options": { "duty": ["Heavy Duty"], "width": [36, 42] },
-        "lookup": {
-          "Heavy Duty|36": { "sku": "MM4N1-36", "price": 2965, "duty": "Heavy Duty", "width": 36 },
-          "Heavy Duty|42": { "sku": "MM4N1-42", "price": 3065, "duty": "Heavy Duty", "width": 42 }
-        }
-      }
-    ]
-  },
-  "FORESTRY DISC MULCHER": {
-    "category": "FORESTRY DISC MULCHER",
-    "items": [
-      {
-        "name": "DISC MULCHER (STANDARD FLOW)",
-        "variants": [
-          { "sku": "FDM-60SF", "price": 24750, "duty": "Standard", "width": 60 }
-        ],
-        "options": { "duty": ["Standard"], "width": [60] },
-        "lookup": {
-          "Standard|60": { "sku": "FDM-60SF", "price": 24750, "duty": "Standard", "width": 60 }
-        }
-      },
-      {
-        "name": "DISC MULCHER (HIGH FLOW)",
-        "variants": [
-          { "sku": "FDM-60HF", "price": 26950, "duty": "High Flow", "width": 60 }
-        ],
-        "options": { "duty": ["High Flow"], "width": [60] },
-        "lookup": {
-          "High Flow|60": { "sku": "FDM-60HF", "price": 26950, "duty": "High Flow", "width": 60 }
-        }
-      }
-    ]
-  },
-  "EXCAVATOR CUTTER": {
-    "category": "EXCAVATOR CUTTER",
-    "items": [
-      {
-        "name": "EXCAVATOR TREE CUTTER",
-        "variants": [
-          { "sku": "EXC-TC", "price": 12950, "duty": "Standard", "width": 0 }
-        ],
-        "options": { "duty": ["Standard"], "width": [0] },
-        "lookup": {
-          "Standard|0": { "sku": "EXC-TC", "price": 12950, "duty": "Standard", "width": 0 }
-        }
-      }
-    ]
-  },
-  "4N1 BUCKET": {
-    "category": "4N1 BUCKET",
-    "items": [
-      {
-        "name": "4-N-1",
-        "variants": [
-          { "sku": "SV4N1-72", "price": 4950, "duty": "Severe Duty", "width": 72 },
-          { "sku": "SV4N1-78", "price": 5100, "duty": "Severe Duty", "width": 78 },
-          { "sku": "SV4N1-81", "price": 5250, "duty": "Severe Duty", "width": 81 },
-          { "sku": "SV4N1-84", "price": 5400, "duty": "Severe Duty", "width": 84 }
-        ],
-        "options": { "duty": ["Severe Duty"], "width": [72, 78, 81, 84] },
-        "lookup": {
-          "Severe Duty|72": { "sku": "SV4N1-72", "price": 4950, "duty": "Severe Duty", "width": 72 },
-          "Severe Duty|78": { "sku": "SV4N1-78", "price": 5100, "duty": "Severe Duty", "width": 78 },
-          "Severe Duty|81": { "sku": "SV4N1-81", "price": 5250, "duty": "Severe Duty", "width": 81 },
-          "Severe Duty|84": { "sku": "SV4N1-84", "price": 5400, "duty": "Severe Duty", "width": 84 }
-        }
-      },
-      {
-        "name": "4-N-1 W/TEETH",
-        "variants": [
-          { "sku": "SV4N1T-72", "price": 5250, "duty": "Severe Duty", "width": 72 },
-          { "sku": "SV4N1T-78", "price": 5400, "duty": "Severe Duty", "width": 78 },
-          { "sku": "SV4N1T-81", "price": 5550, "duty": "Severe Duty", "width": 81 },
-          { "sku": "SV4N1T-84", "price": 5700, "duty": "Severe Duty", "width": 84 }
-        ],
-        "options": { "duty": ["Severe Duty"], "width": [72, 78, 81, 84] },
-        "lookup": {
-          "Severe Duty|72": { "sku": "SV4N1T-72", "price": 5250, "duty": "Severe Duty", "width": 72 },
-          "Severe Duty|78": { "sku": "SV4N1T-78", "price": 5400, "duty": "Severe Duty", "width": 78 },
-          "Severe Duty|81": { "sku": "SV4N1T-81", "price": 5550, "duty": "Severe Duty", "width": 81 },
-          "Severe Duty|84": { "sku": "SV4N1T-84", "price": 5700, "duty": "Severe Duty", "width": 84 }
-        }
-      }
-    ]
-  },
-
-  /* NOTE:
-     For brevity in this inline example, only a subset of tabs/items is embedded.
-     To embed ALL tabs/items, paste the rest of your catalog here the same way.
-     If you want, upload your Excel again and I’ll output a FULL inline version containing every item. */
-};
+/* ---------- INLINE CATALOG (ALL TABS) ---------- */
+const CATALOG_BY_TAB = {"4N1 BUCKET MINI":{"category":"4N1 BUCKET MINI","items":[{"name":"4-N-1 MINI BUCKET","variants":[{"sku":"MM4N1-36","price":2965.0,"duty":"","edge":"Smooth","width":36},{"sku":"MM4N1-42","price":3065.0,"duty":"","edge":"Smooth","width":42}],"options":{"duty":[],"edge":["Smooth"],"width":[36,42]},"lookup":{"Smooth||36":{"sku":"MM4N1-36","price":2965.0,"duty":"","edge":"Smooth","width":36},"Smooth||42":{"sku":"MM4N1-42","price":3065.0,"duty":"","edge":"Smooth","width":42}}}]},"FORESTRY DISC MULCHER":{"category":"FORESTRY DISC MULCHER","items":[{"name":"DISC MULCHER 60","variants":[{"sku":"FDM-60SF","price":24750.0,"duty":"","edge":"Smooth","width":60},{"sku":"FDM-60HF","price":26950.0,"duty":"","edge":"Smooth","width":60}],"options":{"duty":[],"edge":["Smooth"],"width":[60]},"lookup":{"Smooth||60":{"sku":"FDM-60HF","price":26950.0,"duty":"","edge":"Smooth","width":60}}}]},"EXCAVATOR CUTTER":{"category":"EXCAVATOR CUTTER","items":[{"name":"EXCAVATOR CUTTER","variants":[{"sku":"EXC-TC","price":12950.0,"duty":"","edge":"Smooth","width":null}],"options":{"duty":[],"edge":["Smooth"],"width":[]},"lookup":{"Smooth||":{"sku":"EXC-TC","price":12950.0,"duty":"","edge":"Smooth","width":null}}}]},"4N1 BUCKET":{"category":"4N1 BUCKET","items":[{"name":"4-N-1 BUCKET","variants":[{"sku":"SD4N1-54","price":3000.0,"duty":"Standard Duty","edge":"Smooth","width":54},{"sku":"SD4N1-60","price":3050.0,"duty":"Standard Duty","edge":"Smooth","width":60},{"sku":"SD4N1-63","price":3150.0,"duty":"Standard Duty","edge":"Smooth","width":63},{"sku":"SD4N1-66","price":3200.0,"duty":"Standard Duty","edge":"Smooth","width":66},{"sku":"SD4N1-72","price":3300.0,"duty":"Standard Duty","edge":"Smooth","width":72},{"sku":"SD4N1-54T","price":3350.0,"duty":"Standard Duty","edge":"Teeth","width":54},{"sku":"SD4N1-60T","price":3400.0,"duty":"Standard Duty","edge":"Teeth","width":60},{"sku":"SD4N1-63T","price":3450.0,"duty":"Standard Duty","edge":"Teeth","width":63},{"sku":"SD4N1-66T","price":3500.0,"duty":"Standard Duty","edge":"Teeth","width":66},{"sku":"SD4N1-72T","price":3600.0,"duty":"Standard Duty","edge":"Teeth","width":72},{"sku":"HD4N1-60","price":3800.0,"duty":"Heavy Duty","edge":"Smooth","width":60},{"sku":"HD4N1-63","price":3900.0,"duty":"Heavy Duty","edge":"Smooth","width":63},{"sku":"HD4N1-66","price":3950.0,"duty":"Heavy Duty","edge":"Smooth","width":66},{"sku":"HD4N1-72","price":4100.0,"duty":"Heavy Duty","edge":"Smooth","width":72},{"sku":"HD4N1-78","price":4200.0,"duty":"Heavy Duty","edge":"Smooth","width":78},{"sku":"HD4N1-84","price":4300.0,"duty":"Heavy Duty","edge":"Smooth","width":84},{"sku":"HD4N1-60T","price":4100.0,"duty":"Heavy Duty","edge":"Teeth","width":60},{"sku":"HD4N1-63T","price":4150.0,"duty":"Heavy Duty","edge":"Teeth","width":63},{"sku":"HD4N1-66T","price":4200.0,"duty":"Heavy Duty","edge":"Teeth","width":66},{"sku":"HD4N1-72T","price":4350.0,"duty":"Heavy Duty","edge":"Teeth","width":72},{"sku":"HD4N1-78T","price":4450.0,"duty":"Heavy Duty","edge":"Teeth","width":78},{"sku":"HD4N1-84T","price":4550.0,"duty":"Heavy Duty","edge":"Teeth","width":84},{"sku":"X4N1-66","price":4250.0,"duty":"Xtreme Duty","edge":"Smooth","width":66},{"sku":"X4N1-72","price":4350.0,"duty":"Xtreme Duty","edge":"Smooth","width":72},{"sku":"X4N1-78","price":4450.0,"duty":"Xtreme Duty","edge":"Smooth","width":78},{"sku":"X4N1-84","price":4550.0,"duty":"Xtreme Duty","edge":"Smooth","width":84},{"sku":"X4N1-66T","price":4500.0,"duty":"Xtreme Duty","edge":"Teeth","width":66},{"sku":"X4N1-72T","price":4600.0,"duty":"Xtreme Duty","edge":"Teeth","width":72},{"sku":"X4N1-78T","price":4700.0,"duty":"Xtreme Duty","edge":"Teeth","width":78},{"sku":"X4N1-84T","price":4800.0,"duty":"Xtreme Duty","edge":"Teeth","width":84},{"sku":"SV4N1-72","price":4950.0,"duty":"Severe Duty","edge":"Smooth","width":72},{"sku":"SV4N1-78","price":5100.0,"duty":"Severe Duty","edge":"Smooth","width":78},{"sku":"SV4N1-81","price":5250.0,"duty":"Severe Duty","edge":"Smooth","width":81},{"sku":"SV4N1-84","price":5400.0,"duty":"Severe Duty","edge":"Smooth","width":84},{"sku":"SV4N1-72T","price":5250.0,"duty":"Severe Duty","edge":"Teeth","width":72},{"sku":"SV4N1-78T","price":5400.0,"duty":"Severe Duty","edge":"Teeth","width":78},{"sku":"SV4N1-81T","price":5550.0,"duty":"Severe Duty","edge":"Teeth","width":81},{"sku":"SV4N1-84T","price":5700.0,"duty":"Severe Duty","edge":"Teeth","width":84}],"options":{"duty":["Standard Duty","Heavy Duty","Xtreme Duty","Severe Duty"],"edge":["Smooth","Teeth"],"width":[54,60,63,66,72,78,81,84]},"lookup":{"Smooth|Standard Duty|54":{"sku":"SD4N1-54","price":3000.0,"duty":"Standard Duty","edge":"Smooth","width":54},"Smooth|Standard Duty|60":{"sku":"SD4N1-60","price":3050.0,"duty":"Standard Duty","edge":"Smooth","width":60},"Smooth|Standard Duty|63":{"sku":"SD4N1-63","price":3150.0,"duty":"Standard Duty","edge":"Smooth","width":63},"Smooth|Standard Duty|66":{"sku":"SD4N1-66","price":3200.0,"duty":"Standard Duty","edge":"Smooth","width":66},"Smooth|Standard Duty|72":{"sku":"SD4N1-72","price":3300.0,"duty":"Standard Duty","edge":"Smooth","width":72},"Teeth|Standard Duty|54":{"sku":"SD4N1-54T","price":3350.0,"duty":"Standard Duty","edge":"Teeth","width":54},"Teeth|Standard Duty|60":{"sku":"SD4N1-60T","price":3400.0,"duty":"Standard Duty","edge":"Teeth","width":60},"Teeth|Standard Duty|63":{"sku":"SD4N1-63T","price":3450.0,"duty":"Standard Duty","edge":"Teeth","width":63},"Teeth|Standard Duty|66":{"sku":"SD4N1-66T","price":3500.0,"duty":"Standard Duty","edge":"Teeth","width":66},"Teeth|Standard Duty|72":{"sku":"SD4N1-72T","price":3600.0,"duty":"Standard Duty","edge":"Teeth","width":72},"Smooth|Heavy Duty|60":{"sku":"HD4N1-60","price":3800.0,"duty":"Heavy Duty","edge":"Smooth","width":60},"Smooth|Heavy Duty|63":{"sku":"HD4N1-63","price":3900.0,"duty":"Heavy Duty","edge":"Smooth","width":63},"Smooth|Heavy Duty|66":{"sku":"HD4N1-66","price":3950.0,"duty":"Heavy Duty","edge":"Smooth","width":66},"Smooth|Heavy Duty|72":{"sku":"HD4N1-72","price":4100.0,"duty":"Heavy Duty","edge":"Smooth","width":72},"Smooth|Heavy Duty|78":{"sku":"HD4N1-78","price":4200.0,"duty":"Heavy Duty","edge":"Smooth","width":78},"Smooth|Heavy Duty|84":{"sku":"HD4N1-84","price":4300.0,"duty":"Heavy Duty","edge":"Smooth","width":84},"Teeth|Heavy Duty|60":{"sku":"HD4N1-60T","price":4100.0,"duty":"Heavy Duty","edge":"Teeth","width":60},"Teeth|Heavy Duty|63":{"sku":"HD4N1-63T","price":4150.0,"duty":"Heavy Duty","edge":"Teeth","width":63},"Teeth|Heavy Duty|66":{"sku":"HD4N1-66T","price":4200.0,"duty":"Heavy Duty","edge":"Teeth","width":66},"Teeth|Heavy Duty|72":{"sku":"HD4N1-72T","price":4350.0,"duty":"Heavy Duty","edge":"Teeth","width":72},"Teeth|Heavy Duty|78":{"sku":"HD4N1-78T","price":4450.0,"duty":"Heavy Duty","edge":"Teeth","width":78},"Teeth|Heavy Duty|84":{"sku":"HD4N1-84T","price":4550.0,"duty":"Heavy Duty","edge":"Teeth","width":84},"Smooth|Xtreme Duty|66":{"sku":"X4N1-66","price":4250.0,"duty":"Xtreme Duty","edge":"Smooth","width":66},"Smooth|Xtreme Duty|72":{"sku":"X4N1-72","price":4350.0,"duty":"Xtreme Duty","edge":"Smooth","width":72},"Smooth|Xtreme Duty|78":{"sku":"X4N1-78","price":4450.0,"duty":"Xtreme Duty","edge":"Smooth","width":78},"Smooth|Xtreme Duty|84":{"sku":"X4N1-84","price":4550.0,"duty":"Xtreme Duty","edge":"Smooth","width":84},"Teeth|Xtreme Duty|66":{"sku":"X4N1-66T","price":4500.0,"duty":"Xtreme Duty","edge":"Teeth","width":66},"Teeth|Xtreme Duty|72":{"sku":"X4N1-72T","price":4600.0,"duty":"Xtreme Duty","edge":"Teeth","width":72},"Teeth|Xtreme Duty|78":{"sku":"X4N1-78T","price":4700.0,"duty":"Xtreme Duty","edge":"Teeth","width":78},"Teeth|Xtreme Duty|84":{"sku":"X4N1-84T","price":4800.0,"duty":"Xtreme Duty","edge":"Teeth","width":84},"Smooth|Severe Duty|72":{"sku":"SV4N1-72","price":4950.0,"duty":"Severe Duty","edge":"Smooth","width":72},"Smooth|Severe Duty|78":{"sku":"SV4N1-78","price":5100.0,"duty":"Severe Duty","edge":"Smooth","width":78},"Smooth|Severe Duty|81":{"sku":"SV4N1-81","price":5250.0,"duty":"Severe Duty","edge":"Smooth","width":81},"Smooth|Severe Duty|84":{"sku":"SV4N1-84","price":5400.0,"duty":"Severe Duty","edge":"Smooth","width":84},"Teeth|Severe Duty|72":{"sku":"SV4N1-72T","price":5250.0,"duty":"Severe Duty","edge":"Teeth","width":72},"Teeth|Severe Duty|78":{"sku":"SV4N1-78T","price":5400.0,"duty":"Severe Duty","edge":"Teeth","width":78},"Teeth|Severe Duty|81":{"sku":"SV4N1-81T","price":5550.0,"duty":"Severe Duty","edge":"Teeth","width":81},"Teeth|Severe Duty|84":{"sku":"SV4N1-84T","price":5700.0,"duty":"Severe Duty","edge":"Teeth","width":84}}}]},"LONG BOTTOM BUCKET":{"category":"LONG BOTTOM BUCKET","items":[{"name":"LONG BOTTOM BUCKET","variants":[{"sku":"SDBKT-66LB","price":1750.0,"duty":"Standard Duty","edge":"Smooth","width":66},{"sku":"SDBKT-72LB","price":1800.0,"duty":"Standard Duty","edge":"Smooth","width":72},{"sku":"SDBKT-78LB","price":1900.0,"duty":"Standard Duty","edge":"Smooth","width":78},{"sku":"SDBKT-84LB","price":2000.0,"duty":"Standard Duty","edge":"Smooth","width":84}],"options":{"duty":["Standard Duty"],"edge":["Smooth"],"width":[66,72,78,84]},"lookup":{"Smooth|Standard Duty|66":{"sku":"SDBKT-66LB","price":1750.0,"duty":"Standard Duty","edge":"Smooth","width":66},"Smooth|Standard Duty|72":{"sku":"SDBKT-72LB","price":1800.0,"duty":"Standard Duty","edge":"Smooth","width":72},"Smooth|Standard Duty|78":{"sku":"SDBKT-78LB","price":1900.0,"duty":"Standard Duty","edge":"Smooth","width":78},"Smooth|Standard Duty|84":{"sku":"SDBKT-84LB","price":2000.0,"duty":"Standard Duty","edge":"Smooth","width":84}}}]},"HIGH DUMP BUCKETS":{"category":"HIGH DUMP BUCKETS","items":[{"name":"HIGH DUMP BUCKET","variants":[{"sku":"HDMP-72","price":5950.0,"duty":"","edge":"Smooth","width":72},{"sku":"HDMP-78","price":6150.0,"duty":"","edge":"Smooth","width":78},{"sku":"HDMP-84","price":6350.0,"duty":"","edge":"Smooth","width":84},{"sku":"HDMP-96","price":6850.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[72,78,84,96]},"lookup":{"Smooth||72":{"sku":"HDMP-72","price":5950.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"HDMP-78","price":6150.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"HDMP-84","price":6350.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"HDMP-96","price":6850.0,"duty":"","edge":"Smooth","width":96}}}]},"CONCRETE BUCKETS":{"category":"CONCRETE BUCKETS","items":[{"name":"CONCRETE BUCKET","variants":[{"sku":"CBKT-60","price":2600.0,"duty":"","edge":"Smooth","width":60},{"sku":"CBKT-72","price":2700.0,"duty":"","edge":"Smooth","width":72},{"sku":"CBKT-84","price":2800.0,"duty":"","edge":"Smooth","width":84}],"options":{"duty":[],"edge":["Smooth"],"width":[60,72,84]},"lookup":{"Smooth||60":{"sku":"CBKT-60","price":2600.0,"duty":"","edge":"Smooth","width":60},"Smooth||72":{"sku":"CBKT-72","price":2700.0,"duty":"","edge":"Smooth","width":72},"Smooth||84":{"sku":"CBKT-84","price":2800.0,"duty":"","edge":"Smooth","width":84}}}]},"LOW PROFILE BUCKET":{"category":"LOW PROFILE BUCKET","items":[{"name":"LOW PROFILE BUCKET","variants":[{"sku":"LPR-60","price":1350.0,"duty":"","edge":"Smooth","width":60},{"sku":"LPR-66","price":1400.0,"duty":"","edge":"Smooth","width":66},{"sku":"LPR-72","price":1500.0,"duty":"","edge":"Smooth","width":72},{"sku":"LPR-78","price":1550.0,"duty":"","edge":"Smooth","width":78},{"sku":"LPR-84","price":1600.0,"duty":"","edge":"Smooth","width":84}],"options":{"duty":[],"edge":["Smooth"],"width":[60,66,72,78,84]},"lookup":{"Smooth||60":{"sku":"LPR-60","price":1350.0,"duty":"","edge":"Smooth","width":60},"Smooth||66":{"sku":"LPR-66","price":1400.0,"duty":"","edge":"Smooth","width":66},"Smooth||72":{"sku":"LPR-72","price":1500.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"LPR-78","price":1550.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"LPR-84","price":1600.0,"duty":"","edge":"Smooth","width":84}}}]},"SNOW-N-LITTER BUCKET":{"category":"SNOW-N-LITTER BUCKET","items":[{"name":"SNOW-N-LITTER BUCKET","variants":[{"sku":"SNLB-72","price":3150.0,"duty":"","edge":"Smooth","width":72},{"sku":"SNLB-78","price":3250.0,"duty":"","edge":"Smooth","width":78},{"sku":"SNLB-84","price":3350.0,"duty":"","edge":"Smooth","width":84},{"sku":"SNLB-96","price":3600.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[72,78,84,96]},"lookup":{"Smooth||72":{"sku":"SNLB-72","price":3150.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"SNLB-78","price":3250.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"SNLB-84","price":3350.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"SNLB-96","price":3600.0,"duty":"","edge":"Smooth","width":96}}}]},"ROCK GRAPPLES":{"category":"ROCK GRAPPLES","items":[{"name":"ROCK GRAPPLE","variants":[{"sku":"CTROKG48","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":48},{"sku":"CTROKGS4","price":1950.0,"duty":"Compact Tractor","edge":"Smooth","width":54},{"sku":"CTROKG60","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":60},{"sku":"CTROKG6E","price":1950.0,"duty":"Compact Tractor","edge":"Smooth","width":66},{"sku":"CTROKG72","price":1800.0,"duty":"Compact Tractor","edge":"Smooth","width":72},{"sku":"CTROKG78","price":1850.0,"duty":"Compact Tractor","edge":"Smooth","width":78},{"sku":"CTROKG84","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":84},{"sku":"ROKG66","price":2650.0,"duty":"","edge":"Smooth","width":66},{"sku":"ROKG72","price":2750.0,"duty":"","edge":"Smooth","width":72},{"sku":"ROKG78","price":2850.0,"duty":"","edge":"Smooth","width":78},{"sku":"ROKG84","price":2950.0,"duty":"","edge":"Smooth","width":84}],"options":{"duty":["Compact Tractor"],"edge":["Smooth"],"width":[48,54,60,66,72,78,84]},"lookup":{"Smooth|Compact Tractor|48":{"sku":"CTROKG48","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":48},"Smooth|Compact Tractor|54":{"sku":"CTROKGS4","price":1950.0,"duty":"Compact Tractor","edge":"Smooth","width":54},"Smooth|Compact Tractor|60":{"sku":"CTROKG60","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":60},"Smooth|Compact Tractor|66":{"sku":"CTROKG6E","price":1950.0,"duty":"Compact Tractor","edge":"Smooth","width":66},"Smooth|Compact Tractor|72":{"sku":"CTROKG72","price":1800.0,"duty":"Compact Tractor","edge":"Smooth","width":72},"Smooth|Compact Tractor|78":{"sku":"CTROKG78","price":1850.0,"duty":"Compact Tractor","edge":"Smooth","width":78},"Smooth|Compact Tractor|84":{"sku":"CTROKG84","price":1900.0,"duty":"Compact Tractor","edge":"Smooth","width":84},"Smooth||66":{"sku":"ROKG66","price":2650.0,"duty":"","edge":"Smooth","width":66},"Smooth||72":{"sku":"ROKG72","price":2750.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"ROKG78","price":2850.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"ROKG84","price":2950.0,"duty":"","edge":"Smooth","width":84}}}]},"ROCK BUCKET":{"category":"ROCK BUCKET","items":[{"name":"ROCK BUCKET","variants":[{"sku":"RKBK-60","price":2450.0,"duty":"","edge":"Smooth","width":60},{"sku":"RKBK-66","price":2550.0,"duty":"","edge":"Smooth","width":66},{"sku":"RKBK-72","price":2650.0,"duty":"","edge":"Smooth","width":72},{"sku":"RKBK-78","price":2750.0,"duty":"","edge":"Smooth","width":78},{"sku":"RKBK-84","price":2850.0,"duty":"","edge":"Smooth","width":84},{"sku":"RKBK-96","price":3100.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[60,66,72,78,84,96]},"lookup":{"Smooth||60":{"sku":"RKBK-60","price":2450.0,"duty":"","edge":"Smooth","width":60},"Smooth||66":{"sku":"RKBK-66","price":2550.0,"duty":"","edge":"Smooth","width":66},"Smooth||72":{"sku":"RKBK-72","price":2650.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"RKBK-78","price":2750.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"RKBK-84","price":2850.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"RKBK-96","price":3100.0,"duty":"","edge":"Smooth","width":96}}}]},"TRACTOR BUCKET":{"category":"TRACTOR BUCKET","items":[{"name":"TRACTOR BUCKET","variants":[{"sku":"CTRAC48","price":900.0,"duty":"Compact Tractor","edge":"Smooth","width":48},{"sku":"CTRACS4","price":950.0,"duty":"Compact Tractor","edge":"Smooth","width":54},{"sku":"CTRACEO","price":950.0,"duty":"Compact Tractor","edge":"Smooth","width":60},{"sku":"CTRAC63","price":1050.0,"duty":"Compact Tractor","edge":"Smooth","width":63},{"sku":"CTRACE6","price":1100.0,"duty":"Compact Tractor","edge":"Smooth","width":66},{"sku":"CTRAC72","price":1150.0,"duty":"Compact Tractor","edge":"Smooth","width":72},{"sku":"TRAC63","price":1200.0,"duty":"Heavy Duty","edge":"Smooth","width":63},{"sku":"TRAC66","price":1250.0,"duty":"Heavy Duty","edge":"Smooth","width":66},{"sku":"TRAC72","price":1350.0,"duty":"Heavy Duty","edge":"Smooth","width":72},{"sku":"TRAC78","price":1400.0,"duty":"Heavy Duty","edge":"Smooth","width":78},{"sku":"TRAC81","price":1450.0,"duty":"Heavy Duty","edge":"Smooth","width":81},{"sku":"TRACB4","price":1500.0,"duty":"Heavy Duty","edge":"Smooth","width":84},{"sku":"XTRAC72","price":2050.0,"duty":"Xtreme Duty","edge":"Smooth","width":72},{"sku":"XTRAC78","price":2150.0,"duty":"Xtreme Duty","edge":"Smooth","width":78},{"sku":"XTRAC84","price":2300.0,"duty":"Xtreme Duty","edge":"Smooth","width":84},{"sku":"XTRAC9O","price":2450.0,"duty":"Xtreme Duty","edge":"Smooth","width":90},{"sku":"XTRAC96","price":2600.0,"duty":"Xtreme Duty","edge":"Smooth","width":96},{"sku":"XTRAC102","price":3000.0,"duty":"Xtreme Duty","edge":"Smooth","width":102},{"sku":"XTRAC108","price":3100.0,"duty":"Xtreme Duty","edge":"Smooth","width":108}],"options":{"duty":["Compact Tractor","Heavy Duty","Xtreme Duty"],"edge":["Smooth"],"width":[48,54,60,63,66,72,78,81,84,90,96,102,108]},"lookup":{"Smooth|Compact Tractor|48":{"sku":"CTRAC48","price":900.0,"duty":"Compact Tractor","edge":"Smooth","width":48},"Smooth|Compact Tractor|54":{"sku":"CTRACS4","price":950.0,"duty":"Compact Tractor","edge":"Smooth","width":54},"Smooth|Compact Tractor|60":{"sku":"CTRACEO","price":950.0,"duty":"Compact Tractor","edge":"Smooth","width":60},"Smooth|Compact Tractor|63":{"sku":"CTRAC63","price":1050.0,"duty":"Compact Tractor","edge":"Smooth","width":63},"Smooth|Compact Tractor|66":{"sku":"CTRACE6","price":1100.0,"duty":"Compact Tractor","edge":"Smooth","width":66},"Smooth|Compact Tractor|72":{"sku":"CTRAC72","price":1150.0,"duty":"Compact Tractor","edge":"Smooth","width":72},"Smooth|Heavy Duty|63":{"sku":"TRAC63","price":1200.0,"duty":"Heavy Duty","edge":"Smooth","width":63},"Smooth|Heavy Duty|66":{"sku":"TRAC66","price":1250.0,"duty":"Heavy Duty","edge":"Smooth","width":66},"Smooth|Heavy Duty|72":{"sku":"TRAC72","price":1350.0,"duty":"Heavy Duty","edge":"Smooth","width":72},"Smooth|Heavy Duty|78":{"sku":"TRAC78","price":1400.0,"duty":"Heavy Duty","edge":"Smooth","width":78},"Smooth|Heavy Duty|81":{"sku":"TRAC81","price":1450.0,"duty":"Heavy Duty","edge":"Smooth","width":81},"Smooth|Heavy Duty|84":{"sku":"TRACB4","price":1500.0,"duty":"Heavy Duty","edge":"Smooth","width":84},"Smooth|Xtreme Duty|72":{"sku":"XTRAC72","price":2050.0,"duty":"Xtreme Duty","edge":"Smooth","width":72},"Smooth|Xtreme Duty|78":{"sku":"XTRAC78","price":2150.0,"duty":"Xtreme Duty","edge":"Smooth","width":78},"Smooth|Xtreme Duty|84":{"sku":"XTRAC84","price":2300.0,"duty":"Xtreme Duty","edge":"Smooth","width":84},"Smooth|Xtreme Duty|90":{"sku":"XTRAC9O","price":2450.0,"duty":"Xtreme Duty","edge":"Smooth","width":90},"Smooth|Xtreme Duty|96":{"sku":"XTRAC96","price":2600.0,"duty":"Xtreme Duty","edge":"Smooth","width":96},"Smooth|Xtreme Duty|102":{"sku":"XTRAC102","price":3000.0,"duty":"Xtreme Duty","edge":"Smooth","width":102},"Smooth|Xtreme Duty|108":{"sku":"XTRAC108","price":3100.0,"duty":"Xtreme Duty","edge":"Smooth","width":108}}}]},"TRACK LOADER BUCKETS":{"category":"TRACK LOADER BUCKETS","items":[{"name":"TRACK LOADER BUCKET","variants":[{"sku":"TLBKT-72","price":3250.0,"duty":"","edge":"Smooth","width":72},{"sku":"TLBKT-78","price":3350.0,"duty":"","edge":"Smooth","width":78},{"sku":"TLBKT-84","price":3450.0,"duty":"","edge":"Smooth","width":84},{"sku":"TLBKT-96","price":3700.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[72,78,84,96]},"lookup":{"Smooth||72":{"sku":"TLBKT-72","price":3250.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"TLBKT-78","price":3350.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"TLBKT-84","price":3450.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"TLBKT-96","price":3700.0,"duty":"","edge":"Smooth","width":96}}}]},"HIGH CAPACITY SNOW-N-LITTER BUC":{"category":"HIGH CAPACITY SNOW-N-LITTER BUC","items":[{"name":"HIGH CAPACITY SNOW-N-LITTER BUCKET","variants":[{"sku":"HCSNLB-72","price":3650.0,"duty":"","edge":"Smooth","width":72},{"sku":"HCSNLB-78","price":3750.0,"duty":"","edge":"Smooth","width":78},{"sku":"HCSNLB-84","price":3850.0,"duty":"","edge":"Smooth","width":84},{"sku":"HCSNLB-96","price":4100.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[72,78,84,96]},"lookup":{"Smooth||72":{"sku":"HCSNLB-72","price":3650.0,"duty":"","edge":"Smooth","width":72},"Smooth||78":{"sku":"HCSNLB-78","price":3750.0,"duty":"","edge":"Smooth","width":78},"Smooth||84":{"sku":"HCSNLB-84","price":3850.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"HCSNLB-96","price":4100.0,"duty":"","edge":"Smooth","width":96}}}]},"TURKEY LITTER BUCKET":{"category":"TURKEY LITTER BUCKET","items":[{"name":"TURKEY LITTER BUCKET","variants":[{"sku":"TLB-84","price":3950.0,"duty":"","edge":"Smooth","width":84},{"sku":"TLB-96","price":4200.0,"duty":"","edge":"Smooth","width":96}],"options":{"duty":[],"edge":["Smooth"],"width":[84,96]},"lookup":{"Smooth||84":{"sku":"TLB-84","price":3950.0,"duty":"","edge":"Smooth","width":84},"Smooth||96":{"sku":"TLB-96","price":4200.0,"duty":"","edge":"Smooth","width":96}}}]}}; /* END INLINE CATALOG */
 
 /* ---------- helpers ---------- */
 const escAttr = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
@@ -242,7 +144,7 @@ const money = n => {
 const uniq = arr => [...new Set((arr||[]).filter(v => v !== undefined && v !== null && v !== ""))];
 const numericSort = arr => uniq(arr).slice().sort((a,b)=>Number(a)-Number(b));
 
-/* ---------- machine mapping ---------- */
+/* ---------- machine mapping (uses category/tab name) ---------- */
 function inferMachine(categoryName){
   const n = norm(categoryName);
   if (n.includes("tractor")) return "Tractor";
@@ -260,7 +162,8 @@ const categoryTitle = document.getElementById("categoryTitle");
 const categoryHint = document.getElementById("categoryHint");
 
 /* ---------- normalize categories ---------- */
-const MACHINES = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
+const MACHINE_ORDER = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
+
 const CATEGORIES = Object.entries(CATALOG_BY_TAB).map(([tabName, obj]) => {
   const label = obj?.category || tabName;
   return {
@@ -271,24 +174,26 @@ const CATEGORIES = Object.entries(CATALOG_BY_TAB).map(([tabName, obj]) => {
   };
 }).sort((a,b)=>a.label.localeCompare(b.label));
 
+const MACHINES = MACHINE_ORDER.filter(m => CATEGORIES.some(c => c.machine === m));
+
 /* ---------- state ---------- */
-let machine = MACHINES.find(m => CATEGORIES.some(c => c.machine === m)) || "Skid/Track Loader";
+let machine = MACHINES[0] || "Skid/Track Loader";
 let category = null;
 
 /* ---------- variant lookup ---------- */
-function getVariant(item, duty, width){
+function getVariant(item, edge, duty, width){
+  const e = edge ? String(edge) : "";
   const d = duty ? String(duty) : "";
   const w = (width === "" || width === null || width === undefined) ? "" : String(width);
-  const key = `${d}|${w}`;
+  const key = `${e}|${d}|${w}`;
   return item.lookup?.[key] || null;
 }
 
 /* ---------- render ---------- */
 function renderMachines(){
-  const availableMachines = MACHINES.filter(m => CATEGORIES.some(c => c.machine === m));
-  machineTabs.innerHTML = availableMachines.map(m => `
+  machineTabs.innerHTML = (MACHINES||[]).map(m => `
     <button class="${m===machine ? "active" : ""}" onclick="setMachine('${escAttr(m)}')">${m}</button>
-  `).join("");
+  `).join("") || `<div class="small">No machines found.</div>`;
 }
 
 function renderCats(){
@@ -305,15 +210,24 @@ function renderCats(){
 }
 
 function makeTile(item){
-  const duties = uniq(item?.options?.duty || []).filter(d => norm(d) !== "none");
+  const duties = uniq(item?.options?.duty || []);
+  const edges  = uniq(item?.options?.edge || []);
   const widths = numericSort(item?.options?.width || []);
 
-  // Always show Duty dropdown (even if 1 option) if duties exist
-  const showDuty = duties.length > 0;
+  // Always show Edge dropdown if we have both Smooth + Teeth (or multiple)
+  const showEdge = edges.length > 1;
 
-  // Defaults
-  let selectedDuty = showDuty ? duties[0] : "";
-  let selectedWidth = widths.length ? widths[0] : "";
+  // Show Duty dropdown if multiple duties OR if includes your main duty set
+  const hasMainDuty = duties.some(d => ["standard duty","heavy duty","xtreme duty","severe duty"].includes(norm(d)));
+  const showDuty = duties.length > 1 || hasMainDuty;
+
+  // Show width dropdown if we have widths
+  const showWidth = widths.length > 0;
+
+  // defaults
+  const defaultEdge = edges.includes("Smooth") ? "Smooth" : (edges[0] || "");
+  const defaultDuty = duties.includes("Standard Duty") ? "Standard Duty" : (duties[0] || "");
+  const defaultWidth = showWidth ? widths[0] : "";
 
   const tile = document.createElement("div");
   tile.className = "tile";
@@ -332,12 +246,24 @@ function makeTile(item){
             </select>
           </div>
         ` : ""}
-        <div class="field">
-          <label>Width (in)</label>
-          <select class="widthSel">
-            ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
-          </select>
-        </div>
+
+        ${showEdge ? `
+          <div class="field">
+            <label>Edge</label>
+            <select class="edgeSel">
+              ${edges.map(e => `<option value="${escAttr(e)}">${e}</option>`).join("")}
+            </select>
+          </div>
+        ` : ""}
+
+        ${showWidth ? `
+          <div class="field">
+            <label>Width (in)</label>
+            <select class="widthSel">
+              ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
+            </select>
+          </div>
+        ` : ""}
       </div>
 
       <div>
@@ -356,16 +282,23 @@ function makeTile(item){
     </div>
   `;
 
-  const dutySel = tile.querySelector(".dutySel");
+  const dutySel  = tile.querySelector(".dutySel");
+  const edgeSel  = tile.querySelector(".edgeSel");
   const widthSel = tile.querySelector(".widthSel");
-  const skuOut = tile.querySelector(".skuOut");
+  const skuOut   = tile.querySelector(".skuOut");
   const priceOut = tile.querySelector(".priceOut");
   const emailBtn = tile.querySelector(".emailBtn");
 
+  if (dutySel) dutySel.value = defaultDuty;
+  if (edgeSel) edgeSel.value = defaultEdge;
+  if (widthSel) widthSel.value = String(defaultWidth);
+
   function update(){
-    const d = dutySel ? dutySel.value : "";
-    const w = widthSel ? widthSel.value : "";
-    const v = getVariant(item, d, w);
+    const duty = dutySel ? dutySel.value : (duties[0] || "");
+    const edge = edgeSel ? edgeSel.value : (edges[0] || "Smooth");
+    const width = widthSel ? widthSel.value : "";
+
+    const v = getVariant(item, edge, duty, width);
 
     skuOut.textContent = v?.sku || "—";
     priceOut.textContent = v ? money(v.price) : "—";
@@ -376,19 +309,19 @@ function makeTile(item){
       `I’d like a quote for:\n` +
       `Category: ${category?.label || ""}\n` +
       `Item: ${item?.name || ""}\n` +
-      (d ? `Duty: ${d}\n` : "") +
-      (w ? `Width: ${w}"\n` : "") +
+      (duty ? `Duty: ${duty}\n` : "") +
+      (edge ? `Edge: ${edge}\n` : "") +
+      (width ? `Width: ${width}"\n` : "") +
       (v?.sku ? `SKU: ${v.sku}\n` : "") +
       (v ? `Price shown: ${money(v.price)}\n` : "") +
       `\nName:\nPhone:\nLocation:\n\nThanks!`
     );
+
     emailBtn.href = `mailto:${QUOTE_EMAIL}?subject=${subject}&body=${body}`;
   }
 
-  if (dutySel && selectedDuty) dutySel.value = selectedDuty;
-  if (widthSel && selectedWidth !== "") widthSel.value = String(selectedWidth);
-
   if (dutySel) dutySel.addEventListener("change", update);
+  if (edgeSel) edgeSel.addEventListener("change", update);
   if (widthSel) widthSel.addEventListener("change", update);
 
   update();
@@ -400,13 +333,13 @@ function renderTiles(){
 
   if (!category){
     categoryTitle.textContent = "Select a category";
-    categoryHint.textContent = "Choose a machine + category. Then use duty + width dropdowns — price updates instantly.";
+    categoryHint.textContent = "Pick duty / smooth-teeth / width — price updates instantly.";
     statusEl.textContent = "";
     return;
   }
 
   categoryTitle.textContent = category.label;
-  categoryHint.textContent = "Tiles below are loaded from the Excel-driven catalog (inline).";
+  categoryHint.textContent = "Products are generated from your Excel tabs (All_Items ignored).";
 
   const items = Array.isArray(category.items) ? category.items : [];
   if (!items.length){
@@ -442,7 +375,6 @@ window.setCategory = function(id){
 
 /* ---------- init ---------- */
 (function init(){
-  // restore selections if possible
   let savedMachine = null;
   let savedCategory = null;
   try{
@@ -450,10 +382,10 @@ window.setCategory = function(id){
     savedCategory = localStorage.getItem("hendo_category");
   }catch(e){}
 
-  const availableMachines = MACHINES.filter(m => CATEGORIES.some(c => c.machine === m));
-  if (savedMachine && availableMachines.includes(savedMachine)) machine = savedMachine;
+  if (savedMachine && MACHINES.includes(savedMachine)) machine = savedMachine;
 
   const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
+
   if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
     category = catsForMachine.find(c => c.id === savedCategory);
   } else {
@@ -462,8 +394,6 @@ window.setCategory = function(id){
 
   if (!CATEGORIES.length){
     statusEl.textContent = "No catalog data found inline.";
-  } else if (!category){
-    statusEl.textContent = "Select a machine/category to view items.";
   } else {
     statusEl.textContent = "";
   }
