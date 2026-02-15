@@ -1,471 +1,236 @@
+<!-- index.html  (HOMEPAGE) -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hendo Equipment | Attachments & Pricing</title>
-
+<title>Hendo Equipment | USA Made Attachments</title>
 <style>
 :root{
-  --bg:#f4f6f4;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
-  --muted:#475569;--border:#d1d5db;--accent:#6b7f3a;
+  --bg:#f5f6f5;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
+  --muted:#475569;--border:#d1d5db;--accent:#6b7f3a;--dark:#0b1220;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+a{color:inherit}
 .container{max-width:1200px;margin:0 auto;padding:16px}
 
-header{background:#fff;border-bottom:4px solid var(--accent)}
-.headerRow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.brand h1{margin:0;font-size:22px}
-.badgeRow{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
-.badge{padding:6px 10px;border-radius:999px;background:var(--panelAlt);
-  border:1px solid var(--border);font-size:12px;font-weight:900}
-
+/* header */
+header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand .name{font-size:18px;font-weight:1000;letter-spacing:.2px}
+.brand .sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{
+  padding:9px 12px;border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  text-decoration:none;font-weight:900;font-size:13px;
+}
+.nav a:hover{background:rgba(255,255,255,.14)}
+.ctaRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
   background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
 .btnPrimary{background:var(--accent);color:#fff;border:none}
 
-/* NEW: top machine bar */
-.machineBar{
-  background:#fff;
-  border-bottom:1px solid var(--border);
+/* hero */
+.hero{padding:34px 0}
+.heroGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
+@media(max-width:900px){.heroGrid{grid-template-columns:1fr}}
+.heroCard{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;
+  box-shadow:0 8px 18px rgba(15,23,42,.06);
 }
-.machineBarInner{
-  display:flex;
-  align-items:stretch;
-  gap:10px;
-  overflow-x:auto;
-  padding:10px 16px;
+.heroTitle{font-size:28px;font-weight:1100;line-height:1.1;margin:0 0 10px}
+.heroP{margin:0;color:var(--muted);font-weight:600}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.badge{
+  padding:6px 10px;border-radius:999px;background:var(--panelAlt);
+  border:1px solid var(--border);font-size:12px;font-weight:1000;color:var(--text)
 }
-.machineBarLabel{
-  font-weight:1000;
-  color:var(--accent);
-  display:flex;
-  align-items:center;
-  white-space:nowrap;
-  padding-right:6px;
+.heroRight{display:grid;gap:12px}
+.stat{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px;
 }
-.machinePills{
-  display:flex;
-  gap:10px;
-  align-items:stretch;
-}
+.stat .k{font-size:12px;color:var(--muted);font-weight:900}
+.stat .v{font-size:18px;font-weight:1100;margin-top:6px}
 
-/* "across the top bar going vertical" */
-.machinePill{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:12px;
-  cursor:pointer;
-  padding:10px 8px;
-  min-width:54px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:1000;
-  color:var(--text);
-}
-.machinePill.active{
-  background:var(--panelAlt);
-  border-color:var(--accent);
-  color:var(--text);
-}
+/* sections */
+.sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:10px 0}
+.sectionTitle h2{margin:0;font-size:18px}
+.small{font-size:12px;color:var(--muted);font-weight:700}
 
-/* vertical text inside each pill */
-.machinePill span{
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  letter-spacing:.5px;
-  font-size:12px;
-}
-
-/* layout */
-.layout{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:16px}
-@media(max-width:900px){
-  .layout{grid-template-columns:1fr}
-  .machineBarInner{padding:10px 12px}
-}
-
-.sidebar{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px}
-.sideTitle{font-weight:900;color:var(--accent);margin-bottom:8px}
-
-.catBtn{
-  width:100%;text-align:left;padding:10px;border-radius:8px;
-  border:1px solid var(--border);background:#fff;font-weight:900;
-  cursor:pointer;margin-bottom:6px
-}
-.catBtn.active{background:var(--panelAlt);border-color:var(--accent)}
-
-.content{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px}
-.pageTitle{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
-.pageTitle h2{margin:0;font-size:18px}
-.small{font-size:12px;color:var(--muted)}
-
-.tilesGrid{
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:12px;
-  margin-top:12px;
 }
-.tile{
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:#fff;
-  overflow:hidden;
+.card{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 18px rgba(15,23,42,.05);
 }
-.tileHead{
-  padding:12px;
-  background:var(--panelAlt);
-  border-bottom:1px solid var(--border);
+.cardHead{padding:14px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
+.cardHead .t{font-weight:1100}
+.cardBody{padding:14px;display:grid;gap:10px}
+.cardBody .desc{color:var(--muted);font-size:13px;font-weight:650}
+.card a.action{
+  margin-top:2px;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;font-weight:1000;color:var(--accent)
 }
-.tileHead .name{font-weight:1000}
-.tileBody{padding:12px;display:grid;gap:10px}
-.filters{display:flex;gap:10px;flex-wrap:wrap}
-.field label{font-size:12px;font-weight:900;color:var(--muted)}
-select{padding:10px;border-radius:8px;border:1px solid var(--border);min-width:160px}
-.priceBig{font-size:22px;font-weight:1100}
+.card a.action:hover{text-decoration:underline}
 
-footer{margin-top:24px;border-top:1px solid var(--border);background:#fff}
+footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel)}
+.footerRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px}
 </style>
 </head>
-
 <body>
+
 <header>
-  <div class="container headerRow">
+  <div class="topbar container">
     <div class="brand">
-      <h1>Hendo Equipment</h1>
-      <div class="badgeRow">
-        <span class="badge">🇺🇸 USA Made</span>
-        <span class="badge">Veteran Owned & Operated</span>
-      </div>
+      <div class="name">Hendo Equipment</div>
+      <div class="sub">USA-made attachments • Hendersonville, NC</div>
     </div>
-    <div>
+
+    <nav class="nav" aria-label="Machines">
+      <a href="machine.html?m=Skid%2FTrack%20Loader">Skid/Track</a>
+      <a href="machine.html?m=Mini%20Skid%20Steer">Mini Skid</a>
+      <a href="machine.html?m=Tractor">Tractor</a>
+      <a href="machine.html?m=Excavator">Excavator</a>
+    </nav>
+
+    <div class="ctaRow">
       <a class="btn btnPrimary" href="tel:+18286990157">(828) 699-0157</a>
     </div>
   </div>
 </header>
 
-<!-- NEW: Machine types across the top bar (vertical text) -->
-<div class="machineBar">
-  <div class="container machineBarInner">
-    <div class="machineBarLabel">Machine</div>
-    <div class="machinePills" id="machineTabsTop"></div>
-  </div>
-</div>
-
 <main class="container">
-  <section class="layout">
-    <aside class="sidebar">
-      <div class="sideTitle">Categories</div>
-      <div id="catList"></div>
-    </aside>
+  <section class="hero">
+    <div class="heroGrid">
+      <div class="heroCard">
+        <h1 class="heroTitle">Attachments & pricing—fast, simple, and accurate.</h1>
+        <p class="heroP">Choose your machine type, then configure duty / edge / width. SKU + price update instantly.</p>
 
-    <section class="content">
-      <div class="pageTitle">
-        <h2 id="categoryTitle">Select a category</h2>
-        <div class="small" id="categoryHint">Pick duty / edge (smooth-teeth) / width — price updates instantly.</div>
-        <div class="small" id="status"></div>
+        <div class="badges">
+          <span class="badge">🇺🇸 USA Made</span>
+          <span class="badge">Veteran Owned & Operated</span>
+          <span class="badge">Email quotes in one click</span>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btnPrimary" href="machine.html?m=Skid%2FTrack%20Loader">Shop Skid/Track</a>
+          <a class="btn" href="machine.html?m=Mini%20Skid%20Steer">Shop Mini Skid</a>
+          <a class="btn" href="machine.html?m=Tractor">Shop Tractor</a>
+          <a class="btn" href="machine.html?m=Excavator">Shop Excavator</a>
+        </div>
       </div>
 
-      <div id="tiles" class="tilesGrid"></div>
-    </section>
+      <div class="heroRight">
+        <div class="stat">
+          <div class="k">How it works</div>
+          <div class="v">Pick machine → pick category → configure options</div>
+        </div>
+        <div class="stat">
+          <div class="k">Need help?</div>
+          <div class="v">Call or email for a quick quote</div>
+          <div class="small" style="margin-top:8px">Quotes email: whoots821@gmail.com</div>
+        </div>
+        <div class="stat">
+          <div class="k">Tip</div>
+          <div class="v">Use the top machine tabs like CID’s layout</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sectionTitle">
+      <h2>Shop by machine</h2>
+      <div class="small">Machine tabs run left → right across the top</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="cardHead"><div class="t">Skid / Track Loader</div></div>
+        <div class="cardBody">
+          <div class="desc">Buckets, grapples, mulchers and more.</div>
+          <a class="action" href="machine.html?m=Skid%2FTrack%20Loader">Browse categories →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardHead"><div class="t">Mini Skid Steer</div></div>
+        <div class="cardBody">
+          <div class="desc">Compact attachments sized for mini machines.</div>
+          <a class="action" href="machine.html?m=Mini%20Skid%20Steer">Browse categories →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardHead"><div class="t">Tractor</div></div>
+        <div class="cardBody">
+          <div class="desc">Tractor buckets and fitment options.</div>
+          <a class="action" href="machine.html?m=Tractor">Browse categories →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardHead"><div class="t">Excavator</div></div>
+        <div class="cardBody">
+          <div class="desc">Excavator mounts and related items.</div>
+          <a class="action" href="machine.html?m=Excavator">Browse categories →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:18px">
+    <div class="sectionTitle">
+      <h2>Featured categories</h2>
+      <div class="small">Quick links</div>
+    </div>
+    <div class="grid" id="featuredGrid"></div>
   </section>
 </main>
 
 <footer>
-  <div class="container small">
-    © Hendo Equipment • Hendersonville, NC
+  <div class="container footerRow small">
+    <div>© Hendo Equipment • Hendersonville, NC</div>
+    <div>Call: (828) 699-0157</div>
   </div>
 </footer>
 
+<script src="catalog.js"></script>
 <script>
-/* =========================================================
-   Updated layout:
-   - Machines moved to TOP BAR (with vertical text)
-   - Categories remain on the left
-   - Everything else unchanged
-   ========================================================= */
+(function(){
+  const cat = window.HENDO_CATALOG || {};
+  const all = Object.values(cat).map(t => ({
+    label: t.category,
+    machine: t.machine || "Skid/Track Loader"
+  }));
 
-const QUOTE_EMAIL = "whoots821@gmail.com";
+  const want = [
+    "4N1 BUCKET",
+    "TRACTOR BUCKET",
+    "ROCK GRAPPLES",
+    "ROCK BUCKET",
+    "HIGH DUMP BUCKETS",
+    "FORESTRY DISC MULCHER"
+  ];
+  const featured = want.map(name => all.find(x => x.label === name)).filter(Boolean);
 
-/* ---------- INLINE CATALOG ----------
-   Keep your existing CATALOG_BY_TAB here (the big object).
-   I’m leaving a placeholder below so you can paste your current one in.
-   IMPORTANT: Do NOT include the "All_Items" tab.
-------------------------------------- */
-const CATALOG_BY_TAB = /* PASTE YOUR BIG CATALOG_BY_TAB OBJECT HERE */ {
-  /* Example minimal stub so the page doesn't crash if you forget to paste:
-  "4N1 BUCKET": {"category":"4N1 BUCKET","machine":"Skid/Track Loader","items":[
-    {"name":"4-N-1 Bucket","variants":[{"sku":"SD4N1-60","price":3050,"duty":"Standard Duty","edge":"Smooth","width":60}],
-     "options":{"duty":["Standard Duty"],"edge":["Smooth"],"width":[60]},
-     "lookup":{"Smooth|Standard Duty|60":{"sku":"SD4N1-60","price":3050,"duty":"Standard Duty","edge":"Smooth","width":60}}}
-  ]}
-  */
-};
-
-/* If your pasted catalog already contains lookup tables, this will just overwrite safely */
-for (const tab of Object.values(CATALOG_BY_TAB)) {
-  if (!tab || !Array.isArray(tab.items)) continue;
-  for (const item of tab.items) {
-    const lookup = {};
-    for (const v of (item.variants || [])) {
-      const w = (v.width === null || v.width === undefined) ? "" : String(v.width);
-      const key = `${v.edge || ""}|${v.duty || ""}|${w}`;
-      lookup[key] = v;
-    }
-    item.lookup = lookup;
-  }
-}
-
-/* ---------- helpers ---------- */
-const escAttr = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
-const norm = s => String(s ?? "").toLowerCase().trim();
-const money = n => {
-  const num = Number(n);
-  if (!Number.isFinite(num)) return "—";
-  return "$" + Math.round(num).toLocaleString();
-};
-const uniq = arr => [...new Set((arr||[]).filter(v => v !== undefined && v !== null && v !== ""))];
-const numericSort = arr => uniq(arr).slice().sort((a,b)=>Number(a)-Number(b));
-
-function inferMachine(categoryName){
-  const n = (categoryName || "").toUpperCase();
-  if (n.includes("TRACTOR")) return "Tractor";
-  if (n.includes("EXCAVATOR")) return "Excavator";
-  if (n.includes("MINI")) return "Mini Skid Steer";
-  return "Skid/Track Loader";
-}
-
-/* ---------- DOM ---------- */
-const machineTabsTop = document.getElementById("machineTabsTop");
-const catList = document.getElementById("catList");
-const tilesEl = document.getElementById("tiles");
-const statusEl = document.getElementById("status");
-const categoryTitle = document.getElementById("categoryTitle");
-const categoryHint = document.getElementById("categoryHint");
-
-/* ---------- normalize categories ---------- */
-const MACHINE_ORDER = ["Skid/Track Loader","Mini Skid Steer","Tractor","Excavator"];
-
-const CATEGORIES = Object.entries(CATALOG_BY_TAB).map(([tabName, obj]) => {
-  const label = obj?.category || tabName;
-  return {
-    id: tabName,
-    label,
-    machine: obj?.machine || inferMachine(label),
-    items: Array.isArray(obj?.items) ? obj.items : []
-  };
-}).sort((a,b)=>a.label.localeCompare(b.label));
-
-const MACHINES = MACHINE_ORDER.filter(m => CATEGORIES.some(c => c.machine === m));
-
-/* ---------- state ---------- */
-let machine = MACHINES[0] || "Skid/Track Loader";
-let category = null;
-
-/* ---------- variant lookup ---------- */
-function getVariant(item, edge, duty, width){
-  const e = edge ? String(edge) : "";
-  const d = duty ? String(duty) : "";
-  const w = (width === "" || width === null || width === undefined) ? "" : String(width);
-  const key = `${e}|${d}|${w}`;
-  return item.lookup?.[key] || null;
-}
-
-/* ---------- render ---------- */
-function renderMachines(){
-  machineTabsTop.innerHTML = (MACHINES||[]).map(m => `
-    <button class="machinePill ${m===machine ? "active" : ""}" onclick="setMachine('${escAttr(m)}')">
-      <span>${m}</span>
-    </button>
-  `).join("") || `<div class="small">No machines found.</div>`;
-}
-
-function renderCats(){
-  const list = CATEGORIES.filter(c => c.machine === machine);
-  catList.innerHTML = list.map(c => `
-    <button class="catBtn ${category && category.id===c.id ? "active" : ""}" onclick="setCategory('${escAttr(c.id)}')">
-      ${c.label}
-    </button>
-  `).join("");
-
-  if (!list.length){
-    catList.innerHTML = `<div class="small">No categories for this machine.</div>`;
-  }
-}
-
-function makeTile(item){
-  const duties = uniq(item?.options?.duty || []);
-  const edges  = uniq(item?.options?.edge || []);
-  const widths = numericSort(item?.options?.width || []);
-
-  const showDuty  = duties.length > 0;
-  const showEdge  = edges.length > 1;    // Smooth/Teeth
-  const showWidth = widths.length > 0;
-
-  const defaultEdge = edges.includes("Smooth") ? "Smooth" : (edges[0] || "Smooth");
-  const defaultDuty = duties.includes("Standard Duty") ? "Standard Duty" : (duties[0] || "");
-  const defaultWidth = showWidth ? widths[0] : "";
-
-  const tile = document.createElement("div");
-  tile.className = "tile";
-
-  tile.innerHTML = `
-    <div class="tileHead"><div class="name">${escAttr(item?.name || "Item")}</div></div>
-    <div class="tileBody">
-      <div class="filters">
-        ${showDuty ? `
-          <div class="field">
-            <label>Duty</label>
-            <select class="dutySel">
-              ${duties.map(d => `<option value="${escAttr(d)}">${d}</option>`).join("")}
-            </select>
-          </div>` : ""}
-
-        ${showEdge ? `
-          <div class="field">
-            <label>Edge</label>
-            <select class="edgeSel">
-              ${edges.map(e => `<option value="${escAttr(e)}">${e}</option>`).join("")}
-            </select>
-          </div>` : ""}
-
-        ${showWidth ? `
-          <div class="field">
-            <label>Width (in)</label>
-            <select class="widthSel">
-              ${widths.map(w => `<option value="${escAttr(w)}">${w}"</option>`).join("")}
-            </select>
-          </div>` : ""}
+  const el = document.getElementById("featuredGrid");
+  el.innerHTML = featured.map(f => {
+    const href = "machine.html?m=" + encodeURIComponent(f.machine) + "&cat=" + encodeURIComponent(f.label);
+    return `
+      <div class="card">
+        <div class="cardHead"><div class="t">${f.label}</div></div>
+        <div class="cardBody">
+          <div class="desc">${f.machine}</div>
+          <a class="action" href="${href}">View products →</a>
+        </div>
       </div>
-
-      <div>
-        <div class="small">Selected SKU</div>
-        <div class="skuOut" style="font-weight:900">—</div>
-      </div>
-
-      <div>
-        <div class="small">Price</div>
-        <div class="priceOut priceBig">—</div>
-      </div>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btnPrimary emailBtn" href="#">Email Quote</a>
-      </div>
-    </div>
-  `;
-
-  const dutySel  = tile.querySelector(".dutySel");
-  const edgeSel  = tile.querySelector(".edgeSel");
-  const widthSel = tile.querySelector(".widthSel");
-  const skuOut   = tile.querySelector(".skuOut");
-  const priceOut = tile.querySelector(".priceOut");
-  const emailBtn = tile.querySelector(".emailBtn");
-
-  if (dutySel) dutySel.value = defaultDuty;
-  if (edgeSel) edgeSel.value = defaultEdge;
-  if (widthSel) widthSel.value = String(defaultWidth);
-
-  function update(){
-    const duty = dutySel ? dutySel.value : "";
-    const edge = edgeSel ? edgeSel.value : defaultEdge;
-    const width = widthSel ? widthSel.value : "";
-
-    const v = getVariant(item, edge, duty, width);
-
-    skuOut.textContent = v?.sku || "—";
-    priceOut.textContent = v ? money(v.price) : "—";
-
-    const subject = encodeURIComponent(`Quote request: ${(item?.name || "Item")} ${v?.sku ? "(" + v.sku + ")" : ""}`);
-    const body = encodeURIComponent(
-      `Hi Hendo Equipment,\n\n` +
-      `I’d like a quote for:\n` +
-      `Category: ${category?.label || ""}\n` +
-      `Item: ${item?.name || ""}\n` +
-      (duty ? `Duty: ${duty}\n` : "") +
-      (edge ? `Edge: ${edge}\n` : "") +
-      (width ? `Width: ${width}"\n` : "") +
-      (v?.sku ? `SKU: ${v.sku}\n` : "") +
-      (v ? `Price shown: ${money(v.price)}\n` : "") +
-      `\nName:\nPhone:\nLocation:\n\nThanks!`
-    );
-
-    emailBtn.href = `mailto:${QUOTE_EMAIL}?subject=${subject}&body=${body}`;
-  }
-
-  if (dutySel) dutySel.addEventListener("change", update);
-  if (edgeSel) edgeSel.addEventListener("change", update);
-  if (widthSel) widthSel.addEventListener("change", update);
-
-  update();
-  return tile;
-}
-
-function renderTiles(){
-  tilesEl.innerHTML = "";
-
-  if (!category){
-    categoryTitle.textContent = "Select a category";
-    categoryHint.textContent = "Pick duty / edge (smooth-teeth) / width — price updates instantly.";
-    statusEl.textContent = "";
-    return;
-  }
-
-  categoryTitle.textContent = category.label;
-  categoryHint.textContent = "Products are generated from your Excel tabs (All_Items ignored).";
-
-  const items = Array.isArray(category.items) ? category.items : [];
-  if (!items.length){
-    tilesEl.innerHTML = `<div class="small">No items found in this category.</div>`;
-    statusEl.textContent = "";
-    return;
-  }
-
-  items.forEach(item => tilesEl.appendChild(makeTile(item)));
-  statusEl.textContent = `Showing ${items.length} item${items.length===1?"":"s"}.`;
-}
-
-function render(){
-  renderMachines();
-  renderCats();
-  renderTiles();
-}
-
-/* ---------- actions ---------- */
-window.setMachine = function(m){
-  machine = m;
-  const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
-  category = catsForMachine[0] || null;
-  try { localStorage.setItem("hendo_machine", machine); } catch(e){}
-  render();
-};
-
-window.setCategory = function(id){
-  category = CATEGORIES.find(c => c.id === id) || null;
-  try { localStorage.setItem("hendo_category", category?.id || ""); } catch(e){}
-  render();
-};
-
-/* ---------- init ---------- */
-(function init(){
-  let savedMachine = null;
-  let savedCategory = null;
-  try{
-    savedMachine = localStorage.getItem("hendo_machine");
-    savedCategory = localStorage.getItem("hendo_category");
-  }catch(e){}
-
-  if (savedMachine && MACHINES.includes(savedMachine)) machine = savedMachine;
-
-  const catsForMachine = CATEGORIES.filter(c => c.machine === machine);
-  if (savedCategory && catsForMachine.some(c => c.id === savedCategory)){
-    category = catsForMachine.find(c => c.id === savedCategory);
-  } else {
-    category = catsForMachine[0] || null;
-  }
-
-  statusEl.textContent = "";
-  render();
+    `;
+  }).join("");
 })();
 </script>
 </body>
