@@ -1,0 +1,373 @@
+<!-- machine.html  (MACHINE PAGE: CID-STYLE CATEGORY GRID + CONFIGURATOR) -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hendo Equipment | Machine</title>
+<style>
+:root{
+  --bg:#f5f6f5;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
+  --muted:#475569;--border:#d1d5db;--accent:#6b7f3a;--dark:#0b1220;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+a{color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:16px}
+
+/* header */
+header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand .name{font-size:18px;font-weight:1000;letter-spacing:.2px}
+.brand .sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{
+  padding:9px 12px;border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  text-decoration:none;font-weight:900;font-size:13px;
+}
+.nav a.active{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.28)}
+.nav a:hover{background:rgba(255,255,255,.14)}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
+  background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
+.btnPrimary{background:var(--accent);color:#fff;border:none}
+
+/* title */
+.pageTop{padding:18px 0 8px}
+.h1{font-size:22px;font-weight:1100;margin:0}
+.small{font-size:12px;color:var(--muted);font-weight:700}
+
+/* category grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+.card{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 18px rgba(15,23,42,.05);
+}
+.cardHead{padding:14px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
+.cardHead .t{font-weight:1100}
+.cardBody{padding:14px;display:grid;gap:10px}
+.cardBody .desc{color:var(--muted);font-size:13px;font-weight:650}
+.card a.action{
+  margin-top:2px;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;font-weight:1000;color:var(--accent)
+}
+.card a.action:hover{text-decoration:underline}
+
+/* products section */
+.panel{
+  margin-top:16px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(15,23,42,.05);
+}
+.panelHead{
+  padding:14px;
+  background:var(--panelAlt);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.panelHead .t{font-weight:1100}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select{padding:10px;border-radius:10px;border:1px solid var(--border);min-width:200px;background:#fff;font-weight:800}
+.tiles{
+  padding:14px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
+.tile{
+  border:1px solid var(--border);border-radius:18px;background:#fff;overflow:hidden;
+}
+.tileHead{padding:12px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
+.tileHead .name{font-weight:1100}
+.tileBody{padding:12px;display:grid;gap:10px}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.field label{font-size:12px;font-weight:1000;color:var(--muted)}
+.field select{min-width:160px}
+.priceBig{font-size:22px;font-weight:1100}
+footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel)}
+.footerRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px}
+</style>
+</head>
+<body id="top">
+
+<header>
+  <div class="topbar container">
+    <div class="brand">
+      <a href="index.html" style="color:#fff;text-decoration:none">
+        <div class="name">Hendo Equipment</div>
+      </a>
+      <div class="sub">USA-made attachments • Hendersonville, NC</div>
+    </div>
+
+    <nav class="nav" aria-label="Machines">
+      <a id="navSkid" href="machine.html?m=Skid%2FTrack%20Loader">Skid/Track</a>
+      <a id="navMini" href="machine.html?m=Mini%20Skid%20Steer">Mini Skid</a>
+      <a id="navTractor" href="machine.html?m=Tractor">Tractor</a>
+      <a id="navExc" href="machine.html?m=Excavator">Excavator</a>
+    </nav>
+
+    <div>
+      <a class="btn btnPrimary" href="tel:+18286990157">(828) 699-0157</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="pageTop">
+    <h1 class="h1" id="machineTitle">Machine</h1>
+    <div class="small">Click a category card to view products and configure options (duty / edge / spec / width).</div>
+  </section>
+
+  <section>
+    <div class="grid" id="catGrid"></div>
+  </section>
+
+  <section class="panel" id="productsPanel" style="display:none">
+    <div class="panelHead">
+      <div class="t" id="panelTitle">Products</div>
+      <div class="controls">
+        <select id="categorySelect"></select>
+        <a class="btn" href="#top">Back to top</a>
+      </div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footerRow small">
+    <div>© Hendo Equipment • Hendersonville, NC</div>
+    <div>Quotes email: whoots821@gmail.com</div>
+  </div>
+</footer>
+
+<script src="catalog.js"></script>
+<script>
+/* ===== helpers ===== */
+const money = n => {
+  const num = Number(n);
+  if (!Number.isFinite(num)) return "—";
+  return "$" + Math.round(num).toLocaleString();
+};
+const uniq = arr => [...new Set((arr||[]).filter(v => v !== undefined && v !== null && v !== ""))];
+const numericSort = arr => uniq(arr).slice().sort((a,b)=>Number(a)-Number(b));
+const esc = s => String(s ?? "").replace(/"/g,'&quot;').replace(/</g,'&lt;');
+
+function qp(name){
+  const u = new URL(location.href);
+  return u.searchParams.get(name);
+}
+
+const QUOTE_EMAIL = "whoots821@gmail.com";
+const catalog = window.HENDO_CATALOG || {};
+
+const machine = qp("m") || "Skid/Track Loader";
+const preCat = qp("cat") || "";
+
+/* set title + active nav */
+document.getElementById("machineTitle").textContent = machine + " Attachments";
+const navMap = {
+  "Skid/Track Loader":"navSkid",
+  "Mini Skid Steer":"navMini",
+  "Tractor":"navTractor",
+  "Excavator":"navExc"
+};
+if (navMap[machine]) document.getElementById(navMap[machine]).classList.add("active");
+
+/* build categories for this machine */
+const categories = Object.values(catalog)
+  .filter(t => (t.machine || "Skid/Track Loader") === machine)
+  .map(t => ({ id: t.category, label: t.category, items: t.items || [] }))
+  .sort((a,b)=>a.label.localeCompare(b.label));
+
+const catGrid = document.getElementById("catGrid");
+catGrid.innerHTML = categories.map(c => `
+  <div class="card">
+    <div class="cardHead"><div class="t">${esc(c.label)}</div></div>
+    <div class="cardBody">
+      <div class="desc">View products & configure options</div>
+      <a class="action" href="#products" onclick="showCategory('${esc(c.id)}');return false;">View products →</a>
+    </div>
+  </div>
+`).join("") || `<div class="small">No categories found for this machine.</div>`;
+
+const productsPanel = document.getElementById("productsPanel");
+const categorySelect = document.getElementById("categorySelect");
+const tiles = document.getElementById("tiles");
+const panelTitle = document.getElementById("panelTitle");
+
+/* dropdown */
+categorySelect.innerHTML = categories.map(c => `<option value="${esc(c.id)}">${esc(c.label)}</option>`).join("");
+categorySelect.addEventListener("change", () => showCategory(categorySelect.value));
+
+/* variant lookup key: edge|duty|spec|width */
+function ensureLookup(item){
+  if (item.lookup) return;
+  const lookup = {};
+  const vars = item.variants || [];
+  for (const v of vars){
+    const e = v.edge || "";
+    const d = v.duty || "";
+    const sp = v.spec || "";
+    const w = (v.width === null || v.width === undefined) ? "" : String(v.width);
+    lookup[`${e}|${d}|${sp}|${w}`] = v;
+  }
+  item.lookup = lookup;
+}
+
+function getVariant(item, edge, duty, spec, width){
+  ensureLookup(item);
+  const e = edge || "";
+  const d = duty || "";
+  const sp = spec || "";
+  const w = (width === null || width === undefined || width === "") ? "" : String(width);
+  return item.lookup[`${e}|${d}|${sp}|${w}`] || null;
+}
+
+function makeTile(item){
+  const duties = uniq(item?.options?.duty || []);
+  const edges  = uniq(item?.options?.edge || []);
+  const specs  = uniq(item?.options?.spec || []);
+  const widths = numericSort(item?.options?.width || []);
+
+  const showDuty  = duties.length > 0;
+  const showEdge  = edges.length > 1;       // shows Smooth/Teeth when present
+  const showSpec  = specs.length > 0;       // shows motor/other spec when present
+  const showWidth = widths.length > 0;
+
+  const defaultEdge = edges.includes("Smooth") ? "Smooth" : (edges[0] || "Smooth");
+  const defaultDuty = duties.includes("Standard Duty") ? "Standard Duty" : (duties[0] || "");
+  const defaultSpec = specs[0] || "";
+  const defaultWidth = showWidth ? widths[0] : "";
+
+  const el = document.createElement("div");
+  el.className = "tile";
+  el.innerHTML = `
+    <div class="tileHead"><div class="name">${esc(item?.name || "Item")}</div></div>
+    <div class="tileBody">
+      <div class="filters">
+        ${showDuty ? `
+          <div class="field"><label>Duty</label>
+            <select class="dutySel">${duties.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join("")}</select>
+          </div>` : ""}
+        ${showEdge ? `
+          <div class="field"><label>Edge</label>
+            <select class="edgeSel">${edges.map(e=>`<option value="${esc(e)}">${esc(e)}</option>`).join("")}</select>
+          </div>` : ""}
+        ${showSpec ? `
+          <div class="field"><label>Spec</label>
+            <select class="specSel">${specs.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("")}</select>
+          </div>` : ""}
+        ${showWidth ? `
+          <div class="field"><label>Width (in)</label>
+            <select class="widthSel">${widths.map(w=>`<option value="${esc(w)}">${esc(w)}</option>`).join("")}</select>
+          </div>` : ""}
+      </div>
+
+      <div>
+        <div class="small">Selected SKU</div>
+        <div class="skuOut" style="font-weight:1000">—</div>
+      </div>
+
+      <div>
+        <div class="small">Price</div>
+        <div class="priceOut priceBig">—</div>
+      </div>
+
+      <div>
+        <a class="btn btnPrimary emailBtn" href="#">Email Quote</a>
+      </div>
+    </div>
+  `;
+
+  const dutySel = el.querySelector(".dutySel");
+  const edgeSel = el.querySelector(".edgeSel");
+  const specSel = el.querySelector(".specSel");
+  const widthSel = el.querySelector(".widthSel");
+  const skuOut = el.querySelector(".skuOut");
+  const priceOut = el.querySelector(".priceOut");
+  const emailBtn = el.querySelector(".emailBtn");
+
+  if (dutySel) dutySel.value = defaultDuty;
+  if (edgeSel) edgeSel.value = defaultEdge;
+  if (specSel) specSel.value = defaultSpec;
+  if (widthSel) widthSel.value = String(defaultWidth);
+
+  function update(){
+    const duty = dutySel ? dutySel.value : "";
+    const edge = edgeSel ? edgeSel.value : defaultEdge;
+    const spec = specSel ? specSel.value : "";
+    const width = widthSel ? widthSel.value : "";
+
+    const v = getVariant(item, edge, duty, spec, width);
+    skuOut.textContent = v?.sku || "—";
+    priceOut.textContent = v ? money(v.price) : "—";
+
+    const subject = encodeURIComponent(`Quote request: ${(item?.name || "Item")} ${v?.sku ? "(" + v.sku + ")" : ""}`);
+    const body = encodeURIComponent(
+      `Hi Hendo Equipment,\n\n`+
+      `I’d like a quote for:\n`+
+      `Machine: ${machine}\n`+
+      `Category: ${categorySelect.options[categorySelect.selectedIndex]?.text || ""}\n`+
+      `Item: ${item?.name || ""}\n`+
+      (duty ? `Duty: ${duty}\n` : "")+
+      (edge ? `Edge: ${edge}\n` : "")+
+      (spec ? `Spec: ${spec}\n` : "")+
+      (width ? `Width: ${width}"\n` : "")+
+      (v?.sku ? `SKU: ${v.sku}\n` : "")+
+      (v ? `Price shown: ${money(v.price)}\n` : "")+
+      `\nName:\nPhone:\nLocation:\n\nThanks!`
+    );
+    emailBtn.href = `mailto:${QUOTE_EMAIL}?subject=${subject}&body=${body}`;
+  }
+
+  if (dutySel) dutySel.addEventListener("change", update);
+  if (edgeSel) edgeSel.addEventListener("change", update);
+  if (specSel) specSel.addEventListener("change", update);
+  if (widthSel) widthSel.addEventListener("change", update);
+
+  update();
+  return el;
+}
+
+window.showCategory = function(catId){
+  const tab = Object.values(catalog).find(t => t.category === catId && (t.machine||"Skid/Track Loader")===machine);
+  if (!tab) return;
+
+  productsPanel.style.display = "block";
+  panelTitle.textContent = catId;
+
+  categorySelect.value = catId;
+
+  tiles.innerHTML = "";
+  const items = tab.items || [];
+  items.forEach(it => tiles.appendChild(makeTile(it)));
+
+  // sharable URL
+  const u = new URL(location.href);
+  u.searchParams.set("m", machine);
+  u.searchParams.set("cat", catId);
+  history.replaceState({}, "", u.toString());
+
+  // scroll
+  const top = productsPanel.getBoundingClientRect().top + window.scrollY - 86;
+  window.scrollTo({top, behavior:"smooth"});
+};
+
+/* auto-open category if linked */
+if (preCat && categories.some(c => c.id === preCat)) {
+  categorySelect.value = preCat;
+  showCategory(preCat);
+}
+</script>
+</body>
+</html>
