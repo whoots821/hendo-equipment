@@ -1,10 +1,11 @@
-<!-- index.html  (HOMEPAGE) -->
+<!-- index.html (HOMEPAGE) -->
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Hendo Equipment | USA Made Attachments</title>
+
 <style>
 :root{
   --bg:#f5f6f5;--panel:#fff;--panelAlt:#eef2ee;--text:#0f172a;
@@ -15,13 +16,15 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;backgrou
 a{color:inherit}
 .container{max-width:1200px;margin:0 auto;padding:16px}
 
-/* header */
+/* ===== header ===== */
 header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px}
-.brand{display:flex;flex-direction:column;line-height:1.1}
-.brand .name{font-size:18px;font-weight:1000;letter-spacing:.2px}
-.brand .sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px}
-.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}
+.brand{display:flex;align-items:center;gap:12px;min-width:240px}
+.brandLogo{
+  width:140px;max-width:40vw;height:auto;display:block;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));
+}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .nav a{
   padding:9px 12px;border-radius:999px;
   background:rgba(255,255,255,.08);
@@ -29,67 +32,55 @@ header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
   text-decoration:none;font-weight:900;font-size:13px;
 }
 .nav a:hover{background:rgba(255,255,255,.14)}
-.ctaRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
-  background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
+  background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;white-space:nowrap}
 .btnPrimary{background:var(--accent);color:#fff;border:none}
 
-/* hero (CID-style: quote left, image right) */
-.hero{padding:28px 0}
-.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:stretch}
-@media(max-width:900px){.heroGrid{grid-template-columns:1fr}}
-.heroCard{
-  background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;
-  box-shadow:0 8px 18px rgba(15,23,42,.06);
-}
-.heroTitle{font-size:30px;font-weight:1100;line-height:1.05;margin:0 0 10px}
-.heroP{margin:0;color:var(--muted);font-weight:650;font-size:14px}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.badge{
-  padding:6px 10px;border-radius:999px;background:var(--panelAlt);
-  border:1px solid var(--border);font-size:12px;font-weight:1000;color:var(--text)
-}
-.heroBtns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-
-.heroMedia{
-  background:var(--panel);
-  border:1px solid var(--border);
+/* ===== HERO: ONLY PHOTO + QUOTE ===== */
+.heroWrap{padding:18px 0}
+.hero{
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 8px 18px rgba(15,23,42,.06);
+  border:1px solid var(--border);
+  box-shadow:0 10px 22px rgba(15,23,42,.08);
   position:relative;
+  background:#000;
 }
-.heroMedia img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  min-height:240px;
+.heroImg{
+  width:100%;height:440px;object-fit:cover;display:block;
 }
-.heroMedia .overlay{
+@media(max-width:900px){.heroImg{height:360px}}
+@media(max-width:640px){.heroImg{height:300px}}
+.heroOverlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(11,18,32,.55), rgba(11,18,32,0));
+  background:linear-gradient(to right, rgba(11,18,32,.70), rgba(11,18,32,.15) 55%, rgba(11,18,32,.15));
 }
-.heroMedia .caption{
-  position:absolute;left:14px;right:14px;bottom:12px;
-  color:#fff;font-weight:900;font-size:13px;
+.heroQuote{
+  position:absolute;left:18px;top:18px;bottom:18px;
+  width:min(520px, 92%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(6px);
+  color:#fff;
+}
+.heroQuote h1{margin:0 0 10px;font-size:32px;line-height:1.05;font-weight:1100}
+.heroQuote p{margin:0;color:rgba(255,255,255,.85);font-weight:650;font-size:14px}
+.heroQuote .mini{margin-top:12px;font-size:12px;color:rgba(255,255,255,.78);font-weight:800}
+@media(max-width:900px){
+  .heroQuote{left:14px;right:14px;width:auto}
+  .heroQuote h1{font-size:28px}
 }
 
-/* sections */
+/* ===== sections ===== */
+.section{margin-top:18px}
 .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:10px 0}
 .sectionTitle h2{margin:0;font-size:18px}
-.small{font-size:12px;color:var(--muted);font-weight:700}
+.small{font-size:12px;color:var(--muted);font-weight:750}
 
-/* featured tabs + full-width tiles */
-.tabsRow{
-  display:flex;gap:8px;flex-wrap:wrap;
-  margin:10px 0 12px;
-}
-.tabBtn{
-  padding:10px 12px;border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  font-weight:1000;
-  cursor:pointer;
-}
-.tabBtn.active{background:var(--panelAlt);border-color:var(--accent)}
+/* ===== Featured: 4 tiles edge-to-edge + auto rotate ===== */
 .featureGrid{
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -103,37 +94,80 @@ header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 8px 18px rgba(15,23,42,.05);
+  display:flex;flex-direction:column;
 }
 .tileHead{padding:14px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
 .tileHead .t{font-weight:1100}
 .tileBody{padding:14px;display:grid;gap:10px}
-.tileBody .desc{color:var(--muted);font-size:13px;font-weight:650}
+.tileBody .desc{color:var(--muted);font-size:13px;font-weight:650;min-height:32px}
 .tile a.action{
   margin-top:2px;display:inline-flex;align-items:center;gap:8px;
   text-decoration:none;font-weight:1000;color:var(--accent)
 }
 .tile a.action:hover{text-decoration:underline}
 
-/* full-width section wrapper */
-.fullBleed{
-  width:100%;
-  background:transparent;
+.featureControls{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;
+  margin:8px 0 12px;
 }
-.fullBleedInner{
-  max-width:1200px;margin:0 auto;padding:0 16px 16px;
+.pills{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pill{
+  width:8px;height:8px;border-radius:999px;
+  border:1px solid var(--border);background:#fff;opacity:.75;
+}
+.pill.active{background:var(--accent);border-color:var(--accent);opacity:1}
+.controlsRight{display:flex;gap:8px;align-items:center}
+.controlBtn{
+  padding:8px 10px;border-radius:999px;
+  border:1px solid var(--border);background:#fff;font-weight:1000;cursor:pointer
 }
 
+/* ===== Who we are ===== */
+.who{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 8px 18px rgba(15,23,42,.05);
+  padding:18px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:14px;
+}
+@media(max-width:900px){.who{grid-template-columns:1fr}}
+.who h3{margin:0 0 8px;font-size:18px;font-weight:1100}
+.who p{margin:0;color:var(--muted);font-weight:650;line-height:1.5}
+.whoCards{display:grid;gap:10px}
+.whoCard{
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:var(--panelAlt);
+  padding:12px;
+}
+.whoCard .k{font-size:12px;color:var(--muted);font-weight:1000}
+.whoCard .v{margin-top:6px;font-size:14px;font-weight:1000;color:var(--text)}
+
+/* ===== footer ===== */
 footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel)}
 .footerRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px}
 </style>
 </head>
+
 <body>
+<!--
+  REQUIRED FILES IN YOUR REPO (recommended):
+  /index.html  (this file)
+  /machine.html
+  /catalog.js
+  /assets/homepage.jpg   <-- SAVE your uploaded "homepage picture.png" as this name
+  /assets/logo.jpg       <-- SAVE your uploaded "Industrial logo design..." as this name
+-->
 
 <header>
   <div class="topbar container">
     <div class="brand">
-      <div class="name">Hendo Equipment</div>
-      <div class="sub">USA-made attachments • Hendersonville, NC</div>
+      <a href="index.html" aria-label="Hendo Equipment Home">
+        <img class="brandLogo" src="assets/logo.jpg" alt="Hendo Equipment logo" />
+      </a>
     </div>
 
     <nav class="nav" aria-label="Machines">
@@ -143,60 +177,82 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
       <a href="machine.html?m=Excavator">Excavator</a>
     </nav>
 
-    <div class="ctaRow">
+    <div>
       <a class="btn btnPrimary" href="tel:+18286990157">(828) 699-0157</a>
     </div>
   </div>
 </header>
 
 <main class="container">
-  <!-- CID-style hero: quote left, picture right -->
-  <section class="hero">
-    <div class="heroGrid">
-      <div class="heroCard">
-        <h1 class="heroTitle">“Built tough. Priced right. Delivered fast.”</h1>
-        <p class="heroP">
-          Choose your machine, pick your attachment, and configure options. SKU + price update instantly for quick quotes.
+  <!-- HERO: ONLY PHOTO + QUOTE -->
+  <section class="heroWrap">
+    <div class="hero">
+      <img class="heroImg" src="assets/homepage.jpg" alt="Hendo Equipment attachments in action" />
+      <div class="heroOverlay"></div>
+
+      <div class="heroQuote">
+        <h1>“Built tough. Priced right. Delivered fast.”</h1>
+        <p>Choose your machine, select an attachment, and configure options. SKU + price update instantly for quick quotes.</p>
+        <div class="mini">🇺🇸 USA Made • Veteran Owned & Operated</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED (rotates through ALL attachment categories, 4 at a time) -->
+  <section class="section">
+    <div class="sectionTitle">
+      <h2>Featured Attachments</h2>
+      <div class="small">Auto-rotating — click any tile to view & configure</div>
+    </div>
+
+    <div class="featureControls">
+      <div class="pills" id="pills"></div>
+      <div class="controlsRight">
+        <button class="controlBtn" id="prevBtn" type="button">◀</button>
+        <button class="controlBtn" id="pauseBtn" type="button">Pause</button>
+        <button class="controlBtn" id="nextBtn" type="button">▶</button>
+      </div>
+    </div>
+
+    <div class="featureGrid" id="featuredGrid"></div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="section">
+    <div class="sectionTitle">
+      <h2>Who We Are</h2>
+      <div class="small">Local service • Real support • Built to work</div>
+    </div>
+
+    <div class="who">
+      <div>
+        <h3>Hendo Equipment</h3>
+        <p>
+          We supply tough, USA-made attachments for skid steers, mini skids, tractors, and excavators.
+          Our goal is simple: make it easy to get the right attachment with accurate pricing and fast quotes.
         </p>
-
-        <div class="badges">
-          <span class="badge">🇺🇸 USA Made</span>
-          <span class="badge">Veteran Owned & Operated</span>
-          <span class="badge">Fast email quotes</span>
-        </div>
-
-        <div class="heroBtns">
-          <a class="btn btnPrimary" href="machine.html?m=Skid%20Steer">Shop Skid Steer</a>
-          <a class="btn" href="machine.html?m=Mini%20Skid%20Steer">Shop Mini Skid</a>
-          <a class="btn" href="machine.html?m=Tractor">Shop Tractor</a>
-          <a class="btn" href="machine.html?m=Excavator">Shop Excavator</a>
-        </div>
-
-        <div class="small" style="margin-top:10px">Quotes email: whoots821@gmail.com</div>
+        <p style="margin-top:10px">
+          Need help choosing the right setup? Call us and we’ll get you matched up quickly.
+        </p>
       </div>
 
-      <div class="heroMedia" aria-label="Hero image">
-        <!-- Replace this with your own photo file later, ex: assets/hero.jpg -->
-        <img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?auto=format&fit=crop&w=1400&q=70" alt="Skid steer attachment">
-        <div class="overlay"></div>
-        <div class="caption">Attachments for Skid Steer • Mini Skid • Tractor • Excavator</div>
+      <div class="whoCards">
+        <div class="whoCard">
+          <div class="k">What we do</div>
+          <div class="v">Attachments, fitment help, and fast quotes</div>
+        </div>
+        <div class="whoCard">
+          <div class="k">Where we are</div>
+          <div class="v">Hendersonville, NC</div>
+        </div>
+        <div class="whoCard">
+          <div class="k">How to reach us</div>
+          <div class="v">(828) 699-0157 • whoots821@gmail.com</div>
+        </div>
       </div>
     </div>
   </section>
 </main>
-
-<!-- FULL-WIDTH FEATURED SECTION (tiles edge-to-edge inside max width) -->
-<section class="fullBleed">
-  <div class="fullBleedInner">
-    <div class="sectionTitle">
-      <h2>Featured</h2>
-      <div class="small">4 quick categories</div>
-    </div>
-
-    <div class="tabsRow" id="featuredTabs"></div>
-    <div class="featureGrid" id="featuredGrid"></div>
-  </div>
-</section>
 
 <footer>
   <div class="container footerRow small">
@@ -208,49 +264,60 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
 <script src="catalog.js"></script>
 <script>
 (function(){
-  const cat = window.HENDO_CATALOG || {};
+  const catalog = window.HENDO_CATALOG || {};
 
-  // normalize machine label: treat old "Skid/Track Loader" as "Skid Steer"
-  const normalizeMachine = (m) => (m === "Skid/Track Loader") ? "Skid Steer" : m;
+  // Normalize: old "Skid/Track Loader" becomes "Skid Steer"
+  const normalizeMachine = (m) => (m === "Skid/Track Loader") ? "Skid Steer" : (m || "Skid Steer");
 
-  const allTabs = Object.values(cat).map(t => ({
-    label: t.category,
-    machine: normalizeMachine(t.machine || "Skid Steer")
-  }));
+  // Build all categories from catalog tabs
+  const categories = Object.values(catalog)
+    .map(t => ({
+      label: t.category,
+      machine: normalizeMachine(t.machine),
+      // optional: use first item name as short description
+      desc: (t.items && t.items[0] && t.items[0].name) ? t.items[0].name : ""
+    }))
+    .filter(c => !!c.label)
+    .sort((a,b)=>a.label.localeCompare(b.label));
 
-  // EXACTLY 4 featured tabs (edit these names if you want different ones)
-  const featured = [
-    "4N1 BUCKET",
-    "TRACTOR BUCKET",
-    "ROCK GRAPPLES",
-    "FORESTRY DISC MULCHER"
-  ].map(name => allTabs.find(x => x.label === name)).filter(Boolean);
+  const pageSize = 4;
+  const totalPages = Math.max(1, Math.ceil(categories.length / pageSize));
 
-  // Render tabs row (4 pills)
-  const tabsEl = document.getElementById("featuredTabs");
   const gridEl = document.getElementById("featuredGrid");
+  const pillsEl = document.getElementById("pills");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const pauseBtn = document.getElementById("pauseBtn");
 
-  let active = featured[0]?.label || "";
+  // build pills
+  pillsEl.innerHTML = Array.from({length: totalPages}).map((_,i)=>`<span class="pill" data-i="${i}"></span>`).join("");
 
-  tabsEl.innerHTML = featured.map(f => `
-    <button class="tabBtn ${f.label===active?'active':''}" data-cat="${f.label}">
-      ${f.label}
-    </button>
-  `).join("");
+  let page = 0;
+  let paused = false;
+  let timer = null;
 
-  function renderGrid(selectedLabel){
-    // show 4 tiles across the page (CID-style feel)
-    // Here we show the selected featured category + 3 other featured categories (always 4 tiles)
-    const ordered = featured.slice().sort((a,b)=> (a.label===selectedLabel?-1:0) - (b.label===selectedLabel?-1:0));
-    const tiles = ordered.slice(0,4);
+  function setPills(){
+    [...pillsEl.querySelectorAll(".pill")].forEach((p, i) => p.classList.toggle("active", i === page));
+  }
 
-    gridEl.innerHTML = tiles.map(f => {
-      const href = "machine.html?m=" + encodeURIComponent(f.machine) + "&cat=" + encodeURIComponent(f.label);
+  function render(){
+    setPills();
+    const start = page * pageSize;
+    const slice = categories.slice(start, start + pageSize);
+
+    // If last page has < 4, wrap from beginning to keep 4 tiles
+    const tiles = slice.length < pageSize
+      ? slice.concat(categories.slice(0, pageSize - slice.length))
+      : slice;
+
+    gridEl.innerHTML = tiles.map(c => {
+      const href = "machine.html?m=" + encodeURIComponent(c.machine) + "&cat=" + encodeURIComponent(c.label);
+      const desc = c.desc ? c.desc : "View products & configure options";
       return `
         <div class="tile">
-          <div class="tileHead"><div class="t">${f.label}</div></div>
+          <div class="tileHead"><div class="t">${c.label}</div></div>
           <div class="tileBody">
-            <div class="desc">${f.machine}</div>
+            <div class="desc">${desc}</div>
             <a class="action" href="${href}">View products →</a>
           </div>
         </div>
@@ -258,16 +325,40 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
     }).join("");
   }
 
-  renderGrid(active);
+  function go(n){
+    page = (n + totalPages) % totalPages;
+    render();
+  }
 
-  tabsEl.addEventListener("click", (e) => {
-    const btn = e.target.closest(".tabBtn");
-    if (!btn) return;
-    active = btn.getAttribute("data-cat") || active;
+  function startAuto(){
+    stopAuto();
+    timer = setInterval(() => {
+      if (!paused) go(page + 1);
+    }, 4500);
+  }
+  function stopAuto(){
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
 
-    [...tabsEl.querySelectorAll(".tabBtn")].forEach(b => b.classList.toggle("active", b.getAttribute("data-cat")===active));
-    renderGrid(active);
+  prevBtn.addEventListener("click", () => go(page - 1));
+  nextBtn.addEventListener("click", () => go(page + 1));
+
+  pauseBtn.addEventListener("click", () => {
+    paused = !paused;
+    pauseBtn.textContent = paused ? "Play" : "Pause";
   });
+
+  pillsEl.addEventListener("click", (e) => {
+    const pill = e.target.closest(".pill");
+    if (!pill) return;
+    const i = Number(pill.getAttribute("data-i"));
+    if (Number.isFinite(i)) go(i);
+  });
+
+  // initial
+  render();
+  startAuto();
 })();
 </script>
 </body>
