@@ -34,51 +34,94 @@ header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
   background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
 .btnPrimary{background:var(--accent);color:#fff;border:none}
 
-/* hero */
-.hero{padding:34px 0}
-.heroGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
+/* hero (CID-style: quote left, image right) */
+.hero{padding:28px 0}
+.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:stretch}
 @media(max-width:900px){.heroGrid{grid-template-columns:1fr}}
 .heroCard{
   background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;
   box-shadow:0 8px 18px rgba(15,23,42,.06);
 }
-.heroTitle{font-size:28px;font-weight:1100;line-height:1.1;margin:0 0 10px}
-.heroP{margin:0;color:var(--muted);font-weight:600}
+.heroTitle{font-size:30px;font-weight:1100;line-height:1.05;margin:0 0 10px}
+.heroP{margin:0;color:var(--muted);font-weight:650;font-size:14px}
 .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .badge{
   padding:6px 10px;border-radius:999px;background:var(--panelAlt);
   border:1px solid var(--border);font-size:12px;font-weight:1000;color:var(--text)
 }
-.heroRight{display:grid;gap:12px}
-.stat{
-  background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px;
+.heroBtns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+
+.heroMedia{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(15,23,42,.06);
+  position:relative;
 }
-.stat .k{font-size:12px;color:var(--muted);font-weight:900}
-.stat .v{font-size:18px;font-weight:1100;margin-top:6px}
+.heroMedia img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  min-height:240px;
+}
+.heroMedia .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(11,18,32,.55), rgba(11,18,32,0));
+}
+.heroMedia .caption{
+  position:absolute;left:14px;right:14px;bottom:12px;
+  color:#fff;font-weight:900;font-size:13px;
+}
 
 /* sections */
 .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:10px 0}
 .sectionTitle h2{margin:0;font-size:18px}
 .small{font-size:12px;color:var(--muted);font-weight:700}
 
-.grid{
+/* featured tabs + full-width tiles */
+.tabsRow{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin:10px 0 12px;
+}
+.tabBtn{
+  padding:10px 12px;border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  font-weight:1000;
+  cursor:pointer;
+}
+.tabBtn.active{background:var(--panelAlt);border-color:var(--accent)}
+.featureGrid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:12px;
 }
-.card{
-  background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;
+@media(max-width:1100px){.featureGrid{grid-template-columns:repeat(2, minmax(0, 1fr));}}
+@media(max-width:640px){.featureGrid{grid-template-columns:1fr;}}
+.tile{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
   box-shadow:0 8px 18px rgba(15,23,42,.05);
 }
-.cardHead{padding:14px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
-.cardHead .t{font-weight:1100}
-.cardBody{padding:14px;display:grid;gap:10px}
-.cardBody .desc{color:var(--muted);font-size:13px;font-weight:650}
-.card a.action{
+.tileHead{padding:14px;background:var(--panelAlt);border-bottom:1px solid var(--border)}
+.tileHead .t{font-weight:1100}
+.tileBody{padding:14px;display:grid;gap:10px}
+.tileBody .desc{color:var(--muted);font-size:13px;font-weight:650}
+.tile a.action{
   margin-top:2px;display:inline-flex;align-items:center;gap:8px;
   text-decoration:none;font-weight:1000;color:var(--accent)
 }
-.card a.action:hover{text-decoration:underline}
+.tile a.action:hover{text-decoration:underline}
+
+/* full-width section wrapper */
+.fullBleed{
+  width:100%;
+  background:transparent;
+}
+.fullBleedInner{
+  max-width:1200px;margin:0 auto;padding:0 16px 16px;
+}
 
 footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel)}
 .footerRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px}
@@ -94,7 +137,7 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
     </div>
 
     <nav class="nav" aria-label="Machines">
-      <a href="machine.html?m=Skid%2FTrack%20Loader">Skid/Track</a>
+      <a href="machine.html?m=Skid%20Steer">Skid Steer</a>
       <a href="machine.html?m=Mini%20Skid%20Steer">Mini Skid</a>
       <a href="machine.html?m=Tractor">Tractor</a>
       <a href="machine.html?m=Excavator">Excavator</a>
@@ -107,90 +150,53 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
 </header>
 
 <main class="container">
+  <!-- CID-style hero: quote left, picture right -->
   <section class="hero">
     <div class="heroGrid">
       <div class="heroCard">
-        <h1 class="heroTitle">Attachments & pricing—fast, simple, and accurate.</h1>
-        <p class="heroP">Choose your machine type, then configure duty / edge / width. SKU + price update instantly.</p>
+        <h1 class="heroTitle">“Built tough. Priced right. Delivered fast.”</h1>
+        <p class="heroP">
+          Choose your machine, pick your attachment, and configure options. SKU + price update instantly for quick quotes.
+        </p>
 
         <div class="badges">
           <span class="badge">🇺🇸 USA Made</span>
           <span class="badge">Veteran Owned & Operated</span>
-          <span class="badge">Email quotes in one click</span>
+          <span class="badge">Fast email quotes</span>
         </div>
 
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btnPrimary" href="machine.html?m=Skid%2FTrack%20Loader">Shop Skid/Track</a>
+        <div class="heroBtns">
+          <a class="btn btnPrimary" href="machine.html?m=Skid%20Steer">Shop Skid Steer</a>
           <a class="btn" href="machine.html?m=Mini%20Skid%20Steer">Shop Mini Skid</a>
           <a class="btn" href="machine.html?m=Tractor">Shop Tractor</a>
           <a class="btn" href="machine.html?m=Excavator">Shop Excavator</a>
         </div>
+
+        <div class="small" style="margin-top:10px">Quotes email: whoots821@gmail.com</div>
       </div>
 
-      <div class="heroRight">
-        <div class="stat">
-          <div class="k">How it works</div>
-          <div class="v">Pick machine → pick category → configure options</div>
-        </div>
-        <div class="stat">
-          <div class="k">Need help?</div>
-          <div class="v">Call or email for a quick quote</div>
-          <div class="small" style="margin-top:8px">Quotes email: whoots821@gmail.com</div>
-        </div>
-        <div class="stat">
-          <div class="k">Tip</div>
-          <div class="v">Use the top machine tabs like CID’s layout</div>
-        </div>
+      <div class="heroMedia" aria-label="Hero image">
+        <!-- Replace this with your own photo file later, ex: assets/hero.jpg -->
+        <img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?auto=format&fit=crop&w=1400&q=70" alt="Skid steer attachment">
+        <div class="overlay"></div>
+        <div class="caption">Attachments for Skid Steer • Mini Skid • Tractor • Excavator</div>
       </div>
     </div>
-  </section>
-
-  <section>
-    <div class="sectionTitle">
-      <h2>Shop by machine</h2>
-      <div class="small">Machine tabs run left → right across the top</div>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="cardHead"><div class="t">Skid / Track Loader</div></div>
-        <div class="cardBody">
-          <div class="desc">Buckets, grapples, mulchers and more.</div>
-          <a class="action" href="machine.html?m=Skid%2FTrack%20Loader">Browse categories →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="cardHead"><div class="t">Mini Skid Steer</div></div>
-        <div class="cardBody">
-          <div class="desc">Compact attachments sized for mini machines.</div>
-          <a class="action" href="machine.html?m=Mini%20Skid%20Steer">Browse categories →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="cardHead"><div class="t">Tractor</div></div>
-        <div class="cardBody">
-          <div class="desc">Tractor buckets and fitment options.</div>
-          <a class="action" href="machine.html?m=Tractor">Browse categories →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="cardHead"><div class="t">Excavator</div></div>
-        <div class="cardBody">
-          <div class="desc">Excavator mounts and related items.</div>
-          <a class="action" href="machine.html?m=Excavator">Browse categories →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="margin-top:18px">
-    <div class="sectionTitle">
-      <h2>Featured categories</h2>
-      <div class="small">Quick links</div>
-    </div>
-    <div class="grid" id="featuredGrid"></div>
   </section>
 </main>
+
+<!-- FULL-WIDTH FEATURED SECTION (tiles edge-to-edge inside max width) -->
+<section class="fullBleed">
+  <div class="fullBleedInner">
+    <div class="sectionTitle">
+      <h2>Featured</h2>
+      <div class="small">4 quick categories</div>
+    </div>
+
+    <div class="tabsRow" id="featuredTabs"></div>
+    <div class="featureGrid" id="featuredGrid"></div>
+  </div>
+</section>
 
 <footer>
   <div class="container footerRow small">
@@ -203,34 +209,65 @@ footer{margin-top:26px;border-top:1px solid var(--border);background:var(--panel
 <script>
 (function(){
   const cat = window.HENDO_CATALOG || {};
-  const all = Object.values(cat).map(t => ({
+
+  // normalize machine label: treat old "Skid/Track Loader" as "Skid Steer"
+  const normalizeMachine = (m) => (m === "Skid/Track Loader") ? "Skid Steer" : m;
+
+  const allTabs = Object.values(cat).map(t => ({
     label: t.category,
-    machine: t.machine || "Skid/Track Loader"
+    machine: normalizeMachine(t.machine || "Skid Steer")
   }));
 
-  const want = [
+  // EXACTLY 4 featured tabs (edit these names if you want different ones)
+  const featured = [
     "4N1 BUCKET",
     "TRACTOR BUCKET",
     "ROCK GRAPPLES",
-    "ROCK BUCKET",
-    "HIGH DUMP BUCKETS",
     "FORESTRY DISC MULCHER"
-  ];
-  const featured = want.map(name => all.find(x => x.label === name)).filter(Boolean);
+  ].map(name => allTabs.find(x => x.label === name)).filter(Boolean);
 
-  const el = document.getElementById("featuredGrid");
-  el.innerHTML = featured.map(f => {
-    const href = "machine.html?m=" + encodeURIComponent(f.machine) + "&cat=" + encodeURIComponent(f.label);
-    return `
-      <div class="card">
-        <div class="cardHead"><div class="t">${f.label}</div></div>
-        <div class="cardBody">
-          <div class="desc">${f.machine}</div>
-          <a class="action" href="${href}">View products →</a>
+  // Render tabs row (4 pills)
+  const tabsEl = document.getElementById("featuredTabs");
+  const gridEl = document.getElementById("featuredGrid");
+
+  let active = featured[0]?.label || "";
+
+  tabsEl.innerHTML = featured.map(f => `
+    <button class="tabBtn ${f.label===active?'active':''}" data-cat="${f.label}">
+      ${f.label}
+    </button>
+  `).join("");
+
+  function renderGrid(selectedLabel){
+    // show 4 tiles across the page (CID-style feel)
+    // Here we show the selected featured category + 3 other featured categories (always 4 tiles)
+    const ordered = featured.slice().sort((a,b)=> (a.label===selectedLabel?-1:0) - (b.label===selectedLabel?-1:0));
+    const tiles = ordered.slice(0,4);
+
+    gridEl.innerHTML = tiles.map(f => {
+      const href = "machine.html?m=" + encodeURIComponent(f.machine) + "&cat=" + encodeURIComponent(f.label);
+      return `
+        <div class="tile">
+          <div class="tileHead"><div class="t">${f.label}</div></div>
+          <div class="tileBody">
+            <div class="desc">${f.machine}</div>
+            <a class="action" href="${href}">View products →</a>
+          </div>
         </div>
-      </div>
-    `;
-  }).join("");
+      `;
+    }).join("");
+  }
+
+  renderGrid(active);
+
+  tabsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".tabBtn");
+    if (!btn) return;
+    active = btn.getAttribute("data-cat") || active;
+
+    [...tabsEl.querySelectorAll(".tabBtn")].forEach(b => b.classList.toggle("active", b.getAttribute("data-cat")===active));
+    renderGrid(active);
+  });
 })();
 </script>
 </body>
