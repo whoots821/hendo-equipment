@@ -16,25 +16,67 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;backgrou
 a{color:inherit}
 .container{max-width:1200px;margin:0 auto;padding:16px}
 
-/* ===== header ===== */
-header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:50}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}
-.brand{display:flex;align-items:center;gap:12px;min-width:240px}
-.brandLogo{
-  width:140px;max-width:40vw;height:auto;display:block;
-  filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));
-}
-.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.nav a{
-  padding:9px 12px;border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.14);
-  text-decoration:none;font-weight:900;font-size:13px;
-}
-.nav a:hover{background:rgba(255,255,255,.14)}
-.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
-  background:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;white-space:nowrap}
-.btnPrimary{background:var(--accent);color:#fff;border:none}
+<!-- UPDATED index.html HEADER WITH QUOTE ICON + TOP SEARCH BAR -->
+<!-- Replace your current <header> section with this -->
+
+<header>
+  <!-- VERY TOP STRIP WITH SEARCH -->
+  <div style="background:#0b1220;border-bottom:1px solid rgba(255,255,255,.08);">
+    <div class="container" style="display:flex;justify-content:flex-end;align-items:center;padding:6px 16px;">
+      <div style="position:relative;max-width:240px;width:100%;">
+        <!-- Search Icon -->
+        <svg viewBox="0 0 24 24" width="16" height="16"
+          style="position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.6;pointer-events:none;">
+          <path fill="#ffffff" d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 10-.7.7l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z"/>
+        </svg>
+
+        <input type="text"
+          placeholder="Search attachments..."
+          style="
+            width:100%;
+            padding:6px 10px 6px 32px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,.2);
+            background:rgba(255,255,255,.08);
+            color:#fff;
+            font-size:12px;
+            outline:none;
+          ">
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV BAR -->
+  <div class="topbar container">
+    <div class="brand">
+      <a href="index.html">
+        <img class="brandLogo" src="assets/logo.jpg" alt="Hendo Equipment logo" />
+      </a>
+    </div>
+
+    <nav class="nav">
+      <a href="machine.html?m=Skid%20Steer">Skid Steer</a>
+      <a href="machine.html?m=Mini%20Skid%20Steer">Mini Skid</a>
+      <a href="machine.html?m=Tractor">Tractor</a>
+      <a href="machine.html?m=Excavator">Excavator</a>
+    </nav>
+
+    <!-- PHONE BUTTON WITH QUOTE ICON -->
+    <div>
+      <a class="btn btnPrimary" href="tel:+18286990157"
+        style="display:flex;align-items:center;gap:8px;">
+        
+        <!-- Quote Icon -->
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path fill="white" d="M7.17 6A5 5 0 002 11v7h7v-7H5a3 3 0 013-3h1V6H7.17zm10 0A5 5 0 0012 11v7h7v-7h-4a3 3 0 013-3h1V6h-1.83z"/>
+        </svg>
+
+        (828) 699-0157
+      </a>
+    </div>
+  </div>
+</header>
+
 
 /* ===== HERO: ONLY PHOTO + QUOTE ===== */
 .heroWrap{padding:18px 0}
